@@ -1,21 +1,28 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "BuffMageCharacter.h"
+#include "EnhancedInputComponent.h"
 
 
 // Sets default values
 ABuffMageCharacter::ABuffMageCharacter()
 {
-	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	AttackComp = CreateDefaultSubobject<UAttackComponent>("AttackComponent");
 }
+
+
 
 // Called when the game starts or when spawned
 void ABuffMageCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	AttackComp->AnimInstance = AnimInstance;
+	if (!IsValid(AnimInstance))
+		return;
+
+	AnimInstance->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &ABuffMageCharacter::OnMontageNotifyBegin);
 }
 
 // Called every frame
@@ -27,7 +34,17 @@ void ABuffMageCharacter::Tick(float DeltaTime)
 // Called to bind functionality to input
 void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	if (UEnhancedInputComponent* enhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		enhancedInput->BindAction(LookAroundInputAction, ETriggerEvent::Triggered, this, &ABuffMageCharacter::AimInputFunction);
+
+		// attack input:|
+		enhancedInput->BindAction(ShootInputAction, ETriggerEvent::Started, this, &ABuffMageCharacter::AttackInputFunction);
+
+		// move inputs :)
+		enhancedInput->BindAction(MoveInputAction, ETriggerEvent::Triggered, this, &ABuffMageCharacter::MoveInputFunction);
+		enhancedInput->BindAction(MoveInputAction, ETriggerEvent::Completed, this, &ABuffMageCharacter::MoveInputFunction);
+	}
 }
 
 void ABuffMageCharacter::MoveInputFunction(const FInputActionValue& InputActionValue)
@@ -55,8 +72,19 @@ void ABuffMageCharacter::AimInputFunction(const FInputActionValue& InputActionVa
 	AddControllerPitchInput(-input.Y);
 }
 
-void ABuffMageCharacter::AttackInputFunction(const FInputActionValue& InputActionValue) const
+void ABuffMageCharacter::AttackInputFunction(const FInputActionValue& InputActionValue) 
 {
-	OnAttackInput.Broadcast();
+	AttackComp->Attack();
 }
+
+void ABuffMageCharacter::OnMontageNotifyBegin(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
+{
+	AttackComp->OnMontageNotifyBegin(Name,BranchingPointNotifyPayload);
+}
+
+TObjectPtr<UAttackComponent> ABuffMageCharacter::GetAttackComponent()
+{
+	return AttackComp;
+}
+
 
