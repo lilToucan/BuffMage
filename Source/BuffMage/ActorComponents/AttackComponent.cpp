@@ -2,6 +2,8 @@
 
 
 #include "AttackComponent.h"
+#include "Engine/DamageEvents.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 UAttackComponent::UAttackComponent()
 {
@@ -28,17 +30,56 @@ void UAttackComponent::Attack()
 	}
 }
 
-void UAttackComponent::OnMontageNotifyBegin(FName Name,const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
+void UAttackComponent::DealDamage()
 {
-	if (!bHasAttackBeenPerformed)
+	TArray<AActor*> hitActors = AttackOverlapSphere();
+	
+	if (hitActors.Num() <= 0)
+		return;
+
+	for (auto actor : hitActors)
+	{
+		FDamageEvent DamageEvent;
+		actor->TakeDamage(1,DamageEvent,nullptr,GetOwner());
+	};
+}
+
+void UAttackComponent::CheckComboPerformed(float BlendTime)
+{
+	// check combo
+	if (!bHasAttackBeenPerformed) // if the player didn't perform the attack input before this notify then stop the combo 
 	{
 		if (IsValid(AnimInstance))
 		{
-			AnimInstance->Montage_Stop(0.4f,WeaponData->AttackComboAnimMontage);
+			AnimInstance->Montage_Stop(BlendTime,WeaponData->AttackComboAnimMontage);
 		}
 	}
 	bHasAttackBeenPerformed = false;
 }
+
+void UAttackComponent::OnMontageNotifyBegin(FName Name,float BlendTime,const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
+{
+	CheckComboPerformed(BlendTime);
+	DealDamage();
+}
+
+TArray<AActor*> UAttackComponent::AttackOverlapSphere()
+{
+	TArray<TEnumAsByte<EObjectTypeQuery>> EObjectTypeQueryArray;
+	EObjectTypeQueryArray.Add(UEngineTypes::ConvertToObjectType(CollisionChannelToHit));
+	UClass* actorTypeFilters = nullptr;
+	TArray<AActor*> ignoreActors;
+	ignoreActors.Add(GetOwner());
+	TArray<AActor*> outActors;
+
+	
+	UKismetSystemLibrary::SphereOverlapActors(GetWorld(), GetOwner()->GetActorLocation(), OverlapSphereRange, EObjectTypeQueryArray,
+											  actorTypeFilters, ignoreActors, outActors);
+
+	return outActors;
+}
+
+
 
 
 

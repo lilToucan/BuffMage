@@ -26,7 +26,7 @@ public: // variables
 	
 	
 protected: // variables
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Attack")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent")
 	TObjectPtr<UAttackComponent> AttackComp;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
@@ -47,13 +47,15 @@ public: // functions
 	ABuffMageCharacter();
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	void MoveInputFunction(const FInputActionValue& InputActionValue);
-	void AimInputFunction(const FInputActionValue& InputActionValue);
-	void AttackInputFunction(const FInputActionValue& InputActionValue);
+	virtual void MoveInputFunction(const FInputActionValue& InputActionValue);
+	virtual void AimInputFunction(const FInputActionValue& InputActionValue);
+	virtual void AttackInputFunction(const FInputActionValue& InputActionValue);
 	
 protected: // functions
 	UFUNCTION()
-	void OnMontageNotifyBegin(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload);
+	virtual void OnMontageNotifyBegin(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload);
+	UFUNCTION(BlueprintImplementableEvent)
+	void BP_OnMonatageNotifyBegin();
 	virtual TObjectPtr<UAttackComponent> GetAttackComponent() override;
 	virtual void BeginPlay() override;
 };
