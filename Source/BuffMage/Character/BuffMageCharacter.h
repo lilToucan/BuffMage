@@ -23,8 +23,6 @@ public: // variables
 	FVoidFloat OnMovementInput;
 
 	
-	
-	
 protected: // variables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent")
 	TObjectPtr<UAttackComponent> AttackComp;
@@ -52,10 +50,10 @@ public: // functions
 	virtual void AttackInputFunction(const FInputActionValue& InputActionValue);
 	
 protected: // functions
+	virtual void BeginPlay() override;
 	UFUNCTION()
 	virtual void OnMontageNotifyBegin(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload);
 	UFUNCTION(BlueprintImplementableEvent)
 	void BP_OnMonatageNotifyBegin();
 	virtual TObjectPtr<UAttackComponent> GetAttackComponent() override;
-	virtual void BeginPlay() override;
 };
