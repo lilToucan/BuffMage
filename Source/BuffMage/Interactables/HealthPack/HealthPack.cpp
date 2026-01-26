@@ -3,6 +3,8 @@
 
 #include "HealthPack.h"
 
+#include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
+
 
 // Sets default values
 AHealthPack::AHealthPack()

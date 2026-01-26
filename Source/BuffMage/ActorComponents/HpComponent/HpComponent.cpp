@@ -6,7 +6,7 @@
 UHpComponent::UHpComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
-	GetOwner()->OnTakeAnyDamage.AddUniqueDynamic(this, UHpComponent::OnDamageTaken);
+	GetOwner()->OnTakeAnyDamage.AddUniqueDynamic(this, &UHpComponent::OnDamageTaken);
 	if (StartingHP == 0)
 		CurrentHp = MaxHp;
 	else
@@ -16,7 +16,7 @@ UHpComponent::UHpComponent()
 		return;
 
 	CharacterOwner = Cast<ACharacter>(GetOwner());
-	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this,UHpComponent::OnAnimNotifyBegin);
+	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this,&UHpComponent::OnAnimNotifyBegin);
 }
 
 void UHpComponent::BeginPlay()
@@ -25,7 +25,7 @@ void UHpComponent::BeginPlay()
 	if (CharacterOwner)
 		return;
 	CharacterOwner = Cast<ACharacter>(GetOwner());
-	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, UHpComponent::OnAnimNotifyBegin);
+	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnAnimNotifyBegin);
 }
 
 void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
