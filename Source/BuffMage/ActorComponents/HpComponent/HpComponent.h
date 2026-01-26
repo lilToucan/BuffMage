@@ -40,7 +40,7 @@ protected:
 	USkeletalMesh* OwnersSkeletalMesh;
 	UPROPERTY(BlueprintReadWrite, Category = "Component|HPComponent|Animations")
 	ACharacter* CharacterOwner;
-	UPROPERTY(BlueprintRead, Category = "Component|HPComponent|Animations")
+	UPROPERTY(BlueprintReadOnly, Category = "Component|HPComponent|Animations")
 	float DeathAnimDuration ;
 	
 // functions
