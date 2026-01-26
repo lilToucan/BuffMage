@@ -24,8 +24,8 @@ void AHealthPack::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AHealthPack::Interact_Implementation()
+void AHealthPack::Interact_Implementation(ABuffMageCharacter* Player)
 {
-	
+	Player->FindComponentByClass<UHpComponent>();
 }
 

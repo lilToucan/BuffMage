@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BuffMage/Character/BuffMageCharacter.h"
 #include "UObject/Interface.h"
 #include "Interactables.generated.h"
 
@@ -17,5 +18,5 @@ class BUFFMAGE_API IInteractables
 
 public:
 UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Interact();
+	void Interact(ABuffMageCharacter* Player);
 };

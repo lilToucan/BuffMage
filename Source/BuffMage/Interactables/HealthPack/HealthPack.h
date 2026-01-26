@@ -17,7 +17,7 @@ protected:
 public:
 	AHealthPack();
 	virtual void Tick(float DeltaTime) override;
-	virtual void Interact_Implementation() override;
+	virtual void Interact_Implementation(ABuffMageCharacter* Player) override;
 	
 protected:
 	virtual void BeginPlay() override;
