@@ -1,16 +1,18 @@
 #include "DashComponent.h"
 
+#include "Animation/InputScaleBias.h"
+
 UDashComponent::UDashComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
-void UDashComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UDashComponent::TickComponent(float DeltaTime, enum ELevelTick TickType,
+                                   FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	DashUpdate(DeltaTime);
 }
-
 
 
 void UDashComponent::BeginPlay()
@@ -22,6 +24,12 @@ void UDashComponent::BeginPlay()
 	OwnersSkeletalMesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
 }
 
+void UDashComponent::ActivateIFrames()
+{
+	GetOwner()->SetActorEnableCollision(false);
+
+}
+
 void UDashComponent::PerformDash()
 {
 	if (!bCanDash)
@@ -29,7 +37,7 @@ void UDashComponent::PerformDash()
 
 	bCanDash = false;
 
-	if (OwnersMovement && OwnersMovement->Velocity != FVector::ZeroVector )
+	if (OwnersMovement && OwnersMovement->Velocity != FVector::ZeroVector)
 	{
 		DashDirection = OwnersMovement->Velocity;
 		DashDirection.Normalize();
@@ -39,14 +47,19 @@ void UDashComponent::PerformDash()
 
 	if (OwnersCamera)
 		CameraStartPos = OwnersCamera->GetRelativeLocation();
-	
+
 	if (OwnersSkeletalMesh)
 		MeshStartPos = OwnersSkeletalMesh->GetRelativeLocation();
 
 	DashStartPos = GetOwner()->GetActorLocation();
-	DashEndPos = GetOwner()->GetActorLocation() + DashDirection * DashDistance;
+	
 
 	SetComponentTickEnabled(true);
+
+	GetWorld()->GetTimerManager().ClearTimer(CooldownTimerHandle);
+
+	GetWorld()->GetTimerManager().SetTimer(CooldownTimerHandle, this, &UDashComponent::ActivateIFrames,
+	                                       WaitTimeBeforeIFrames);
 }
 
 
@@ -60,20 +73,19 @@ void UDashComponent::DashUpdate(float DeltaTime)
 		DashFinished();
 		return;
 	}
-	
-	MoveOwner(Alpha);
-	
-	LowerComponent(OwnersCamera,CameraStartPos,Alpha);
-	LowerComponent(OwnersSkeletalMesh,MeshStartPos,Alpha);
-}
 
+	MoveOwner(Alpha);
+
+	LowerComponent(OwnersCamera, CameraStartPos, Alpha);
+	LowerComponent(OwnersSkeletalMesh, MeshStartPos, Alpha);
+}
 
 
 void UDashComponent::DashFinished()
 {
-	LowerComponent(OwnersCamera,CameraStartPos,1);
-	LowerComponent(OwnersSkeletalMesh,MeshStartPos,1);
-	
+	LowerComponent(OwnersCamera, CameraStartPos, 1);
+	LowerComponent(OwnersSkeletalMesh, MeshStartPos, 1);
+
 	TimePassed = 0;
 	SetComponentTickEnabled(false);
 	GetWorld()->GetTimerManager().ClearTimer(CooldownTimerHandle);
@@ -83,29 +95,23 @@ void UDashComponent::DashFinished()
 void UDashComponent::RefreshDash()
 {
 	bCanDash = true;
+	GetOwner()->SetActorEnableCollision(true);
+
 }
-// void UDashComponent::LowerCamera(float Alpha)
-// {
-// 	if (!OwnersCamera)
-// 		return;
-// 	
-// 	FVector CamRelPos = MoveVectorBasedOnCurve(CameraStartPos, Alpha);
-// 	OwnersCamera->SetRelativeLocation(CamRelPos);
-// }
 
 // Alpha = value between 0 and 1
-void UDashComponent::LowerComponent(USceneComponent* Component,FVector StartPos ,float Alpha)
+void UDashComponent::LowerComponent(USceneComponent* Component, FVector StartPos, float Alpha)
 {
 	if (!Component)
 		return;
-	
-	FVector CamRelPos = MoveVectorBasedOnCurve(StartPos, Alpha);
+
+	FVector CamRelPos = MoveVectorBasedOnCurve(StartPos, DashCamLoweringCurve, Alpha);
 	Component->SetRelativeLocation(CamRelPos);
 }
 
-FVector UDashComponent::MoveVectorBasedOnCurve(FVector StartingPos, float Alpha)
+FVector UDashComponent::MoveVectorBasedOnCurve(FVector StartingPos, UCurveFloat* Curve, float Alpha)
 {
-	float CurveValue = DashCamLoweringCurve->GetFloatValue(Alpha);
+	float CurveValue = Curve->GetFloatValue(Alpha);
 	FVector CurrentPos = StartingPos;
 	CurrentPos.Z += CurveValue;
 	return CurrentPos;
@@ -113,6 +119,7 @@ FVector UDashComponent::MoveVectorBasedOnCurve(FVector StartingPos, float Alpha)
 
 void UDashComponent::MoveOwner(float Alpha)
 {
-	FVector CurrentPos = FMath::Lerp(DashStartPos, DashEndPos, Alpha);
-	GetOwner()->SetActorLocation(CurrentPos,true);
+	float CurveValue = DashDistanceCurve->GetFloatValue(Alpha);
+	FVector CurrentPos = DashStartPos + DashDirection * CurveValue;
+	GetOwner()->SetActorLocation(CurrentPos, true);
 }
