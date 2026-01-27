@@ -40,7 +40,7 @@ void UAttackComponent::DealDamage()
 	for (auto actor : hitActors)
 	{
 		FDamageEvent DamageEvent;
-		actor->TakeDamage(1,DamageEvent,nullptr,GetOwner());
+		actor->TakeDamage(WeaponData->Damage,DamageEvent,nullptr,GetOwner());
 	};
 }
 

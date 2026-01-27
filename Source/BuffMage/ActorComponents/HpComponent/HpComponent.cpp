@@ -6,56 +6,66 @@
 UHpComponent::UHpComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
-	GetOwner()->OnTakeAnyDamage.AddUniqueDynamic(this, &UHpComponent::OnDamageTaken);
-	if (StartingHP == 0)
-		CurrentHp = MaxHp;
-	else
-		CurrentHp = StartingHP;
-
-	if (!GetOwner())
-		return;
-
-	CharacterOwner = Cast<ACharacter>(GetOwner());
-	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this,&UHpComponent::OnAnimNotifyBegin);
 }
 
 void UHpComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	if (CharacterOwner)
-		return;
+
+	GetOwner()->OnTakeAnyDamage.AddUniqueDynamic(this, &UHpComponent::OnDamageTaken);
+
 	CharacterOwner = Cast<ACharacter>(GetOwner());
-	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnAnimNotifyBegin);
+	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(
+		this, &UHpComponent::OnAnimNotifyBegin);
+
+	if (StartingHP == 0)
+		CurrentHp = MaxHp;
+	else
+		CurrentHp = StartingHP;
 }
 
-void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
-                                 AController* InstigatedBy, AActor* DamageCauser)
+void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
+	if (CurrentHp <= 0)
+		return;
+	
 	CurrentHp -= Damage;
 
 	if (CurrentHp <= 0)
-		Death();
-	else
 	{
-		CharacterOwner->PlayAnimMontage(HitMontage);
+		Death();
+		return;
 	}
+
+	if (!HitMontage)
+		return;
+	CharacterOwner->PlayAnimMontage(HitMontage);
 }
 
 void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 {
-	CurrentHp = FMath::Clamp(CurrentHp, CurrentHp + Healing, MaxHp);
+	CurrentHp = FMath::Min(CurrentHp + Healing, MaxHp);
 }
 
 void UHpComponent::Death()
 {
-	DeathAnimDuration = CharacterOwner->PlayAnimMontage(DeathMontage);
+	if (DeathMontage)
+		DeathAnimDuration = CharacterOwner->PlayAnimMontage(DeathMontage);
+	StartDeathTimer();
+}
+
+void UHpComponent::StartDeathTimer()
+{
+	GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UHpComponent::DisableOwner, DeathAnimDuration -.5f);
+	DeathAnimDuration = 0;
 }
 
 void UHpComponent::OnAnimNotifyBegin(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
 {
 	if (Name == DeathNotifyName)
 	{
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle,this,&UHpComponent::DisableOwner, DeathAnimDuration);
+		StartDeathTimer();
 	}
 }
 
@@ -65,4 +75,3 @@ void UHpComponent::DisableOwner()
 	GetOwner()->SetActorEnableCollision(false);
 	GetOwner()->SetActorTickEnabled(false);
 }
-

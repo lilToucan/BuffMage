@@ -15,7 +15,7 @@ class BUFFMAGE_API UWeaponDataAsset : public UDataAsset
 	GENERATED_BODY()
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
-	float Damage;
+	float Damage = 1;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
 	TObjectPtr<UAnimMontage> AttackComboAnimMontage;

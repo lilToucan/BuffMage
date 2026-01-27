@@ -11,6 +11,8 @@ class BUFFMAGE_API AHealthPack : public AActor, public IInteractables
 	GENERATED_BODY()
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config")
+	float HealingAmount;
 
 protected:
 
@@ -21,4 +23,5 @@ public:
 	
 protected:
 	virtual void BeginPlay() override;
+	void DisableActor();
 };

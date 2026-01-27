@@ -1,11 +1,14 @@
 #include "BuffMageCharacter.h"
 #include "EnhancedInputComponent.h"
+#include "BuffMage/Interfaces/Interactables.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 ABuffMageCharacter::ABuffMageCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
 	AttackComp = CreateDefaultSubobject<UAttackComponent>("AttackComponent");
+	HpComponent = CreateDefaultSubobject<UHpComponent>("HpComponent");
 }
 
 void ABuffMageCharacter::BeginPlay()
@@ -20,7 +23,6 @@ void ABuffMageCharacter::BeginPlay()
 	AnimInstance->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &ABuffMageCharacter::OnMontageNotifyBegin);
 }
 
-// Called every frame
 void ABuffMageCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -31,6 +33,7 @@ void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 {
 	if (UEnhancedInputComponent* enhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
+		// aim input :o
 		enhancedInput->BindAction(LookAroundInputAction, ETriggerEvent::Triggered, this,
 		                          &ABuffMageCharacter::AimInputFunction);
 
@@ -43,6 +46,28 @@ void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		                          &ABuffMageCharacter::MoveInputFunction);
 		enhancedInput->BindAction(MoveInputAction, ETriggerEvent::Completed, this,
 		                          &ABuffMageCharacter::MoveInputFunction);
+
+		// interact Input :l
+		enhancedInput->BindAction(InteractInputAction, ETriggerEvent::Triggered, this,
+		                          &ABuffMageCharacter::InteractInputFunction);
+	}
+}
+
+void ABuffMageCharacter::InteractInputFunction(const FInputActionValue& InputActionValue)
+{
+	TArray<TEnumAsByte<EObjectTypeQuery>> traceObjectTypes;
+	traceObjectTypes.Add(UEngineTypes::ConvertToObjectType(InteractCollisionChannel));
+	TArray<AActor*> ignoreActors;
+	TArray<AActor*> outActors;
+	FVector sphereSpawnLocation = GetActorLocation();
+	UClass* seekClass = nullptr;
+	UKismetSystemLibrary::SphereOverlapActors(GetWorld(), sphereSpawnLocation, InteractionRadius, traceObjectTypes, seekClass, ignoreActors, outActors);
+
+	for (AActor* Actor : outActors)
+	{
+		if (!Actor->Implements<UInteractables>())
+			continue;
+		IInteractables::Execute_Interact(Actor, this);
 	}
 }
 
@@ -76,12 +101,12 @@ void ABuffMageCharacter::AttackInputFunction(const FInputActionValue& InputActio
 	AttackComp->Attack();
 }
 
-void ABuffMageCharacter::OnMontageNotifyBegin(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
+void ABuffMageCharacter::OnMontageNotifyBegin(
+	FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
 {
 	AttackComp->OnMontageNotifyBegin(Name, 0.4f, BranchingPointNotifyPayload);
 	BP_OnMonatageNotifyBegin();
 }
-
 
 
 TObjectPtr<UAttackComponent> ABuffMageCharacter::GetAttackComponent()

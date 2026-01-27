@@ -1,26 +1,18 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "HealthPack.h"
 
 #include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
 
 
-// Sets default values
 AHealthPack::AHealthPack()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-// Called when the game starts or when spawned
 void AHealthPack::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
-// Called every frame
 void AHealthPack::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -28,6 +20,20 @@ void AHealthPack::Tick(float DeltaTime)
 
 void AHealthPack::Interact_Implementation(ABuffMageCharacter* Player)
 {
-	Player->FindComponentByClass<UHpComponent>();
+	UHpComponent* PlayerHp = Player->FindComponentByClass<UHpComponent>();
+	if (!PlayerHp)
+		return;
+	
+	PlayerHp->OnHealingTaken(HealingAmount,GetOwner());
+
+	DisableActor();
 }
+
+void AHealthPack::DisableActor()
+{
+	SetActorHiddenInGame(true);
+	SetActorEnableCollision(false);
+	SetActorTickEnabled(false);
+}
+
 
