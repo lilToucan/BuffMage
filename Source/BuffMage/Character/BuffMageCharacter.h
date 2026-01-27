@@ -7,6 +7,7 @@
 #include "BuffMage/Interfaces/AttackerInterface.h"
 #include "GameFramework/Character.h"
 #include "BuffMage/ActorComponents/AttackComponent.h"
+#include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
 
 #include "BuffMageCharacter.generated.h"
 
@@ -22,30 +23,40 @@ public: // variables
 	UPROPERTY(BlueprintAssignable, Category = "Input")
 	FVoidFloat OnMovementInput;
 
-	
-	
-	
 protected: // variables
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Inereact")
+	TEnumAsByte<ECollisionChannel> InteractCollisionChannel;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Interact")
+	float InteractionRadius = 750.f;
+	
+	// components
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Component|AttackComponent")
 	TObjectPtr<UAttackComponent> AttackComp;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Component|AttackComponent")
+	TObjectPtr<UHpComponent> HpComponent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
+	// inputs
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Movement")
 	UInputAction* MoveInputAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Aim")
 	UInputAction* LookAroundInputAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Shoot")
 	UInputAction* ShootInputAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Interact")
+	UInputAction* InteractInputAction;
 	
 	UPROPERTY(BlueprintreadWrite, Category="Movement")
 	float Velocity;
-
-
 	
 public: // functions
 	ABuffMageCharacter();
 	virtual void Tick(float DeltaTime) override;
+	void InteractInputFunction(const FInputActionValue& InputActionValue);
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void MoveInputFunction(const FInputActionValue& InputActionValue);
 	virtual void AimInputFunction(const FInputActionValue& InputActionValue);
