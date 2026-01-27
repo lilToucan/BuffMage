@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/ActorComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -43,6 +44,9 @@ protected:
 	UPROPERTY(BlueprintReadWrite)
 	USkeletalMeshComponent* OwnersSkeletalMesh;
 
+	UPROPERTY(BlueprintReadWrite)
+	UHpComponent* OwnersHpComponent;
+	
 	FTimerHandle CooldownTimerHandle;
 	FTimerHandle WaitForIFramesTimerHandle;
 	float TimePassed;
@@ -65,6 +69,8 @@ public:
 	// void LowerCamera(float Alpha);
 	void LowerComponent(USceneComponent* Component,FVector StartPos,float Alpha);
 	FVector MoveVectorBasedOnCurve(FVector StartingPos, UCurveFloat* Curve, float Alpha);
+
+	
 
 protected:
 	virtual void BeginPlay() override;

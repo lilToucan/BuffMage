@@ -43,10 +43,15 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Component|HPComponent|Animations")
 	float DeathAnimDuration;
 
+	bool bIsActive;
+
 	// functions
 public:
 	UHpComponent();
 
+	virtual void Activate(bool bReset = false) override;
+	virtual void Deactivate() override;
+	
 	UFUNCTION(BlueprintCallable, Category = "Component|HPComponent")
 	void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy,
 	                   AActor* DamageCauser);

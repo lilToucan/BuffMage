@@ -35,7 +35,7 @@ void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	if (UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		// aim input :o
-		enhancedInput->BindAction(LookAroundInputAction, ETriggerEvent::Triggered, this,
+		EnhancedInput->BindAction(LookAroundInputAction, ETriggerEvent::Triggered, this,
 		                          &ABuffMageCharacter::AimInputFunction);
 
 		// attack input:|
@@ -52,7 +52,7 @@ void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		EnhancedInput->BindAction(DashInputAction, ETriggerEvent::Completed, DashComponent,
 		                          FName("PerformDash"));
 		// interact Input :l
-		enhancedInput->BindAction(InteractInputAction, ETriggerEvent::Triggered, this,
+		EnhancedInput->BindAction(InteractInputAction, ETriggerEvent::Triggered, this,
 		                          &ABuffMageCharacter::InteractInputFunction);
 	}
 }

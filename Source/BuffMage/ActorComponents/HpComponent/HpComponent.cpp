@@ -8,6 +8,25 @@ UHpComponent::UHpComponent()
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
+void UHpComponent::Activate(bool bReset)
+{
+	if (bReset)
+	{
+		if (StartingHP == 0)
+			CurrentHp = MaxHp;
+		else
+			CurrentHp = StartingHP;
+	}
+
+	bIsActive = true;
+	
+}
+
+void UHpComponent::Deactivate()
+{
+	bIsActive = false;
+}
+
 void UHpComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -26,7 +45,7 @@ void UHpComponent::BeginPlay()
 
 void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	if (CurrentHp <= 0)
+	if (!bIsActive || CurrentHp <= 0)
 		return;
 	
 	CurrentHp -= Damage;
@@ -44,6 +63,9 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 
 void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 {
+	if (!bIsActive || CurrentHp <= 0)
+		return;
+	
 	CurrentHp = FMath::Min(CurrentHp + Healing, MaxHp);
 }
 

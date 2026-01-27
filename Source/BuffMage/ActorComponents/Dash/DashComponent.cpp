@@ -1,7 +1,5 @@
 #include "DashComponent.h"
 
-#include "Animation/InputScaleBias.h"
-
 UDashComponent::UDashComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
@@ -22,12 +20,15 @@ void UDashComponent::BeginPlay()
 	OwnersCamera = GetOwner()->FindComponentByClass<UCameraComponent>();
 	OwnersMovement = GetOwner()->FindComponentByClass<UCharacterMovementComponent>();
 	OwnersSkeletalMesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
+	OwnersHpComponent = GetOwner()->FindComponentByClass<UHpComponent>();
 }
 
 void UDashComponent::ActivateIFrames()
 {
-	GetOwner()->SetActorEnableCollision(false);
-
+	if (OwnersHpComponent)
+		OwnersHpComponent->Deactivate();
+	else
+		GetOwner()->SetActorEnableCollision(false);
 }
 
 void UDashComponent::PerformDash()
@@ -52,7 +53,7 @@ void UDashComponent::PerformDash()
 		MeshStartPos = OwnersSkeletalMesh->GetRelativeLocation();
 
 	DashStartPos = GetOwner()->GetActorLocation();
-	
+
 
 	SetComponentTickEnabled(true);
 
@@ -95,8 +96,11 @@ void UDashComponent::DashFinished()
 void UDashComponent::RefreshDash()
 {
 	bCanDash = true;
-	GetOwner()->SetActorEnableCollision(true);
-
+	
+	if (OwnersHpComponent)
+		OwnersHpComponent->Activate();
+	else
+		GetOwner()->SetActorEnableCollision(true);
 }
 
 // Alpha = value between 0 and 1
