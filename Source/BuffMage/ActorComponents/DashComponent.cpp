@@ -1,17 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "DashComponent.h"
 
 
-// Sets default values for this component's properties
 UDashComponent::UDashComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
 
@@ -19,17 +11,23 @@ UDashComponent::UDashComponent()
 void UDashComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// ...
+	FOnTimelineFloat TimelineTick;
+	TimelineTick.BindUFunction(this,FName("UpdateTimeline"));
 	
+	FOnTimelineEvent OnTimelineFinished;
+	OnTimelineFinished.BindUFunction(this,FName("TimelineFinished"));
+
+	DashCrouchTimeline.SetPlayRate(DashCrouchTimeline.GetPlayRate()/DashDuration);
+	DashCrouchTimeline.AddInterpFloat(DashCurve,TimelineTick);
+	DashCrouchTimeline.SetTimelineFinishedFunc(OnTimelineFinished);
 }
 
-
-// Called every frame
-void UDashComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UDashComponent::UpdateTimeline(float Alpha)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
 }
+
+void UDashComponent::TimelineFinished()
+{
+}
+
 
