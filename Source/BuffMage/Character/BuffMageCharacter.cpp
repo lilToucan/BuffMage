@@ -8,6 +8,7 @@ ABuffMageCharacter::ABuffMageCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	AttackComp = CreateDefaultSubobject<UAttackComponent>("AttackComponent");
+	DashComponent = CreateDefaultSubobject<UDashComponent>("DashComponent");
 	HpComponent = CreateDefaultSubobject<UHpComponent>("HpComponent");
 }
 
@@ -31,22 +32,25 @@ void ABuffMageCharacter::Tick(float DeltaTime)
 // Called to bind functionality to input
 void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	if (UEnhancedInputComponent* enhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	if (UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		// aim input :o
 		enhancedInput->BindAction(LookAroundInputAction, ETriggerEvent::Triggered, this,
 		                          &ABuffMageCharacter::AimInputFunction);
 
 		// attack input:|
-		enhancedInput->BindAction(ShootInputAction, ETriggerEvent::Started, this,
+		EnhancedInput->BindAction(ShootInputAction, ETriggerEvent::Started, this,
 		                          &ABuffMageCharacter::AttackInputFunction);
 
 		// move inputs :)
-		enhancedInput->BindAction(MoveInputAction, ETriggerEvent::Triggered, this,
+		EnhancedInput->BindAction(MoveInputAction, ETriggerEvent::Triggered, this,
 		                          &ABuffMageCharacter::MoveInputFunction);
-		enhancedInput->BindAction(MoveInputAction, ETriggerEvent::Completed, this,
+		EnhancedInput->BindAction(MoveInputAction, ETriggerEvent::Completed, this,
 		                          &ABuffMageCharacter::MoveInputFunction);
 
+		// Dash Input :I
+		EnhancedInput->BindAction(DashInputAction, ETriggerEvent::Completed, DashComponent,
+		                          FName("PerformDash"));
 		// interact Input :l
 		enhancedInput->BindAction(InteractInputAction, ETriggerEvent::Triggered, this,
 		                          &ABuffMageCharacter::InteractInputFunction);

@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -8,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "BuffMage/ActorComponents/AttackComponent.h"
 #include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
+#include "BuffMage/ActorComponents/Dash/DashComponent.h"
 
 #include "BuffMageCharacter.generated.h"
 
@@ -34,11 +33,11 @@ protected: // variables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Component|AttackComponent")
 	TObjectPtr<UAttackComponent> AttackComp;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="DashComponent")
+	TObjectPtr<UDashComponent> DashComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Component|AttackComponent")
 	TObjectPtr<UHpComponent> HpComponent;
-
-	// inputs
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
 	UInputAction* MoveInputAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Aim")
@@ -46,6 +45,9 @@ protected: // variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Shoot")
 	UInputAction* ShootInputAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Dash")
+	UInputAction* DashInputAction;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Interact")
 	UInputAction* InteractInputAction;
