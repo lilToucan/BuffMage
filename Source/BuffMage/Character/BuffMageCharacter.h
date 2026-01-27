@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -7,6 +5,7 @@
 #include "BuffMage/Interfaces/AttackerInterface.h"
 #include "GameFramework/Character.h"
 #include "BuffMage/ActorComponents/AttackComponent.h"
+#include "BuffMage/ActorComponents/Dash/DashComponent.h"
 
 #include "BuffMageCharacter.generated.h"
 
@@ -22,13 +21,14 @@ public: // variables
 	UPROPERTY(BlueprintAssignable, Category = "Input")
 	FVoidFloat OnMovementInput;
 
-	
-	
-	
 protected: // variables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent")
 	TObjectPtr<UAttackComponent> AttackComp;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="DashComponent")
+	TObjectPtr<UDashComponent> DashComponent;
 
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
 	UInputAction* MoveInputAction;
 
@@ -37,9 +37,13 @@ protected: // variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
 	UInputAction* ShootInputAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Dash")
+	UInputAction* DashInputAction;
 	
-	UPROPERTY(BlueprintreadWrite, Category="Movement")
+	UPROPERTY(BlueprintreadWrite, Category="Input|Movement")
 	float Velocity;
+
 
 
 	
