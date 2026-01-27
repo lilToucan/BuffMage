@@ -14,22 +14,22 @@ class BUFFMAGE_API UDashComponent : public UActorComponent
 
 	// variables
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="DashComponent|Config")
-	float DashDistance;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="DashComponent|Config")
-	float DashDuration;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="DashComponent|Config")
-	float IFrames;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="DashComponent|Config")
-	float DashCooldown;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="DashComponent|Config|Curves",
-		meta =(ToolTip = "Only used for Player, Must be of width 1 "))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="DashComponent|Config|Curves", meta =(ToolTip = "Only used for Player, Must be of width 1 "))
 	UCurveFloat* DashCamLoweringCurve;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="DashComponent|Config", meta =(ToolTip = "Only used for Player, Must be of width 1 "))
+	UCurveFloat* DashDistanceCurve;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="DashComponent|Config")
+	float DashDuration = 0.25f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="DashComponent|Config")
+	float WaitTimeBeforeIFrames = 0.05f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="DashComponent|Config")
+	float DashCooldown = 1;
+
+	
 protected:
 	UPROPERTY(BlueprintReadWrite)
 	bool bCanDash = true;
@@ -44,11 +44,11 @@ protected:
 	USkeletalMeshComponent* OwnersSkeletalMesh;
 
 	FTimerHandle CooldownTimerHandle;
+	FTimerHandle WaitForIFramesTimerHandle;
 	float TimePassed;
 
 	FVector DashDirection;
 	FVector DashStartPos;
-	FVector DashEndPos;
 
 	FVector CameraStartPos;
 
@@ -64,11 +64,12 @@ public:
 	void MoveOwner(float Alpha);
 	// void LowerCamera(float Alpha);
 	void LowerComponent(USceneComponent* Component,FVector StartPos,float Alpha);
-	FVector MoveVectorBasedOnCurve(FVector StartingPos, float Alpha);
+	FVector MoveVectorBasedOnCurve(FVector StartingPos, UCurveFloat* Curve, float Alpha);
 
 protected:
 	virtual void BeginPlay() override;
 
+	void ActivateIFrames();
 	UFUNCTION()
 	void DashUpdate(float Alpha);
 	UFUNCTION()
