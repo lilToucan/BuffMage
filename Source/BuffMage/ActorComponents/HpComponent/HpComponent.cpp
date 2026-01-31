@@ -34,13 +34,9 @@ void UHpComponent::BeginPlay()
 	GetOwner()->OnTakeAnyDamage.AddUniqueDynamic(this, &UHpComponent::OnDamageTaken);
 
 	CharacterOwner = Cast<ACharacter>(GetOwner());
-	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(
-		this, &UHpComponent::OnAnimNotifyBegin);
+	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnAnimNotifyBegin);
 
-	if (StartingHP == 0)
-		CurrentHp = MaxHp;
-	else
-		CurrentHp = StartingHP;
+	Activate(true);
 }
 
 void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
