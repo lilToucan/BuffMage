@@ -9,20 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/ABP_TargetDummy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations/TestingDummy/ABP_TargetDummy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_Quad_Punch_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_Quad_Punch_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Ch03_nonPBR_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations/TestingDummy/Ch03_nonPBR_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Testing/BP_TestingDummy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Testing/BP_TestingDummy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestWeapon.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Inputs/IMC_TESTING.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Inputs/IMC_TESTING.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +52,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "Uproject.BuffMage.executor": "Debug",
+    "Uproject.BuffMage.executor": "Run",
     "git-widget-placeholder": "feature/Programming/CombatSystem",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -160,7 +147,7 @@
       <workItem from="1769509991989" duration="1970000" />
       <workItem from="1769512742892" duration="391000" />
       <workItem from="1769719779403" duration="8524000" />
-      <workItem from="1769864091247" duration="14580000" />
+      <workItem from="1769864091247" duration="15568000" />
     </task>
     <servers />
   </component>
