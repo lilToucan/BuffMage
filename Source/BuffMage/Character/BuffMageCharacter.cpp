@@ -17,11 +17,10 @@ void ABuffMageCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-	AttackComp->AnimInstance = AnimInstance;
 	if (!IsValid(AnimInstance))
 		return;
-
-	AnimInstance->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &ABuffMageCharacter::OnMontageNotifyBegin);
+	
+	AttackComp->AnimInstance = AnimInstance;
 }
 
 void ABuffMageCharacter::Tick(float DeltaTime)
@@ -54,6 +53,10 @@ void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		// interact Input :l
 		EnhancedInput->BindAction(InteractInputAction, ETriggerEvent::Triggered, this,
 		                          &ABuffMageCharacter::InteractInputFunction);
+
+		// Change Weapon Input :U
+		EnhancedInput->BindAction(ChangeWeaponInputAction, ETriggerEvent::Triggered, this,
+								  &ABuffMageCharacter::ChangeWeaponInputFunction);
 	}
 }
 
@@ -75,18 +78,24 @@ void ABuffMageCharacter::InteractInputFunction(const FInputActionValue& InputAct
 	}
 }
 
+void ABuffMageCharacter::ChangeWeaponInputFunction(const FInputActionValue& InputActionValue)
+{
+	float InputValue  = InputActionValue.Get<float>();
+	AttackComp->ChangeWeapon(InputValue);
+}
+
 void ABuffMageCharacter::MoveInputFunction(const FInputActionValue& InputActionValue)
 {
 	if (!GetController()) // check if the controller exists 
 		return;
 
-	FVector2D input = InputActionValue.Get<FVector2D>(); // get the value of the input
-	Velocity = input.Length();
+	FVector2D InputValue = InputActionValue.Get<FVector2D>(); // get the value of the input
+	Velocity = InputValue.Length();
 	OnMovementInput.Broadcast(Velocity);
 
 	// add movement to the movement component
-	AddMovementInput(GetActorRightVector(), input.X);
-	AddMovementInput(GetActorForwardVector(), input.Y);
+	AddMovementInput(GetActorRightVector(), InputValue.X);
+	AddMovementInput(GetActorForwardVector(), InputValue.Y);
 }
 
 void ABuffMageCharacter::AimInputFunction(const FInputActionValue& InputActionValue)
@@ -102,18 +111,5 @@ void ABuffMageCharacter::AimInputFunction(const FInputActionValue& InputActionVa
 
 void ABuffMageCharacter::AttackInputFunction(const FInputActionValue& InputActionValue)
 {
-	AttackComp->Attack();
-}
-
-void ABuffMageCharacter::OnMontageNotifyBegin(
-	FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
-{
-	AttackComp->OnMontageNotifyBegin(Name, 0.4f, BranchingPointNotifyPayload);
-	BP_OnMonatageNotifyBegin();
-}
-
-
-TObjectPtr<UAttackComponent> ABuffMageCharacter::GetAttackComponent()
-{
-	return AttackComp;
+	AttackComp->StartAttackAnim();
 }

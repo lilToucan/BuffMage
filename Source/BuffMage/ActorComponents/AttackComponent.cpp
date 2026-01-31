@@ -15,72 +15,48 @@ void UAttackComponent::BeginPlay()
 	Super::BeginPlay();
 }
 
-void UAttackComponent::Attack()
+void UAttackComponent::StartAttackAnim()
 {
-	if (!IsValid(AnimInstance) || !IsValid(WeaponData->AttackComboAnimMontage))
+	if (GetWorld()->GetTimeSeconds() < ShootTime || WeaponData.Num() < 1)
+		// check if the player can attack or has animations
 		return;
 
-	if (!AnimInstance->Montage_IsPlaying(WeaponData->AttackComboAnimMontage))
-	{
-		AnimInstance->Montage_Play(WeaponData->AttackComboAnimMontage);
-	}
+	ShootTime = GetWorld()->GetTimeSeconds() + WeaponData[WeaponIndex]->FireRate;
+
+	AnimInstance->Montage_Play(WeaponData[WeaponIndex]->AttackComboAnimMontage[AnimIndex]);
+
+	// go to next Anim 
+	AnimIndex++;
+	if (AnimIndex >= WeaponData[WeaponIndex]->AttackComboAnimMontage.Num())
+		AnimIndex = 0;
+}
+
+void UAttackComponent::HitDetection(FName SocketName)
+{
+	auto Weapon = WeaponData[WeaponIndex];
+
+	FVector AttackPosition;
+
+	if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName))
+		AttackPosition = GetOwner()->GetActorLocation();
 	else
-	{
-		bHasAttackBeenPerformed = true;
-	}
+		AttackPosition = AnimInstance->GetSkelMeshComponent()->GetSocketLocation(SocketName);
+
+	AttackPosition += GetOwner()->GetActorForwardVector() * Weapon->PositionOffsetX;
+
+	Weapon->Attack(AttackPosition, CollisionChannelsToHit, GetOwner());
 }
 
-void UAttackComponent::DealDamage()
+void UAttackComponent::ChangeWeapon(int InputValue)
 {
-	TArray<AActor*> hitActors = AttackOverlapSphere();
-	
-	if (hitActors.Num() <= 0)
-		return;
-
-	for (auto actor : hitActors)
-	{
-		FDamageEvent DamageEvent;
-		actor->TakeDamage(WeaponData->Damage,DamageEvent,nullptr,GetOwner());
-	};
+	WeaponIndex += InputValue;
+	if (WeaponIndex < 0)
+		WeaponIndex = WeaponData.Num() - 1;
+	else if (WeaponIndex >= WeaponData.Num())
+		WeaponIndex = 0;
 }
 
-void UAttackComponent::CheckComboPerformed(float BlendTime)
+void UAttackComponent::AddWeapon(UWeaponDataAsset* Weapon)
 {
-	// check combo
-	if (!bHasAttackBeenPerformed) // if the player didn't perform the attack input before this notify then stop the combo 
-	{
-		if (IsValid(AnimInstance))
-		{
-			AnimInstance->Montage_Stop(BlendTime,WeaponData->AttackComboAnimMontage);
-		}
-	}
-	bHasAttackBeenPerformed = false;
+	WeaponData.Add(Weapon);
 }
-
-void UAttackComponent::OnMontageNotifyBegin(FName Name,float BlendTime,const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
-{
-	CheckComboPerformed(BlendTime);
-	DealDamage();
-}
-
-TArray<AActor*> UAttackComponent::AttackOverlapSphere()
-{
-	TArray<TEnumAsByte<EObjectTypeQuery>> EObjectTypeQueryArray;
-	EObjectTypeQueryArray.Add(UEngineTypes::ConvertToObjectType(CollisionChannelToHit));
-	UClass* actorTypeFilters = nullptr;
-	TArray<AActor*> ignoreActors;
-	ignoreActors.Add(GetOwner());
-	TArray<AActor*> outActors;
-
-	
-	UKismetSystemLibrary::SphereOverlapActors(GetWorld(), GetOwner()->GetActorLocation(), OverlapSphereRange, EObjectTypeQueryArray,
-											  actorTypeFilters, ignoreActors, outActors);
-
-	return outActors;
-}
-
-
-
-
-
-

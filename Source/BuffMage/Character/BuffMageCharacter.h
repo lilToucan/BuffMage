@@ -14,7 +14,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FVoidFloat, float, Velocity);
 
 UCLASS(abstract)
-class BUFFMAGE_API ABuffMageCharacter : public ACharacter, public IAttackerInterface
+class BUFFMAGE_API ABuffMageCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -23,16 +23,19 @@ public: // variables
 	FVoidFloat OnMovementInput;
 
 protected: // variables
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Inereact")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Interact")
 	TEnumAsByte<ECollisionChannel> InteractCollisionChannel;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Interact")
 	float InteractionRadius = 750.f;
-	
+
+	UPROPERTY(BlueprintreadWrite, Category="Movement")
+	float Velocity;
+
 	// components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Component|AttackComponent")
 	TObjectPtr<UAttackComponent> AttackComp;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="DashComponent")
 	TObjectPtr<UDashComponent> DashComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Component|AttackComponent")
@@ -48,27 +51,23 @@ protected: // variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Dash")
 	UInputAction* DashInputAction;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Interact")
 	UInputAction* InteractInputAction;
-	
-	UPROPERTY(BlueprintreadWrite, Category="Movement")
-	float Velocity;
-	
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
+	UInputAction* ChangeWeaponInputAction;
+
 public: // functions
 	ABuffMageCharacter();
 	virtual void Tick(float DeltaTime) override;
-	void InteractInputFunction(const FInputActionValue& InputActionValue);
+	virtual void InteractInputFunction(const FInputActionValue& InputActionValue);
+	virtual void ChangeWeaponInputFunction(const FInputActionValue& InputActionValue);
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void MoveInputFunction(const FInputActionValue& InputActionValue);
 	virtual void AimInputFunction(const FInputActionValue& InputActionValue);
 	virtual void AttackInputFunction(const FInputActionValue& InputActionValue);
-	
+
 protected: // functions
 	virtual void BeginPlay() override;
-	UFUNCTION()
-	virtual void OnMontageNotifyBegin(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload);
-	UFUNCTION(BlueprintImplementableEvent)
-	void BP_OnMonatageNotifyBegin();
-	virtual TObjectPtr<UAttackComponent> GetAttackComponent() override;
 };

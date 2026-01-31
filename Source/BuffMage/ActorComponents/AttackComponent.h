@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -15,29 +13,40 @@ class BUFFMAGE_API UAttackComponent : public UActorComponent
 // variables
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapon")
-	TObjectPtr<UWeaponDataAsset> WeaponData;
+	TArray<TObjectPtr<UWeaponDataAsset>>WeaponData;
 
 	UPROPERTY(BlueprintReadWrite, Category="AttackComponent|Animations")
 	TObjectPtr<UAnimInstance> AnimInstance;
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="AttackComponent|OverlapSphere")
-	float OverlapSphereRange = 500;
-	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="AttackComponent|OverlapSphere")
-	TEnumAsByte<ECollisionChannel> CollisionChannelToHit;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|OverlapSphere")
+	TArray<TEnumAsByte<ECollisionChannel>> CollisionChannelsToHit;
 
 protected:
-	UPROPERTY(BlueprintReadWrite, Category = "Attack")
-	bool bHasAttackBeenPerformed;
+	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
+	int AnimIndex = 0;
 
+	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
+	int WeaponIndex = 0;
+
+	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
+	float ShootTime = 0;
+	
 // functions
 public:
 	UAttackComponent();
-	virtual void OnMontageNotifyBegin(FName Name,float BlendTime, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload);
-	virtual void Attack();
-	virtual void DealDamage();
-	virtual void CheckComboPerformed(float BlendTime);
+	
+	UFUNCTION(BlueprintCallable)
+	virtual void StartAttackAnim();
 
+	UFUNCTION(BlueprintCallable)
+	virtual void HitDetection(FName SocketName);
+
+	UFUNCTION(BlueprintCallable)
+	virtual void ChangeWeapon(int InputValue);
+
+	UFUNCTION(BlueprintCallable)
+	virtual void AddWeapon(UWeaponDataAsset* Weapon);
+	
 protected:
-	virtual TArray<AActor*> AttackOverlapSphere();
 	virtual void BeginPlay() override;
 };
