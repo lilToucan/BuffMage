@@ -32,19 +32,19 @@ public:
 
 	
 protected:
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "DashComponent")
 	bool bCanDash = true;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "DashComponent")
 	UCameraComponent* OwnersCamera;
 	
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "DashComponent")
 	UCharacterMovementComponent* OwnersMovement;
 	
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "DashComponent")
 	USkeletalMeshComponent* OwnersSkeletalMesh;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "DashComponent")
 	UHpComponent* OwnersHpComponent;
 	
 	FTimerHandle CooldownTimerHandle;

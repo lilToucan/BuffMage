@@ -1,10 +1,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BuffMage/DataAssets/WeaponDataAsset.h"
+#include "BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.h"
 #include "Components/ActorComponent.h"
 #include "AttackComponent.generated.h"
 
+
+class UCameraComponent;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), BlueprintType)
 class BUFFMAGE_API UAttackComponent : public UActorComponent
@@ -12,24 +14,17 @@ class BUFFMAGE_API UAttackComponent : public UActorComponent
 	GENERATED_BODY()
 // variables
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapon")
-	TArray<TObjectPtr<UWeaponDataAsset>>WeaponData;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
+	TArray<FDynamicWeaponData>WeaponsData;
 
 	UPROPERTY(BlueprintReadWrite, Category="AttackComponent|Animations")
 	TObjectPtr<UAnimInstance> AnimInstance;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|OverlapSphere")
-	TArray<TEnumAsByte<ECollisionChannel>> CollisionChannelsToHit;
-
 protected:
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
-	int AnimIndex = 0;
-
-	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	int WeaponIndex = 0;
-
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
-	float ShootTime = 0;
+	UCameraComponent* Cam;
 	
 // functions
 public:
@@ -45,7 +40,10 @@ public:
 	virtual void ChangeWeapon(int InputValue);
 
 	UFUNCTION(BlueprintCallable)
-	virtual void AddWeapon(UWeaponDataAsset* Weapon);
+	virtual void AddWeapon(FDynamicWeaponData& Weapon);
+	
+	UFUNCTION(BlueprintCallable)
+	virtual void ReloadWeapon();
 	
 protected:
 	virtual void BeginPlay() override;

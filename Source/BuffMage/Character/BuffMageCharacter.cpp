@@ -10,6 +10,18 @@ ABuffMageCharacter::ABuffMageCharacter()
 	AttackComp = CreateDefaultSubobject<UAttackComponent>("AttackComponent");
 	DashComponent = CreateDefaultSubobject<UDashComponent>("DashComponent");
 	HpComponent = CreateDefaultSubobject<UHpComponent>("HpComponent");
+
+	CameraComponent =  CreateDefaultSubobject<UCameraComponent>("CameraComponent");
+	CameraComponent->AttachToComponent(RootComponent,FAttachmentTransformRules::KeepRelativeTransform);
+	
+	if (!GetMesh())
+		return;
+	
+	FAttachmentTransformRules x = FAttachmentTransformRules::KeepRelativeTransform;
+	GetMesh()->AttachToComponent(CameraComponent,x);
+	
+	CameraComponent->SetRelativeLocation(FVector(30,0,40));
+	
 }
 
 void ABuffMageCharacter::BeginPlay()

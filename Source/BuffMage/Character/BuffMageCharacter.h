@@ -2,7 +2,6 @@
 
 #include "CoreMinimal.h"
 #include "InputAction.h"
-#include "BuffMage/Interfaces/AttackerInterface.h"
 #include "GameFramework/Character.h"
 #include "BuffMage/ActorComponents/AttackComponent.h"
 #include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
@@ -33,13 +32,16 @@ protected: // variables
 	float Velocity;
 
 	// components
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Component|AttackComponent")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|AttackComponent")
 	TObjectPtr<UAttackComponent> AttackComp;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="DashComponent")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|DashComponent")
 	TObjectPtr<UDashComponent> DashComponent;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Component|AttackComponent")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|HpComponent")
 	TObjectPtr<UHpComponent> HpComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|CameraComponent")
+	TObjectPtr<UCameraComponent> CameraComponent;
+
+	// inputs
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
 	UInputAction* MoveInputAction;
 

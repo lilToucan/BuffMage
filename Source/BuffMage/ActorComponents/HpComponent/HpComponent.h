@@ -14,33 +14,33 @@ class BUFFMAGE_API UHpComponent : public UActorComponent
 
 	// variables
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component|HPComponent|Config")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
 	float MaxHp;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component|HPComponent|Config")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
 	float StartingHP;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component|HPComponent|Config")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
 	UAnimMontage* HitMontage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component|HPComponent|Config")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
 	UAnimMontage* DeathMontage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component|HPComponent|Config")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
 	FName DeathNotifyName = FName("DeathNotify");
 
-	UPROPERTY(BlueprintReadWrite, Category = "Component|HPComponent|Config")
+	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Config")
 	FTimerHandle TimerHandle;
 
 protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Component|HPComponent|Hp")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Hp")
 	float CurrentHp;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Component|HPComponent|Animations")
+	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Animations")
 	USkeletalMesh* OwnersSkeletalMesh;
-	UPROPERTY(BlueprintReadWrite, Category = "Component|HPComponent|Animations")
+	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Animations")
 	ACharacter* CharacterOwner;
-	UPROPERTY(BlueprintReadOnly, Category = "Component|HPComponent|Animations")
+	UPROPERTY(BlueprintReadOnly, Category = "HpComponent|Animations")
 	float DeathAnimDuration;
 
 	bool bIsActive;
@@ -52,11 +52,10 @@ public:
 	virtual void Activate(bool bReset = false) override;
 	virtual void Deactivate() override;
 	
-	UFUNCTION(BlueprintCallable, Category = "Component|HPComponent")
-	void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy,
-	                   AActor* DamageCauser);
+	UFUNCTION(BlueprintCallable, Category = "HpComponent")
+	void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 
-	UFUNCTION(BlueprintCallable, Category = "Component|HPComponent")
+	UFUNCTION(BlueprintCallable, Category = "HpComponent")
 	void OnHealingTaken(float Healing, AActor* HealingCauser);
 
 protected:

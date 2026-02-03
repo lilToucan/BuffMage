@@ -3,7 +3,7 @@
 #include "Engine/DamageEvents.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-void UMeleeWeaponData::Attack(FVector StartPos, TArray<TEnumAsByte<ECollisionChannel>>& CollisionChannel, AActor* Instigator)
+void UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator)
 {
 	TArray<TEnumAsByte<EObjectTypeQuery>> traceObjectTypes;
 	traceObjectTypes.Append(CollisionChannel);
@@ -15,8 +15,7 @@ void UMeleeWeaponData::Attack(FVector StartPos, TArray<TEnumAsByte<ECollisionCha
 	TArray<AActor*> OutActors;
 
 	DrawDebugSphere(Instigator->GetWorld(), StartPos, Range, 12, FColor::Red, true, 100.f, 0, 0);
-	UKismetSystemLibrary::SphereOverlapActors(Instigator->GetWorld(), StartPos, Range, traceObjectTypes, SeekClass,
-	                                          IgnoreActors, OutActors);
+	UKismetSystemLibrary::SphereOverlapActors(Instigator->GetWorld(), StartPos, Range, traceObjectTypes, SeekClass, IgnoreActors, OutActors);
 
 	if (OutActors.Num() < 1)
 		return;
