@@ -48,7 +48,7 @@ void UAttackComponent::StartAttackAnim()
 
 void UAttackComponent::HitDetection(FName SocketName)
 {
-	if (WeaponsData.Num() < 1 || !WeaponsData[WeaponIndex].WeaponData)
+	if (WeaponsData.Num() < 1 || !WeaponsData[WeaponIndex].WeaponData || !bCanAttack)
 		return;
 
 	const auto Weapon = WeaponsData[WeaponIndex].WeaponData;
@@ -60,10 +60,8 @@ void UAttackComponent::HitDetection(FName SocketName)
 	// Check Reload
 	if (WeaponsData[WeaponIndex].CurrentAmmo < 0)
 	{
-		WeaponsData[WeaponIndex].CurrentAmmo = Weapon->AmmoMax;
-		WeaponsData[WeaponIndex].ShootTime = GetWorld()->GetTimeSeconds() + Weapon->ReloadTime;
-		
-		AnimInstance->Montage_Play(Weapon->ReloadAnimMontage);
+		AnimInstance->Montage_Play(Weapon->ReloadAnimMontage); // need to move to it's own function then let input activate it
+		bCanAttack = false;
 		return;
 	}
 
@@ -78,11 +76,13 @@ void UAttackComponent::HitDetection(FName SocketName)
 		Weapon->Attack(AttackPosition, Cam->GetComponentRotation(), GetOwner());
 	else
 		Weapon->Attack(AttackPosition, GetOwner()->GetActorRotation(), GetOwner());
+
+	bCanAttack = false;
 }
 
 void UAttackComponent::ChangeWeapon(int InputValue)
 {
-	if (GetWorld()->GetTimeSeconds() < WeaponsData[WeaponIndex].ShootTime || WeaponsData.Num() < 1)
+	if (GetWorld()->GetTimeSeconds() < WeaponsData[WeaponIndex].ShootTime || WeaponsData.Num() < 1 || !bCanAttack)
 		return;
 	
 	WeaponIndex += InputValue;
@@ -97,4 +97,16 @@ void UAttackComponent::AddWeapon(FDynamicWeaponData& Weapon)
 {
 	if (Weapon.WeaponData)
 		WeaponsData.Add(Weapon);
+}
+
+void UAttackComponent::ReloadWeapon()
+{
+	const auto Weapon = WeaponsData[WeaponIndex].WeaponData;
+	bCanAttack = true;
+	WeaponsData[WeaponIndex].CurrentAmmo = Weapon->AmmoMax;
+}
+
+void UAttackComponent::AttackCompleted()
+{
+	bCanAttack = true;
 }

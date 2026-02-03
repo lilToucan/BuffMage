@@ -25,6 +25,8 @@ protected:
 	int WeaponIndex = 0;
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	UCameraComponent* Cam;
+	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
+	bool bCanAttack;
 	
 // functions
 public:
@@ -44,6 +46,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	virtual void ReloadWeapon();
+	
+	UFUNCTION(BlueprintCallable)
+	virtual void AttackCompleted();
 	
 protected:
 	virtual void BeginPlay() override;

@@ -9,28 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/Notifies/AN_PerformAttack.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_QuadPunc_Aoe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_QuadPunc_Aoe.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_Quad_Punch_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_Quad_Punch_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/BT_EnemyCircling.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/BT_EnemyCircling.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/CustomTasks/BTT_PlayAnimMontage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/CustomTasks/BTT_PlayAnimMontage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Testing/BP_TestingDummy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Testing/BP_TestingDummy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestMeleeWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestMeleeWeapon.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Dash/DashComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Dash/DashComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Interfaces/AttackerInterface.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Interfaces/AttackerInterface.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +176,7 @@
       <workItem from="1770124080148" duration="3714000" />
       <workItem from="1770127875072" duration="2445000" />
       <workItem from="1770130358140" duration="4189000" />
-      <workItem from="1770149728796" duration="27000" />
+      <workItem from="1770149728796" duration="847000" />
     </task>
     <servers />
   </component>
@@ -222,11 +202,6 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.cpp</url>
-          <line>87</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
