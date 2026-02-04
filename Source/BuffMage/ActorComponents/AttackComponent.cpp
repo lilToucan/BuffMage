@@ -28,6 +28,9 @@ void UAttackComponent::BeginPlay()
 
 	if (WeaponsData.Num() > 0 || !WeaponsData[WeaponIndex].WeaponData)
 		WeaponsData[WeaponIndex].CurrentAmmo = WeaponsData[WeaponIndex].WeaponData->AmmoMax;
+
+	if (!AnimInstance)
+		AnimInstance = GetOwner()->GetComponentByClass<USkeletalMeshComponent>()->GetAnimInstance();
 }
 
 // Called by the Owner of the component when inputting an attack
@@ -58,9 +61,9 @@ void UAttackComponent::StartAttackAnim()
 // called by the Attack notify inside the animation
 void UAttackComponent::HitDetection(FName SocketName)
 {
-	if (WeaponsData.Num() < 1 || !WeaponsData[WeaponIndex].WeaponData)
+	if (WeaponsData.Num() < 1 || !WeaponsData[WeaponIndex].WeaponData || !AnimInstance)
 		return;
-
+	
 	const auto Weapon = WeaponsData[WeaponIndex].WeaponData;
 
 	FVector AttackPosition;
