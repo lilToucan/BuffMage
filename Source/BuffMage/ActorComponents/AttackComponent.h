@@ -15,6 +15,9 @@ class BUFFMAGE_API UAttackComponent : public UActorComponent
 // variables
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
+	bool FireRateActive;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
 	TArray<FDynamicWeaponData>WeaponsData;
 
 	UPROPERTY(BlueprintReadWrite, Category="AttackComponent|Animations")
@@ -25,8 +28,7 @@ protected:
 	int WeaponIndex = 0;
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	UCameraComponent* Cam;
-	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
-	bool bCanAttack;
+	
 	
 // functions
 public:

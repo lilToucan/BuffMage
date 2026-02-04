@@ -20,5 +20,7 @@ struct FDynamicWeaponData
 
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	float CurrentAmmo;
-	
+
+	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
+	bool bCanAttack = true;
 };
