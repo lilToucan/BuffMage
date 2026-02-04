@@ -10,17 +10,9 @@
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BuffMage.uproject.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/BuffMage.uproject.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_QuadPunc_Aoe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_QuadPunc_Aoe.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BP_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BP_BaseEnemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_AttackEnd.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_AttackEnd.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_PerformAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_PerformAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_ReloadEnd.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_ReloadEnd.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestMeleeWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestMeleeWeapon.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestRangedWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestRangedWeapon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/CustomTasks/BTT_PlayAnimMontage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/CustomTasks/BTT_PlayAnimMontage.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +182,7 @@
       <workItem from="1770127875072" duration="2445000" />
       <workItem from="1770130358140" duration="4189000" />
       <workItem from="1770149728796" duration="847000" />
-      <workItem from="1770214211451" duration="4315000" />
+      <workItem from="1770214211451" duration="6681000" />
     </task>
     <servers />
   </component>
