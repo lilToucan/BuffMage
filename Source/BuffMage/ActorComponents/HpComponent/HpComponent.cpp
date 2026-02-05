@@ -65,6 +65,18 @@ void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 	CurrentHp = FMath::Min(CurrentHp + Healing, MaxHp);
 }
 
+void UHpComponent::RecoverFromStun()
+{
+	OnStunned.Broadcast();
+}
+
+void UHpComponent::GetStunned(float Time, AActor* Instigator)
+{
+	OnStunned.Broadcast();
+	
+	GetOwner()->GetWorldTimerManager().SetTimer(StunTimerHandle, this, &UHpComponent::RecoverFromStun, Time);
+}
+
 void UHpComponent::Death()
 {
 	if (DeathMontage)

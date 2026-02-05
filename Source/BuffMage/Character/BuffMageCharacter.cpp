@@ -28,6 +28,12 @@ void ABuffMageCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (HpComponent)
+	{
+		HpComponent->OnStunned.AddUniqueDynamic(this,&ABuffMageCharacter::OnStunned);
+		HpComponent->OnStunRecovered.AddUniqueDynamic(this, &ABuffMageCharacter::OnStunRecovered);
+	}
+	
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	if (!IsValid(AnimInstance))
 		return;
@@ -43,7 +49,8 @@ void ABuffMageCharacter::Tick(float DeltaTime)
 // Called to bind functionality to input
 void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	if (UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent);
+	if (IsValid(EnhancedInput))
 	{
 		// aim input :o
 		EnhancedInput->BindAction(LookAroundInputAction, ETriggerEvent::Triggered, this,
@@ -124,4 +131,21 @@ void ABuffMageCharacter::AimInputFunction(const FInputActionValue& InputActionVa
 void ABuffMageCharacter::AttackInputFunction(const FInputActionValue& InputActionValue)
 {
 	AttackComp->StartAttackAnim();
+}
+
+void ABuffMageCharacter::OnStunned()
+{
+	APlayerController* x = Cast<APlayerController>(GetController());
+	if (!x)
+		return;
+	DisableInput(x);
+
+}
+
+void ABuffMageCharacter::OnStunRecovered()
+{
+	APlayerController* x = Cast<APlayerController>(GetController());
+	if (!x)
+		return;
+	EnableInput(x);
 }

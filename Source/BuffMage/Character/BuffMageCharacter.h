@@ -18,6 +18,7 @@ class BUFFMAGE_API ABuffMageCharacter : public ACharacter
 	GENERATED_BODY()
 
 public: // variables
+	
 	UPROPERTY(BlueprintAssignable, Category = "Input")
 	FVoidFloat OnMovementInput;
 
@@ -71,5 +72,11 @@ public: // functions
 	virtual void AttackInputFunction(const FInputActionValue& InputActionValue);
 
 protected: // functions
+
 	virtual void BeginPlay() override;
+	
+	UFUNCTION()
+	void OnStunned();
+	UFUNCTION()
+	void OnStunRecovered();
 };

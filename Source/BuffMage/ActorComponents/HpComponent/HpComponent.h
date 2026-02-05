@@ -1,11 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "HpComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStunnedDelegate);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class BUFFMAGE_API UHpComponent : public UActorComponent
@@ -20,29 +19,37 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
 	float StartingHP;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Hit")
 	UAnimMontage* HitMontage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Death")
 	UAnimMontage* DeathMontage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Death")
 	FName DeathNotifyName = FName("DeathNotify");
 
-	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Config")
+	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Death")
 	FTimerHandle TimerHandle;
 
+	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
+	FOnStunnedDelegate OnStunned;
+	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
+	FOnStunnedDelegate OnStunRecovered;
+	
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Hp")
 	float CurrentHp;
 
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Animations")
-	USkeletalMesh* OwnersSkeletalMesh;
-	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Animations")
 	ACharacter* CharacterOwner;
+	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Animations")
+	USkeletalMesh* OwnersSkeletalMesh;
+
 	UPROPERTY(BlueprintReadOnly, Category = "HpComponent|Animations")
 	float DeathAnimDuration;
-
+	
+	FTimerHandle StunTimerHandle;
+	
 	bool bIsActive;
 
 	// functions
@@ -57,6 +64,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "HpComponent")
 	void OnHealingTaken(float Healing, AActor* HealingCauser);
+
+	void RecoverFromStun();
+	UFUNCTION(BlueprintCallable, Category = "HpComponent|Stun")
+	virtual void GetStunned(float Time, AActor* Instigator);
 
 protected:
 	virtual void BeginPlay() override;
