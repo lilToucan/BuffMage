@@ -4,10 +4,6 @@
 #include "Engine/DataAsset.h"
 #include "WeaponDataAsset.generated.h"
 
-
-
-
-
 UCLASS(BlueprintType)
 class BUFFMAGE_API UWeaponDataAsset : public UDataAsset
 {

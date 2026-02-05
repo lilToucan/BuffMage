@@ -135,17 +135,17 @@ void ABuffMageCharacter::AttackInputFunction(const FInputActionValue& InputActio
 
 void ABuffMageCharacter::OnStunned()
 {
-	APlayerController* x = Cast<APlayerController>(GetController());
-	if (!x)
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (!PlayerController)
 		return;
-	DisableInput(x);
+	DisableInput(PlayerController);
 
 }
 
 void ABuffMageCharacter::OnStunRecovered()
 {
-	APlayerController* x = Cast<APlayerController>(GetController());
-	if (!x)
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (!PlayerController)
 		return;
-	EnableInput(x);
+	EnableInput(PlayerController);
 }

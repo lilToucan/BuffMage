@@ -9,7 +9,7 @@ struct FDynamicWeaponData
 	GENERATED_BODY()
 
 	public:
-	UPROPERTY(EditAnywhere, Category = "AttackComponent")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackComponent")
 	UWeaponDataAsset* WeaponData = nullptr;
 
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
