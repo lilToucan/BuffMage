@@ -14,7 +14,7 @@ void UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Insti
 	UClass* SeekClass = nullptr;
 	TArray<AActor*> OutActors;
 
-	DrawDebugSphere(Instigator->GetWorld(), StartPos, Range, 12, FColor::Red, true, 100.f, 0, 0);
+	//DrawDebugSphere(Instigator->GetWorld(), StartPos, Range, 12, FColor::Red, true, 100.f, 0, 0);
 	UKismetSystemLibrary::SphereOverlapActors(Instigator->GetWorld(), StartPos, Range, traceObjectTypes, SeekClass, IgnoreActors, OutActors);
 
 	if (OutActors.Num() < 1)
