@@ -20,6 +20,8 @@ public:
 	float AmmoMax = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")  // could be animation notify
 	float ReloadTime = 10;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
+	bool bDebugActive = true;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 	TArray<TObjectPtr<UAnimMontage>> AttackComboAnimMontage;

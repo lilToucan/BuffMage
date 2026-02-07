@@ -15,7 +15,8 @@ void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator
 	UClass* SeekClass = nullptr;
 	TArray<AActor*> OutActors;
 
-	//DrawDebugSphere(Instigator->GetWorld(), StartPos, Range, 12, FColor::Red, true, 100.f, 0, 0);
+	if (bDebugActive)
+		DrawDebugSphere(Instigator->GetWorld(), StartPos, Range, 12, FColor::Red, true, 100.f, 0, 0);
 	UKismetSystemLibrary::SphereOverlapActors(Instigator->GetWorld(), StartPos, Range, traceObjectTypes, SeekClass, IgnoreActors, OutActors);
 
 	if (OutActors.Num() < 1)
@@ -47,7 +48,7 @@ void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator
 			if (Dot < ConeDot) // 0.7f
 				continue;
 		}
-
+		Actor->TakeDamage(0.0001f, DamageEvent, nullptr, Instigator);
 		HP->GetStunned(Damage, Instigator);
 	}
 }
