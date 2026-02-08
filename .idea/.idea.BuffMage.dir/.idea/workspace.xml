@@ -9,7 +9,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_Quad_Punch_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_Quad_Punch_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BP_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BP_BaseEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/BB_EnemyCicling.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/BB_EnemyCicling.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/BT_EnemyCircling.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/BT_EnemyCircling.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/CustomTasks/BTT_PlayAnimMontage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/CustomTasks/BTT_PlayAnimMontage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestMeleeWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestMeleeWeapon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestRangedWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestRangedWeapon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestStunWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestStunWeapon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +91,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Uproject.BuffMage.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/Programming/CombatSystem&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/Programming/TestBranch&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -191,7 +200,8 @@
       <workItem from="1770214211451" duration="6681000" />
       <workItem from="1770303861683" duration="7023000" />
       <workItem from="1770317309239" duration="2537000" />
-      <workItem from="1770474487326" duration="181000" />
+      <workItem from="1770474487326" duration="238000" />
+      <workItem from="1770559467041" duration="2076000" />
     </task>
     <servers />
   </component>
