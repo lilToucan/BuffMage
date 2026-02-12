@@ -8,7 +8,7 @@
 
 class UCameraComponent;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), BlueprintType)
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), BlueprintType, Blueprintable)
 class BUFFMAGE_API UAttackComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -42,6 +42,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	virtual void ChangeWeapon(int InputValue);
+	void SetUpWeapon(FDynamicWeaponData& Weapon);
 
 	UFUNCTION(BlueprintCallable)
 	virtual void AddWeapon(FDynamicWeaponData& Weapon);

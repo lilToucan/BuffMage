@@ -26,21 +26,31 @@ void UAttackComponent::BeginPlay()
 	Super::BeginPlay();
 	Cam = GetOwner()->GetComponentByClass<UCameraComponent>();
 
-	if (WeaponsData.Num() > 0 || !WeaponsData[WeaponIndex].WeaponData)
-		WeaponsData[WeaponIndex].CurrentAmmo = WeaponsData[WeaponIndex].WeaponData->AmmoMax;
-
 	if (!AnimInstance)
 		AnimInstance = GetOwner()->GetComponentByClass<USkeletalMeshComponent>()->GetAnimInstance();
+
+	if (WeaponsData.Num() > 0)
+	{
+		for (FDynamicWeaponData& Weapon : WeaponsData)
+		{
+			SetUpWeapon(Weapon);
+		}
+	}
+	// if (WeaponsData.Num() > 0 && IsValid(WeaponsData[WeaponIndex].WeaponData))
+	// 	WeaponsData[WeaponIndex].CurrentAmmo = WeaponsData[WeaponIndex].WeaponData->AmmoMax;
+	// else
+	// 	Deactivate();
+
 }
 
 // Called by the Owner of the component when inputting an attack
 void UAttackComponent::StartAttackAnim()
 {
-	if (FireRateActive)
+	if (FireRateActive) // this is for testing if putting a fire rate is better or not
 		if (GetWorld()->GetTimeSeconds() < WeaponsData[WeaponIndex].ShootTime)
 			return;
 	// check if the player can attack or even has the weapon data
-	if (WeaponsData.Num() < 1 || !WeaponsData[WeaponIndex].WeaponData|| !WeaponsData[WeaponIndex].bCanAttack)
+	if (WeaponsData.Num() < 1 || !IsValid(WeaponsData[WeaponIndex].WeaponData)|| !WeaponsData[WeaponIndex].bCanAttack)
 		return;
 
 	const auto Weapon = WeaponsData[WeaponIndex].WeaponData;
@@ -105,11 +115,21 @@ void UAttackComponent::ChangeWeapon(int InputValue)
 
 }
 
+void UAttackComponent::SetUpWeapon(FDynamicWeaponData& Weapon)
+{
+	Weapon.CurrentAmmo = Weapon.WeaponData->AmmoMax;
+	Weapon.AnimIndex = 0;
+	Weapon.bCanAttack = true;
+}
+
 // Called when the owner grabs a weapon pickup
 void UAttackComponent::AddWeapon(FDynamicWeaponData& Weapon)
 {
-	if (Weapon.WeaponData)
-		WeaponsData.Add(Weapon);
+	if (!IsValid(Weapon.WeaponData))
+		return;
+
+	SetUpWeapon(Weapon);
+	WeaponsData.Add(Weapon);
 }
 
 // Called by the Reload notify inside the animation
