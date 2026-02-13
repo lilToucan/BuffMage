@@ -12,13 +12,13 @@ UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), BlueprintType, B
 class BUFFMAGE_API UAttackComponent : public UActorComponent
 {
 	GENERATED_BODY()
-// variables
+	// variables
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
 	bool FireRateActive;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
-	TArray<FDynamicWeaponData>WeaponsData;
+	TArray<FDynamicWeaponData> WeaponsData;
 
 	UPROPERTY(BlueprintReadWrite, Category="AttackComponent|Animations")
 	TObjectPtr<UAnimInstance> AnimInstance;
@@ -28,30 +28,35 @@ protected:
 	int WeaponIndex = 0;
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	UCameraComponent* Cam;
-	
-	
-// functions
+
+
+	// functions
 public:
 	UAttackComponent();
-	
-	UFUNCTION(BlueprintCallable)
-	virtual void StartAttackAnim();
 
-	UFUNCTION(BlueprintCallable)
-	virtual void HitDetection(FName SocketName);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void StartAttackAnim();
 
-	UFUNCTION(BlueprintCallable)
-	virtual void ChangeWeapon(int InputValue);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void HitDetection(FName SocketName);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ChangeWeapon(int InputValue);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetUpWeapon(FDynamicWeaponData& Weapon);
 
-	UFUNCTION(BlueprintCallable)
-	virtual void AddWeapon(FDynamicWeaponData& Weapon);
-	
-	UFUNCTION(BlueprintCallable)
-	virtual void ReloadWeapon();
-	
-	UFUNCTION(BlueprintCallable)
-	virtual void AttackCompleted();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void AddWeapon(FDynamicWeaponData& Weapon);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ReloadWeapon();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void AttackCompleted();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void StartReloading(UWeaponDataAsset* Weapon);
 	
 protected:
 	virtual void BeginPlay() override;

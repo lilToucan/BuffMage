@@ -33,7 +33,7 @@ void UAttackComponent::BeginPlay()
 	{
 		for (FDynamicWeaponData& Weapon : WeaponsData)
 		{
-			SetUpWeapon(Weapon);
+			SetUpWeapon_Implementation(Weapon);
 		}
 	}
 	// if (WeaponsData.Num() > 0 && IsValid(WeaponsData[WeaponIndex].WeaponData))
@@ -44,7 +44,7 @@ void UAttackComponent::BeginPlay()
 }
 
 // Called by the Owner of the component when inputting an attack
-void UAttackComponent::StartAttackAnim()
+void UAttackComponent::StartAttackAnim_Implementation()
 {
 	if (FireRateActive) // this is for testing if putting a fire rate is better or not
 		if (GetWorld()->GetTimeSeconds() < WeaponsData[WeaponIndex].ShootTime)
@@ -69,7 +69,7 @@ void UAttackComponent::StartAttackAnim()
 }
 
 // called by the Attack notify inside the animation
-void UAttackComponent::HitDetection(FName SocketName)
+void UAttackComponent::HitDetection_Implementation(FName SocketName)
 {
 	if (WeaponsData.Num() < 1 || !WeaponsData[WeaponIndex].WeaponData || !AnimInstance)
 		return;
@@ -83,8 +83,7 @@ void UAttackComponent::HitDetection(FName SocketName)
 	// Check Reload
 	if (WeaponsData[WeaponIndex].CurrentAmmo < 0)
 	{
-		AnimInstance->Montage_Play(Weapon->ReloadAnimMontage); // need to move to it's own function then let input activate it
-		WeaponsData[WeaponIndex].bCanAttack = false;
+		StartReloading(Weapon);
 		return;
 	}
 
@@ -102,7 +101,7 @@ void UAttackComponent::HitDetection(FName SocketName)
 }
 
 // Called by the owner of the component when inputting a switch to a different gun
-void UAttackComponent::ChangeWeapon(int InputValue)
+void UAttackComponent::ChangeWeapon_Implementation(int InputValue)
 {
 	if (GetWorld()->GetTimeSeconds() < WeaponsData[WeaponIndex].ShootTime || WeaponsData.Num() < 1 || !WeaponsData[WeaponIndex].bCanAttack)
 		return;
@@ -115,7 +114,7 @@ void UAttackComponent::ChangeWeapon(int InputValue)
 
 }
 
-void UAttackComponent::SetUpWeapon(FDynamicWeaponData& Weapon)
+void UAttackComponent::SetUpWeapon_Implementation(FDynamicWeaponData& Weapon)
 {
 	Weapon.CurrentAmmo = Weapon.WeaponData->AmmoMax;
 	Weapon.AnimIndex = 0;
@@ -123,7 +122,7 @@ void UAttackComponent::SetUpWeapon(FDynamicWeaponData& Weapon)
 }
 
 // Called when the owner grabs a weapon pickup
-void UAttackComponent::AddWeapon(FDynamicWeaponData& Weapon)
+void UAttackComponent::AddWeapon_Implementation(FDynamicWeaponData& Weapon)
 {
 	if (!IsValid(Weapon.WeaponData))
 		return;
@@ -132,8 +131,15 @@ void UAttackComponent::AddWeapon(FDynamicWeaponData& Weapon)
 	WeaponsData.Add(Weapon);
 }
 
+// called after performing an attack with 0 ammo or by the player's input
+void UAttackComponent::StartReloading_Implementation(UWeaponDataAsset* const Weapon)
+{
+	AnimInstance->Montage_Play(Weapon->ReloadAnimMontage); // need to move to it's own function then let input activate it
+	WeaponsData[WeaponIndex].bCanAttack = false;
+}
+
 // Called by the Reload notify inside the animation
-void UAttackComponent::ReloadWeapon()
+void UAttackComponent::ReloadWeapon_Implementation()
 {
 	const auto Weapon = WeaponsData[WeaponIndex].WeaponData;
 	WeaponsData[WeaponIndex].bCanAttack = true;
@@ -141,7 +147,7 @@ void UAttackComponent::ReloadWeapon()
 }
 
 // Called by the Attack Completed notify inside the animation
-void UAttackComponent::AttackCompleted()
+void UAttackComponent::AttackCompleted_Implementation()
 {
 	if (FireRateActive)
 		return;
