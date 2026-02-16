@@ -37,7 +37,7 @@ void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator
 	{
 		UHpComponent* HP = Actor->GetComponentByClass<UHpComponent>();
 		if (!HP)
-			return;
+			continue;
 		
 		if (AngleDetection != 360.f)
 		{
