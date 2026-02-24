@@ -4,21 +4,6 @@
 UAttackComponent::UAttackComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
-
-	if (WeaponsData.Num() > 0)
-		return;
-
-	for (FDynamicWeaponData Data : WeaponsData)
-	{
-		if (!Data.WeaponData)
-			return;
-	
-		Data.CurrentAmmo = Data.WeaponData->AmmoMax;
-		Data.ShootTime = 0;
-		Data.AnimIndex = 0;
-		Data.bCanAttack = true;
-	}
-	
 }
 
 void UAttackComponent::BeginPlay()
@@ -36,48 +21,61 @@ void UAttackComponent::BeginPlay()
 			SetUpWeapon_Implementation(Weapon);
 		}
 	}
-	// if (WeaponsData.Num() > 0 && IsValid(WeaponsData[WeaponIndex].WeaponData))
-	// 	WeaponsData[WeaponIndex].CurrentAmmo = WeaponsData[WeaponIndex].WeaponData->AmmoMax;
-	// else
-	// 	Deactivate();
+}
 
+void UAttackComponent::SetUpWeapon_Implementation(FDynamicWeaponData& Weapon)
+{
+	Weapon.CurrentAmmo = Weapon.WeaponData->AmmoMax;
+	Weapon.AnimIndex = 0;
+	Weapon.bIsReloading = false;
+	Weapon.bIsAttacking = false;
 }
 
 // Called by the Owner of the component when inputting an attack
 void UAttackComponent::StartAttackAnim_Implementation()
 {
-	if (FireRateActive) // this is for testing if putting a fire rate is better or not
-		if (GetWorld()->GetTimeSeconds() < WeaponsData[WeaponIndex].ShootTime)
+	if (FireRateActive) // this bool is here for the designers TODO: REMOVE
+	{
+		if (GetWorld()->GetTimeSeconds() < WeaponsData[WeaponIndex].ShootTime) //has the input been received before the fire rate was over
 			return;
-	// check if the player can attack or even has the weapon data
-	if (WeaponsData.Num() < 1 || !IsValid(WeaponsData[WeaponIndex].WeaponData)|| !WeaponsData[WeaponIndex].bCanAttack)
+	}
+	else if (WeaponsData[WeaponIndex].bIsAttacking) // is it attacking?
+		return;
+	
+	if (WeaponsData.Num() < 1 ) // does this component have any weapons?
+		return;
+	if (!IsValid(WeaponsData[WeaponIndex].WeaponData)) // is the current weapon valid?
+		return;
+	if (WeaponsData[WeaponIndex].bIsReloading) // is it reloading?	
 		return;
 
-	const auto Weapon = WeaponsData[WeaponIndex].WeaponData;
+	UWeaponDataAsset* Weapon = WeaponsData[WeaponIndex].WeaponData;
 
-	WeaponsData[WeaponIndex].ShootTime = GetWorld()->GetTimeSeconds() + Weapon->FireRate;
+	WeaponsData[WeaponIndex].ShootTime = GetWorld()->GetTimeSeconds() + Weapon->FireRate; // get the time the fire rate will be over (ex started attack at 4s fire rate = 3s then ShootTime = 4s+3s = 7s)
 
-	AnimInstance->Montage_Play(Weapon->AttackComboAnimMontage[WeaponsData[WeaponIndex].AnimIndex]);
+	AnimInstance->Montage_Play(Weapon->AttackComboAnimMontage[WeaponsData[WeaponIndex].AnimIndex]); // play the animation
 
 	// go to next Anim 
 	WeaponsData[WeaponIndex].AnimIndex++;
 	if (WeaponsData[WeaponIndex].AnimIndex >= Weapon->AttackComboAnimMontage.Num())
-		WeaponsData[WeaponIndex].AnimIndex = 0;
-
-	if (!FireRateActive)
-	WeaponsData[WeaponIndex].bCanAttack = false;
+		WeaponsData[WeaponIndex].AnimIndex = 0; // reset combo after completing in 
+	
+	WeaponsData[WeaponIndex].bIsAttacking = true; // set attacking to true if not using fire rate cooldown 
 }
 
 // called by the Attack notify inside the animation
 void UAttackComponent::HitDetection_Implementation(FName SocketName)
 {
-	if (WeaponsData.Num() < 1 || !WeaponsData[WeaponIndex].WeaponData || !AnimInstance)
+	if (WeaponsData.Num() < 1 || // has any weapon
+		!AnimInstance|| // has the animation instance
+		!WeaponsData[WeaponIndex].WeaponData) // the weapon is valid
 		return;
 	
-	const auto Weapon = WeaponsData[WeaponIndex].WeaponData;
+	UWeaponDataAsset* Weapon = WeaponsData[WeaponIndex].WeaponData;
 
 	FVector AttackPosition;
 
+#pragma region Maybe Move To Start Attack
 	WeaponsData[WeaponIndex].CurrentAmmo--;
 
 	// Check Reload
@@ -86,39 +84,40 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 		StartReloading(Weapon);
 		return;
 	}
-
-	if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName))
-		AttackPosition = GetOwner()->GetActorLocation();
-	else
-		AttackPosition = AnimInstance->GetSkelMeshComponent()->GetSocketLocation(SocketName);
-
-	AttackPosition += GetOwner()->GetActorForwardVector() * Weapon->PositionOffsetX;
+#pragma endregion Maybe Move To Start Attack
 	
-	if (Cam != nullptr)
-		Weapon->Attack(AttackPosition, Cam->GetComponentRotation(), GetOwner());
+	if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName)) // if the socket given does not exist 
+		AttackPosition = GetOwner()->GetActorLocation(); // get owner position
+	else 
+		AttackPosition = AnimInstance->GetSkelMeshComponent()->GetSocketLocation(SocketName); // get the position of the socket
+
+	AttackPosition += GetOwner()->GetActorForwardVector() * Weapon->PositionOffsetX; // offset the position forward by PositionOffsetX
+	
+	if (Cam != nullptr) // if we have the ref to the cam
+		Weapon->Attack(AttackPosition, Cam->GetComponentRotation(), GetOwner()); // rotate attack by the cam
 	else
-		Weapon->Attack(AttackPosition, GetOwner()->GetActorRotation(), GetOwner());
+		Weapon->Attack(AttackPosition, GetOwner()->GetActorRotation(), GetOwner()); // rotate attack by the owenr's rotation
 }
 
-// Called by the owner of the component when inputting a switch to a different gun
-void UAttackComponent::ChangeWeapon_Implementation(int InputValue)
+// Called by the Attack Completed notify inside the animation
+void UAttackComponent::AttackCompleted_Implementation()
 {
-	if (GetWorld()->GetTimeSeconds() < WeaponsData[WeaponIndex].ShootTime || WeaponsData.Num() < 1 || !WeaponsData[WeaponIndex].bCanAttack)
-		return;
-	
-	WeaponIndex += InputValue;
-	if (WeaponIndex < 0)
-		WeaponIndex = WeaponsData.Num() - 1;
-	else if (WeaponIndex >= WeaponsData.Num())
-		WeaponIndex = 0;
-
+	WeaponsData[WeaponIndex].bIsAttacking = false;
 }
 
-void UAttackComponent::SetUpWeapon_Implementation(FDynamicWeaponData& Weapon)
+// called after performing an attack with 0 ammo or by the player's input
+void UAttackComponent::StartReloading_Implementation(UWeaponDataAsset* const Weapon)
 {
-	Weapon.CurrentAmmo = Weapon.WeaponData->AmmoMax;
-	Weapon.AnimIndex = 0;
-	Weapon.bCanAttack = true;
+	AnimInstance->Montage_Play(Weapon->ReloadAnimMontage); // need to move to it's own function then let input activate it
+	WeaponsData[WeaponIndex].bIsReloading = true;
+}
+
+// Called by the Reload notify inside the animation
+void UAttackComponent::ReloadWeapon_Implementation()
+{
+	UWeaponDataAsset* Weapon = WeaponsData[WeaponIndex].WeaponData;
+	WeaponsData[WeaponIndex].bIsReloading = false;
+	WeaponsData[WeaponIndex].CurrentAmmo = Weapon->AmmoMax;
 }
 
 // Called when the owner grabs a weapon pickup
@@ -131,26 +130,19 @@ void UAttackComponent::AddWeapon_Implementation(FDynamicWeaponData& Weapon)
 	WeaponsData.Add(Weapon);
 }
 
-// called after performing an attack with 0 ammo or by the player's input
-void UAttackComponent::StartReloading_Implementation(UWeaponDataAsset* const Weapon)
+// Called by the owner of the component when switching to a different gun
+void UAttackComponent::ChangeWeapon_Implementation(int InputValue)
 {
-	AnimInstance->Montage_Play(Weapon->ReloadAnimMontage); // need to move to it's own function then let input activate it
-	WeaponsData[WeaponIndex].bCanAttack = false;
-}
-
-// Called by the Reload notify inside the animation
-void UAttackComponent::ReloadWeapon_Implementation()
-{
-	const auto Weapon = WeaponsData[WeaponIndex].WeaponData;
-	WeaponsData[WeaponIndex].bCanAttack = true;
-	WeaponsData[WeaponIndex].CurrentAmmo = Weapon->AmmoMax;
-}
-
-// Called by the Attack Completed notify inside the animation
-void UAttackComponent::AttackCompleted_Implementation()
-{
-	if (FireRateActive)
+	if (WeaponsData.Num() < 1 || // if there is only 1 weapon
+		WeaponsData[WeaponIndex].bIsAttacking || // if its currently attacking
+		WeaponsData[WeaponIndex].bIsReloading) // if its currently reloading
 		return;
 	
-	WeaponsData[WeaponIndex].bCanAttack = true;
+	WeaponIndex += InputValue;
+	if (WeaponIndex < 0)
+		WeaponIndex = WeaponsData.Num() - 1; // Go to the last index
+	else if (WeaponIndex >= WeaponsData.Num())
+		WeaponIndex = 0; // Go to the first index
 }
+
+
