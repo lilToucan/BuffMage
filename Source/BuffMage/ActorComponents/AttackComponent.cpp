@@ -103,18 +103,30 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 void UAttackComponent::AttackCompleted_Implementation()
 {
 	WeaponsData[WeaponIndex].bIsAttacking = false;
+	
+	/*
+	 *  TODO: add another AnimNotify that will be called when you can start attacking again
+	 *  and move this functionality there
+	 *  then here reset the combo index of the weapon
+	 *  ask the designers if there should be a cooldown between combos 
+	*/  
 }
 
 // called after performing an attack with 0 ammo or by the player's input
 void UAttackComponent::StartReloading_Implementation(UWeaponDataAsset* const Weapon)
 {
-	AnimInstance->Montage_Play(Weapon->ReloadAnimMontage); // need to move to it's own function then let input activate it
+	WeaponsData[WeaponIndex].bIsAttacking = false;
+	
+	AnimInstance->StopSlotAnimation(0);
+	AnimInstance->Montage_Play(Weapon->ReloadAnimMontage); // need to move to its own function then let input activate it
 	WeaponsData[WeaponIndex].bIsReloading = true;
 }
 
 // Called by the Reload notify inside the animation
 void UAttackComponent::ReloadWeapon_Implementation()
 {
+	WeaponsData[WeaponIndex].bIsAttacking = false;
+	
 	UWeaponDataAsset* Weapon = WeaponsData[WeaponIndex].WeaponData;
 	WeaponsData[WeaponIndex].bIsReloading = false;
 	WeaponsData[WeaponIndex].CurrentAmmo = Weapon->AmmoMax;
@@ -144,5 +156,3 @@ void UAttackComponent::ChangeWeapon_Implementation(int InputValue)
 	else if (WeaponIndex >= WeaponsData.Num())
 		WeaponIndex = 0; // Go to the first index
 }
-
-
