@@ -19,7 +19,7 @@ class BUFFMAGE_API UMeleeWeaponData : public UWeaponDataAsset
 	float AngleDetection = 180;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
-	TArray<TEnumAsByte<ECollisionChannel>> CollisionChannel;
+	/*TArray<TEnumAsByte<ECollisionChannel>>*/TArray<TEnumAsByte<EObjectTypeQuery>> CollisionChannel;
 	
 	virtual void Attack(FVector StartPos, FRotator Rotation, AActor* Instigator) override;
 };

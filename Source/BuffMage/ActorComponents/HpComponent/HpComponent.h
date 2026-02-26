@@ -30,7 +30,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Death")
 	FTimerHandle TimerHandle;
-
+	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Stun")
+	FTimerHandle StunTimerHandle;
+	
 	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
 	FOnStunnedDelegate OnStunned;
 	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
@@ -48,7 +50,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "HpComponent|Animations")
 	float DeathAnimDuration;
 	
-	FTimerHandle StunTimerHandle;
 	
 	bool bIsActive;
 

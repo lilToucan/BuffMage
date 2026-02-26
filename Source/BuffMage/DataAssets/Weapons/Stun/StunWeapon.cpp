@@ -6,9 +6,6 @@
 
 void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator)
 {
-	TArray<TEnumAsByte<EObjectTypeQuery>> traceObjectTypes;
-	traceObjectTypes.Append(CollisionChannel);
-
 	TArray<AActor*> IgnoreActors;
 	IgnoreActors.Add(Instigator);
 
@@ -17,7 +14,7 @@ void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator
 
 	if (bDebugActive)
 		DrawDebugSphere(Instigator->GetWorld(), StartPos, Range, 12, FColor::Red, true, 100.f, 0, 0);
-	UKismetSystemLibrary::SphereOverlapActors(Instigator->GetWorld(), StartPos, Range, traceObjectTypes, SeekClass, IgnoreActors, OutActors);
+	UKismetSystemLibrary::SphereOverlapActors(Instigator->GetWorld(), StartPos, Range, CollisionChannel, SeekClass, IgnoreActors, OutActors);
 
 	if (OutActors.Num() < 1)
 		return;
@@ -49,6 +46,6 @@ void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator
 				continue;
 		}
 		Actor->TakeDamage(0.0001f, DamageEvent, nullptr, Instigator);
-		HP->GetStunned(Damage, Instigator);
+		HP->GetStunned(StunDuration, Instigator);
 	}
 }

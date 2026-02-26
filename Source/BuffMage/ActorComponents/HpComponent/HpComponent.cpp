@@ -68,7 +68,7 @@ void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 void UHpComponent::GetStunned(float Time, AActor* Instigator)
 {
 
-	if (StunTimerHandle.IsValid()) // if you want to you can just call clear timer and then call it again to make the new stun count
+	if (StunTimerHandle.IsValid()) 
 		return;
 	
 	OnStunned.Broadcast();
