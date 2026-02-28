@@ -61,6 +61,9 @@ protected: // variables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
 	UInputAction* ChangeWeaponInputAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
+	UInputAction* ReloadInputAction;
+
 public: // functions
 	ABuffMageCharacter();
 	virtual void Tick(float DeltaTime) override;
@@ -70,6 +73,7 @@ public: // functions
 	virtual void MoveInputFunction(const FInputActionValue& InputActionValue);
 	virtual void AimInputFunction(const FInputActionValue& InputActionValue);
 	virtual void AttackInputFunction(const FInputActionValue& InputActionValue);
+	virtual void ReloadInputFunction(const FInputActionValue& InputActionValue);
 
 protected: // functions
 

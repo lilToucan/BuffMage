@@ -28,6 +28,8 @@ protected:
 	int WeaponIndex = 0;
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	UCameraComponent* Cam;
+	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
+	TArray<AActor*> HitActors;
 
 
 	// functions
@@ -47,7 +49,7 @@ public:
 	void SetUpWeapon(FDynamicWeaponData& Weapon);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void AddWeapon(FDynamicWeaponData& Weapon);
+	void AddWeapon(FDynamicWeaponData& NewWeapon);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ReloadWeapon();
@@ -56,8 +58,18 @@ public:
 	void AttackCompleted();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void StartReloading(UWeaponDataAsset* Weapon);
+	void AttackCanBeUsedAgain();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void StartReloading();
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ReduceAmmo();
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	bool HasAmmoBeenDepleted();
 	
 protected:
 	virtual void BeginPlay() override;
+	
 };

@@ -16,13 +16,14 @@ struct FDynamicWeaponData
 	int AnimIndex = 0;
 
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
-	float ShootTime = 0;
+	float CooldownTime = 0;
 
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	float CurrentAmmo;
 
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	bool bIsReloading = true;
+	
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	bool bIsAttacking = true;
 };

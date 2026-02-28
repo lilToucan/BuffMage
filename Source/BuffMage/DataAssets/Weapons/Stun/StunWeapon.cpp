@@ -4,10 +4,11 @@
 #include "Engine/DamageEvents.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator)
+void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
 {
 	TArray<AActor*> IgnoreActors;
 	IgnoreActors.Add(Instigator);
+	IgnoreActors.Append(ActorsHit);
 
 	UClass* SeekClass = nullptr;
 	TArray<AActor*> OutActors;
@@ -35,7 +36,7 @@ void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator
 		UHpComponent* HP = Actor->GetComponentByClass<UHpComponent>();
 		if (!HP)
 			continue;
-		
+
 		if (AngleDetection != 360.f)
 		{
 			FVector Dir = Actor->GetActorLocation() - Instigator->GetActorLocation();
@@ -47,5 +48,6 @@ void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator
 		}
 		Actor->TakeDamage(0.0001f, DamageEvent, nullptr, Instigator);
 		HP->GetStunned(StunDuration, Instigator);
+		ActorsHit.Add(Actor);
 	}
 }

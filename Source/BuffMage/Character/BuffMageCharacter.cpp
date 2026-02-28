@@ -133,6 +133,11 @@ void ABuffMageCharacter::AttackInputFunction(const FInputActionValue& InputActio
 	AttackComp->StartAttackAnim();
 }
 
+void ABuffMageCharacter::ReloadInputFunction(const FInputActionValue& InputActionValue)
+{
+	AttackComp->StartReloading();
+}
+
 void ABuffMageCharacter::OnStunned()
 {
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
