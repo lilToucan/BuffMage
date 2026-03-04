@@ -13,13 +13,12 @@
       <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Punch_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Punch_Montage.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Stun_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Stun_Montage.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Punch_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Punch_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Ranged_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Ranged_Montage.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Stun_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Stun_Montage.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/ANS_ContinuousAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/ANS_ContinuousAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/PlayerWeapons/TestMeleeWeaponArms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/PlayerWeapons/TestMeleeWeaponArms.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_AttackEnd.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_AttackEnd.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_CanAttackAgain.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_CanAttackAgain.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +95,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "Uproject.BuffMage.executor": "Debug",
+    "Uproject.BuffMage.executor": "Run",
     "git-widget-placeholder": "feature/Programming/CombatSystemDONTPUSH",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -215,6 +214,7 @@
       <workItem from="1772553498818" duration="1734000" />
       <workItem from="1772564665412" duration="17566000" />
       <workItem from="1772621044763" duration="1977000" />
+      <workItem from="1772636602590" duration="3200000" />
     </task>
     <servers />
   </component>

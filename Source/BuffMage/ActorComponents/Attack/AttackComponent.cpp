@@ -57,24 +57,25 @@ void UAttackComponent::StartAttackAnim_Implementation()
 		return;
 	if (!IsValid(AnimInstance))
 		return;
-
-	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
-	HitActors.Empty();
 	// Check if you have ammo
 	if (HasAmmoBeenDepleted())
 		return;
 
-	AnimInstance->StopAllMontages(0.1f);
-	AnimInstance->Montage_Play(WeaponAsset->AttackComboAnimMontage[CurrentWeapon.AnimIndex]); // play the animation
+	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
+	HitActors.Empty();
 
-	// go to next Anim 
-	CurrentWeapon.AnimIndex++;
+	UE_LOG(LogTemp, Log, TEXT("p1p5 AnimIndex = %d"), CurrentWeapon.AnimIndex );
 
 	if (CurrentWeapon.AnimIndex >= WeaponAsset->AttackComboAnimMontage.Num()) //  0 == 1 | 1 == 2 | 2 == 3 | ...
 	{
+		UE_LOG(LogTemp, Log, TEXT("p1p5: AnimIndex out of bounds"  ));
 		CurrentWeapon.AnimIndex = 0; // reset combo after completing in 
 		CurrentWeapon.CooldownTime = GetWorld()->GetTimeSeconds() + WeaponAsset->FireRate; // get the time the fire rate will be over (ex started attack at 4s fire rate = 3s then CooldownTime = 4s+3s = 7s)
 	}
+	
+	AnimInstance->StopAllMontages(0.1f);
+	AnimInstance->Montage_Play(WeaponAsset->AttackComboAnimMontage[CurrentWeapon.AnimIndex]); // play the animation
+	
 
 	CurrentWeapon.bIsAttacking = true; // set attacking to true if not using fire rate cooldown 
 }
@@ -128,16 +129,21 @@ void UAttackComponent::ReduceAmmo_Implementation()
 // ATTACK CAN BE USED AGAIN: Called by the AttackCanBeUsed Notify inside the animation
 void UAttackComponent::AttackCanBeUsedAgain_Implementation()
 {
+	// go to next Anim 
+	CurrentWeapon.AnimIndex++;
 	CurrentWeapon.bIsAttacking = false;
 }
 
 // ATTACK COMPLETED: Called by the Attack Completed notify inside the animation reset's the combo
 void UAttackComponent::AttackCompleted_Implementation()
 {
+	UE_LOG(LogTemp, Log, TEXT("p1p5: bIsAttacking = %hhd"),CurrentWeapon.bIsAttacking);
+	
 	if (CurrentWeapon.bIsAttacking) //D! Ask tutor why it still gets called when the animation is over
 		return;
 	
-	AnimInstance->StopAllMontages(0.1f);
+	UE_LOG(LogTemp, Log, TEXT("p1p5: AttackEnded"));
+	AnimInstance->StopAllMontages(0.f);
 	CurrentWeapon.AnimIndex = 0;
 	//D! CurrentWeapon.CooldownTime = GetWorld()->GetTimeSeconds() + CurrentWeapon.WeaponData->FireRate; ask designers if they want to put a cooldown when you fail the combo
 }
@@ -173,6 +179,7 @@ void UAttackComponent::ReloadWeapon_Implementation()
 	CurrentWeapon.bIsAttacking = false;
 
 	CurrentWeapon.AnimIndex = 0;
+	UE_LOG(LogTemp, Log, TEXT("Reloading"));
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 	CurrentWeapon.bIsReloading = false;
 	CurrentWeapon.CurrentAmmo = WeaponAsset->AmmoMax;
