@@ -21,5 +21,5 @@ class BUFFMAGE_API UMeleeWeaponData : public UWeaponDataAsset
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
 	/*TArray<TEnumAsByte<ECollisionChannel>>*/TArray<TEnumAsByte<EObjectTypeQuery>> CollisionChannel;
 	
-	virtual void Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit) override;
+	virtual int Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit) override;
 };

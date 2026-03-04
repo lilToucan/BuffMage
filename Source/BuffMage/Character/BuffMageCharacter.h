@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "InputAction.h"
 #include "GameFramework/Character.h"
-#include "BuffMage/ActorComponents/AttackComponent.h"
+#include "BuffMage/ActorComponents/Attack/AttackComponent.h"
 #include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
 #include "BuffMage/ActorComponents/Dash/DashComponent.h"
 

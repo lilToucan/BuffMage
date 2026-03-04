@@ -26,4 +26,5 @@ struct FDynamicWeaponData
 	
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	bool bIsAttacking = true;
+
 };

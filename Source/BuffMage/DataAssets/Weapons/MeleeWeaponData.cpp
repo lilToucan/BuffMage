@@ -1,9 +1,10 @@
 #include "MeleeWeaponData.h"
 
+#include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
 #include "Engine/DamageEvents.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-void UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
+int UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
 {
 	TArray<TEnumAsByte<EObjectTypeQuery>> traceObjectTypes;
 	traceObjectTypes.Append(CollisionChannel);
@@ -15,12 +16,14 @@ void UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Insti
 	UClass* SeekClass = nullptr;
 	TArray<AActor*> OutActors;
 
+	int NumbersOfEnemiesHit = 0;
+
 	if (bDebugActive)
 		DrawDebugSphere(Instigator->GetWorld(), StartPos, Range, 12, FColor::Red, true, 100.f, 0, 0);
 	UKismetSystemLibrary::SphereOverlapActors(Instigator->GetWorld(), StartPos, Range, traceObjectTypes, SeekClass, IgnoreActors, OutActors);
 
 	if (OutActors.Num() < 1)
-		return;
+		return -1;
 
 	float ConeDot = -1; // set as the whole circle
 	if (AngleDetection != 360)
@@ -35,6 +38,11 @@ void UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Insti
 
 	for (AActor* Actor : OutActors)
 	{
+
+		UHpComponent* HP = Actor->GetComponentByClass<UHpComponent>();
+		if (!HP)
+			continue;
+		
 		if (AngleDetection != 360.f)
 		{
 			FVector Dir = Actor->GetActorLocation() - Instigator->GetActorLocation();
@@ -47,5 +55,9 @@ void UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Insti
 
 		Actor->TakeDamage(Damage, DamageEvent, nullptr, Instigator);
 		ActorsHit.Add(Actor);
+		NumbersOfEnemiesHit++;
+		if (HP->bAppliesRage)
+			NumbersOfEnemiesHit++;
 	}
+	return NumbersOfEnemiesHit;
 }

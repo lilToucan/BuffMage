@@ -1,5 +1,6 @@
 #include "HpComponent.h"
 
+#include "BuffMage/ActorComponents/Attack/AttackComponent.h"
 #include "GameFramework/Character.h"
 
 
@@ -34,7 +35,7 @@ void UHpComponent::BeginPlay()
 	GetOwner()->OnTakeAnyDamage.AddUniqueDynamic(this, &UHpComponent::OnDamageTaken);
 
 	CharacterOwner = Cast<ACharacter>(GetOwner());
-	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnAnimNotifyBegin);
+	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnDeathNotify);
 
 	Activate(true);
 }
@@ -48,7 +49,7 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 
 	if (CurrentHp <= 0)
 	{
-		Death();
+		Death(InstigatedBy);
 		return;
 	}
 
@@ -67,7 +68,6 @@ void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 
 void UHpComponent::GetStunned(float Time, AActor* Instigator)
 {
-
 	if (StunTimerHandle.IsValid()) 
 		return;
 	
@@ -84,10 +84,11 @@ void UHpComponent::RecoverFromStun()
 	OnStunRecovered.Broadcast();
 }
 
-void UHpComponent::Death()
+void UHpComponent::Death(AActor* TheKiller)
 {
 	if (DeathMontage)
 		DeathAnimDuration = CharacterOwner->PlayAnimMontage(DeathMontage);
+	TheKiller->GetComponentByClass<UAttackComponent>()->AddRage(10);
 	StartDeathTimer();
 }
 
@@ -98,7 +99,7 @@ void UHpComponent::StartDeathTimer()
 	DeathAnimDuration = 0;
 }
 
-void UHpComponent::OnAnimNotifyBegin(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
+void UHpComponent::OnDeathNotify(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
 {
 	if (Name == DeathNotifyName)
 	{
