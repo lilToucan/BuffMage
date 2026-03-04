@@ -29,6 +29,7 @@ void UAttackComponent::BeginPlay()
 		{
 			SetUpWeapon_Implementation(WeaponAsset);
 		}
+		
 		CurrentWeapon = WeaponsData[WeaponIndex];
 	}
 }

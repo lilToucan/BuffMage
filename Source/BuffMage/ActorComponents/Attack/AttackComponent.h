@@ -35,8 +35,10 @@ public:
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
 	float RageAfterGettingHit = 2.0f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
 	float RageAfterHitting = 5.0f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
 	int RageAmountAfterKilling = 10.f;
 	
@@ -91,10 +93,13 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void AddRage(int Amount);
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void AddToRageAfterKill();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StartRage();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StopRage();
 	

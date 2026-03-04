@@ -9,30 +9,17 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BuffMage.uproject.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/BuffMage.uproject.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Hook_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Hook_Montage.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Punch_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Punch_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Stun_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Stun_Montage.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Punch_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Punch_Montage.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Stun_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Stun_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/ActorComponents/BP_EnemyAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/ActorComponents/BP_EnemyAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_AttackEnd.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_AttackEnd.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/ANS_ContinuousAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/ANS_ContinuousAttack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/PlayerWeapons/TestMeleeWeaponArms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/PlayerWeapons/TestMeleeWeaponArms.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Stun/StunWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Stun/StunWeapon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Stun/StunWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Stun/StunWeapon.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +33,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="cidr-memory-view://13" root0="FORCE_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/AssetTools/Internal/AssetHeaderPatcher.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/FunctionalTesting/Private/FunctionalAITest.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/NaniteBuilder/Private/BVHCluster.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -76,6 +63,7 @@
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/Pawn.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Public/DrawDebugHelpers.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/SignalProcessing/Public/DSP/Envelope.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Windows/AudioMixerXAudio2/Private/AudioMixerPlatformXAudio2.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/BuffMage/UHT/HpComponent.gen.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.h" root0="FORCE_HIGHLIGHTING" />
@@ -108,8 +96,8 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "Uproject.BuffMage.executor": "Run",
-    "git-widget-placeholder": "feature/Programming/CombatSystem",
+    "Uproject.BuffMage.executor": "Debug",
+    "git-widget-placeholder": "feature/Programming/CombatSystemDONTPUSH",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -226,6 +214,7 @@
       <workItem from="1772551854250" duration="39000" />
       <workItem from="1772553498818" duration="1734000" />
       <workItem from="1772564665412" duration="17566000" />
+      <workItem from="1772621044763" duration="1977000" />
     </task>
     <servers />
   </component>
