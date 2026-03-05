@@ -76,6 +76,12 @@ void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		// Change Weapon Input :U
 		EnhancedInput->BindAction(ChangeWeaponInputAction, ETriggerEvent::Triggered, this,
 								  &ABuffMageCharacter::ChangeWeaponInputFunction);
+		// Reload Input :P
+		EnhancedInput->BindAction(ReloadInputAction,ETriggerEvent::Started,this,
+								  &ABuffMageCharacter::ReloadInputFunction);
+
+		EnhancedInput->BindAction(RageInputAction,ETriggerEvent::Started,this,
+								  &ABuffMageCharacter::RageInputFunction);
 	}
 }
 
@@ -136,6 +142,11 @@ void ABuffMageCharacter::AttackInputFunction(const FInputActionValue& InputActio
 void ABuffMageCharacter::ReloadInputFunction(const FInputActionValue& InputActionValue)
 {
 	AttackComp->StartReloading();
+}
+
+void ABuffMageCharacter::RageInputFunction(const FInputActionValue& InputActionValue)
+{
+	AttackComp->StartRage();
 }
 
 void ABuffMageCharacter::OnStunned()

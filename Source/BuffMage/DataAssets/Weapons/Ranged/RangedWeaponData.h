@@ -16,5 +16,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Attack", meta=(MustImplement=Projectile))
 	TSubclassOf<AActor> Projectile;
 
-	virtual int Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit) override;
+	virtual void Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit) override;
 };

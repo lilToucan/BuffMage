@@ -22,9 +22,9 @@ struct FDynamicWeaponData
 	float CurrentAmmo;
 
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
-	bool bIsReloading = true;
+	bool bIsReloading = false;
 	
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
-	bool bIsAttacking = true;
+	bool bIsAttacking = false;
 
 };

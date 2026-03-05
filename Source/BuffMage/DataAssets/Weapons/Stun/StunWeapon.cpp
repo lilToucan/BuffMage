@@ -4,7 +4,7 @@
 #include "Engine/DamageEvents.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-int UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
+void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
 {
 	TArray<AActor*> IgnoreActors;
 	IgnoreActors.Add(Instigator);
@@ -20,7 +20,7 @@ int UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator,
 	UKismetSystemLibrary::SphereOverlapActors(Instigator->GetWorld(), StartPos, Range, CollisionChannel, SeekClass, IgnoreActors, OutActors);
 
 	if (OutActors.Num() < 1)
-		return -1;
+		return ;
 
 	float ConeDot = -1; // set as the whole circle
 	if (AngleDetection != 360)
@@ -51,8 +51,5 @@ int UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator,
 		Actor->TakeDamage(0.0001f, DamageEvent, nullptr, Instigator);
 		HP->GetStunned(StunDuration, Instigator);
 		ActorsHit.Add(Actor);
-		if (HP->bAppliesRage)
-			NumbersOfEnemiesHit++;
 	}
-	return NumbersOfEnemiesHit;
 }

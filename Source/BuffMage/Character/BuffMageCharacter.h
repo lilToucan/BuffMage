@@ -63,6 +63,9 @@ protected: // variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
 	UInputAction* ReloadInputAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
+	UInputAction* RageInputAction;
 
 public: // functions
 	ABuffMageCharacter();
@@ -74,6 +77,7 @@ public: // functions
 	virtual void AimInputFunction(const FInputActionValue& InputActionValue);
 	virtual void AttackInputFunction(const FInputActionValue& InputActionValue);
 	virtual void ReloadInputFunction(const FInputActionValue& InputActionValue);
+	virtual void RageInputFunction(const FInputActionValue& InputActionValue);
 
 protected: // functions
 

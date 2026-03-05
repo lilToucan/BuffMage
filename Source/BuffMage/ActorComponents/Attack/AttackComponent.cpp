@@ -3,7 +3,7 @@
 
 UAttackComponent::UAttackComponent()
 {
-	PrimaryComponentTick.bCanEverTick = false;
+	PrimaryComponentTick.bCanEverTick = true;
 }
 
 
@@ -12,9 +12,17 @@ void UAttackComponent::AddToRageAfterKill_Implementation()
 	AddRage(RageAmountAfterKilling);
 }
 
+void UAttackComponent::AddRageAfterHit_Implementation()
+{
+	if (!bIsInRage)
+		AddRage(RageAfterHitting);
+}
+
 void UAttackComponent::BeginPlay()
 {
 	Super::BeginPlay();
+	SetComponentTickEnabled(false);
+	
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UAttackComponent::OnDamageReceived);
 
 	if (IsValid(Cam))
@@ -27,15 +35,33 @@ void UAttackComponent::BeginPlay()
 	{
 		for (FDynamicWeaponData& WeaponAsset : WeaponsData)
 		{
-			SetUpWeapon_Implementation(WeaponAsset);
+			SetUpWeapon(WeaponAsset);
 		}
 		
 		CurrentWeapon = WeaponsData[WeaponIndex];
 	}
+	SetUpWeapon(RageWeapon);
+}
+
+void UAttackComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	if (!bIsInRage)
+		return;
+	
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if (CurrentRageAmount <= 0)
+		StopRage();
+
+	AddRage(-DeltaTime);
 }
 
 void UAttackComponent::SetUpWeapon_Implementation(FDynamicWeaponData& WeaponAsset)
 {
+
+	if (!IsValid(WeaponAsset.WeaponData))
+		return;
+	
 	WeaponAsset.CurrentAmmo = WeaponAsset.WeaponData->AmmoMax;
 	WeaponAsset.AnimIndex = 0;
 	WeaponAsset.bIsReloading = false;
@@ -64,11 +90,8 @@ void UAttackComponent::StartAttackAnim_Implementation()
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 	HitActors.Empty();
 
-	UE_LOG(LogTemp, Log, TEXT("p1p5 AnimIndex = %d"), CurrentWeapon.AnimIndex );
-
 	if (CurrentWeapon.AnimIndex >= WeaponAsset->AttackComboAnimMontage.Num()) //  0 == 1 | 1 == 2 | 2 == 3 | ...
 	{
-		UE_LOG(LogTemp, Log, TEXT("p1p5: AnimIndex out of bounds"  ));
 		CurrentWeapon.AnimIndex = 0; // reset combo after completing in 
 		CurrentWeapon.CooldownTime = GetWorld()->GetTimeSeconds() + WeaponAsset->FireRate; // get the time the fire rate will be over (ex started attack at 4s fire rate = 3s then CooldownTime = 4s+3s = 7s)
 	}
@@ -104,20 +127,10 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 
 	AttackPosition += GetOwner()->GetActorForwardVector() * WeaponAsset->PositionOffsetX; // offset the position forward by PositionOffsetX
 
-	int RageHits = 0;
-
 	if (Cam != nullptr) // if we have the ref to the cam
-		RageHits = WeaponAsset->Attack(AttackPosition, Cam->GetComponentRotation(), GetOwner(), HitActors); // rotate attack by the cam
+		WeaponAsset->Attack(AttackPosition, Cam->GetComponentRotation(), GetOwner(), HitActors); // rotate attack by the cam
 	else
-		RageHits = WeaponAsset->Attack(AttackPosition, GetOwner()->GetActorRotation(), GetOwner(), HitActors); // rotate attack by the owner's rotation
-
-	if (RageHits < 0)
-		return;
-
-	for (int i = 0; i < RageHits; i++)
-	{
-		AddRage(RageAfterHitting);
-	}
+		WeaponAsset->Attack(AttackPosition, GetOwner()->GetActorRotation(), GetOwner(), HitActors); // rotate attack by the owner's rotation
 }
 
 // REDUCE AMMO: Called by the Attack Notify inside the animation
@@ -137,12 +150,8 @@ void UAttackComponent::AttackCanBeUsedAgain_Implementation()
 // ATTACK COMPLETED: Called by the Attack Completed notify inside the animation reset's the combo
 void UAttackComponent::AttackCompleted_Implementation()
 {
-	UE_LOG(LogTemp, Log, TEXT("p1p5: bIsAttacking = %hhd"),CurrentWeapon.bIsAttacking);
-	
 	if (CurrentWeapon.bIsAttacking) //D! Ask tutor why it still gets called when the animation is over
 		return;
-	
-	UE_LOG(LogTemp, Log, TEXT("p1p5: AttackEnded"));
 	AnimInstance->StopAllMontages(0.f);
 	CurrentWeapon.AnimIndex = 0;
 	//D! CurrentWeapon.CooldownTime = GetWorld()->GetTimeSeconds() + CurrentWeapon.WeaponData->FireRate; ask designers if they want to put a cooldown when you fail the combo
@@ -179,7 +188,6 @@ void UAttackComponent::ReloadWeapon_Implementation()
 	CurrentWeapon.bIsAttacking = false;
 
 	CurrentWeapon.AnimIndex = 0;
-	UE_LOG(LogTemp, Log, TEXT("Reloading"));
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 	CurrentWeapon.bIsReloading = false;
 	CurrentWeapon.CurrentAmmo = WeaponAsset->AmmoMax;
@@ -197,9 +205,14 @@ void UAttackComponent::AddWeapon_Implementation(FDynamicWeaponData& NewWeapon)
 }
 
 // ADD RAGE: Called when an attack has been successful
-void UAttackComponent::AddRage_Implementation(int Amount)
+void UAttackComponent::AddRage_Implementation(float Amount)
 {
-	RageMeter += Amount;
+	CurrentRageAmount += Amount;
+	if (CurrentRageAmount > RageDuration)
+		CurrentRageAmount = RageDuration;
+	else if (CurrentRageAmount < 0)
+		CurrentRageAmount = 0;
+	OnRageChange.Broadcast(CurrentRageAmount,RageDuration);
 }
 
 // ON DAMAGE RECEIVED: Called when the owner has been hit by another someone
@@ -211,8 +224,13 @@ void UAttackComponent::OnDamageReceived_Implementation(AActor* Actor, float X, c
 // START RAGE: Called by the owner via input
 void UAttackComponent::StartRage_Implementation()
 {
+	if (CurrentRageAmount < RageDuration)
+		return;
+	
 	WeaponsData[WeaponIndex] = CurrentWeapon;
 	CurrentWeapon = RageWeapon;
+	bIsInRage = true;
+	SetComponentTickEnabled(true);
 }
 
 // STOP RAGE: Called by the rage when it gets depleated
@@ -220,9 +238,11 @@ void UAttackComponent::StopRage_Implementation()
 {
 	RageWeapon = CurrentWeapon;
 	CurrentWeapon = WeaponsData[WeaponIndex];
+	bIsInRage = false;
+	SetComponentTickEnabled(false);
 }
 
-// Called by the owner of the component when switching to a different gun
+// CHANGE WEAPON: Called by the owner of the component when switching to a different gun
 void UAttackComponent::ChangeWeapon_Implementation(int InputValue)
 {
 	if (WeaponsData.Num() < 1 || // if there is only 1 weapon

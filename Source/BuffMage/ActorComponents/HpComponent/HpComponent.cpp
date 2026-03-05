@@ -47,9 +47,16 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 	
 	CurrentHp -= Damage;
 
+	if (bAppliesRage)
+	{
+		UAttackComponent* AttackComponent = DamageCauser->GetComponentByClass<UAttackComponent>();
+		if (IsValid(AttackComponent))
+			AttackComponent->AddRageAfterHit();
+	}
+	
 	if (CurrentHp <= 0)
 	{
-		Death(InstigatedBy);
+		Death(DamageCauser);
 		return;
 	}
 
@@ -86,9 +93,13 @@ void UHpComponent::RecoverFromStun()
 
 void UHpComponent::Death(AActor* TheKiller)
 {
+	Deactivate();
 	if (DeathMontage)
 		DeathAnimDuration = CharacterOwner->PlayAnimMontage(DeathMontage);
-	TheKiller->GetComponentByClass<UAttackComponent>()->AddRage(10);
+	UAttackComponent* AttackComponent = TheKiller->GetComponentByClass<UAttackComponent>();
+	if (IsValid(AttackComponent))
+		AttackComponent->AddToRageAfterKill();
+	
 	StartDeathTimer();
 }
 

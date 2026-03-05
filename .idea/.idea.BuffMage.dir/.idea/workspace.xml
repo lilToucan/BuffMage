@@ -8,17 +8,66 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/PlayerWeapons/TestRageWeaponArms.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Inputs/InputActions/IA_ActivateRage.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Inputs/InputActions/IA_Reload.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Hook_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Hook_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Punch_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Punch_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Stun_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_L_Stun_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Punch_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Punch_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Ranged_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Ranged_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Stun_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_R_Stun_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/ANS_ContinuousAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/ANS_ContinuousAttack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BuffMage.uproject.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/BuffMage.uproject.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/MeleeEnemy/ABP_MeleeEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/MeleeEnemy/ABP_MeleeEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/Testing/HitEnemyTest/ABP_EnemyHitTest.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/Testing/HitEnemyTest/ABP_EnemyHitTest.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/ABP_TargetDummy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/ABP_TargetDummy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_QuadPunc_Aoe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Animations/AM_QuadPunc_Aoe.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/AM_Quad_Punch_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Animations/AM_Quad_Punch_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/Cross_Punch.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Animations/Cross_Punch.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/Dying_Backwards.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Animations/Dying_Backwards.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/Dying_Backwards_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Animations/Dying_Backwards_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/Quad_Punch.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Animations/Quad_Punch.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/Rib_Hit.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Animations/Rib_Hit.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/Rib_Hit_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Animations/Rib_Hit_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/Walking.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Animations/Walking.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/Wave_Hip_Hop_Dance.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Animations/Wave_Hip_Hop_Dance.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Animations/Wave_Hip_Hop_Dance_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Animations/Wave_Hip_Hop_Dance_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Ch03_1001_Diffuse.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Ch03_1001_Diffuse.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Ch03_1001_Glossiness.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Ch03_1001_Glossiness.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Ch03_1001_Normal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Ch03_1001_Normal.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Ch03_1001_Specular.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Ch03_1001_Specular.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Ch03_Body.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Ch03_Body.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Ch03_nonPBR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Ch03_nonPBR.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Ch03_nonPBR_PhysicsAsset.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Ch03_nonPBR_PhysicsAsset.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/TestingDummy/Ch03_nonPBR_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations_DELETE/TestingDummy/Ch03_nonPBR_Skeleton.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BP_BaseEnemy.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/Bheaviours/BB_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/Bheaviours/BB_BaseEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/Bheaviours/CirclingEnemy/BT_EnemyCircling.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/Bheaviours/CirclingEnemy/BT_EnemyCircling.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/Bheaviours/HidingEnemy/BT_HidingEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/Bheaviours/HidingEnemy/BT_HidingEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/CustomTasks/BTT_PlayAnimMontage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/CustomTasks/BTT_PlayAnimMontage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/Testing/BP_EQSTest.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/Testing/BP_EQSTest.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/ActorComponents/BP_EnemyAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/ActorComponents/BP_EnemyAttack.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_AttackEnd.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_AttackEnd.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_CanAttackAgain.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Animation/Notify/AN_CanAttackAgain.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Testing/BP_HitEnemyTest.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Testing/BP_HitEnemyTest.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/PlayerWeapons/TestRangedWeaponArms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/PlayerWeapons/TestRangedWeaponArms.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestMeleeWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestMeleeWeapon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestRangedWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestRangedWeapon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestStunWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestStunWeapon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/Weapons/TestWeapon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Inputs/IMC_TESTING.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Inputs/IMC_TESTING.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestLevel.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Stun/StunWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Stun/StunWeapon.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Stun/StunWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Stun/StunWeapon.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +81,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://11" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/AssetTools/Internal/AssetHeaderPatcher.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/FunctionalTesting/Private/FunctionalAITest.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/NaniteBuilder/Private/BVHCluster.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -96,13 +145,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Uproject.BuffMage.executor": "Run",
-    "git-widget-placeholder": "feature/Programming/CombatSystemDONTPUSH",
+    "git-widget-placeholder": "feature/Programming/CombatSystem",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.toDoOptions",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -215,6 +264,7 @@
       <workItem from="1772564665412" duration="17566000" />
       <workItem from="1772621044763" duration="1977000" />
       <workItem from="1772636602590" duration="3200000" />
+      <workItem from="1772719385706" duration="9117000" />
     </task>
     <servers />
   </component>
@@ -242,11 +292,15 @@
           <option name="timeStamp" value="3" />
         </breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.cpp</url>
-          <line>146</line>
-          <option name="timeStamp" value="12" />
+          <url>file://$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp</url>
+          <line>230</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
