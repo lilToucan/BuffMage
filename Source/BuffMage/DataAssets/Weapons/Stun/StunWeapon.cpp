@@ -4,22 +4,23 @@
 #include "Engine/DamageEvents.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator)
+void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
 {
-	TArray<TEnumAsByte<EObjectTypeQuery>> traceObjectTypes;
-	traceObjectTypes.Append(CollisionChannel);
-
 	TArray<AActor*> IgnoreActors;
 	IgnoreActors.Add(Instigator);
+	IgnoreActors.Append(ActorsHit);
 
 	UClass* SeekClass = nullptr;
 	TArray<AActor*> OutActors;
 
-	//DrawDebugSphere(Instigator->GetWorld(), StartPos, Range, 12, FColor::Red, true, 100.f, 0, 0);
-	UKismetSystemLibrary::SphereOverlapActors(Instigator->GetWorld(), StartPos, Range, traceObjectTypes, SeekClass, IgnoreActors, OutActors);
+	int NumbersOfEnemiesHit = 0;
+
+	if (bDebugActive)
+		DrawDebugSphere(Instigator->GetWorld(), StartPos, Range, 12, FColor::Red, true, 100.f, 0, 0);
+	UKismetSystemLibrary::SphereOverlapActors(Instigator->GetWorld(), StartPos, Range, CollisionChannel, SeekClass, IgnoreActors, OutActors);
 
 	if (OutActors.Num() < 1)
-		return;
+		return ;
 
 	float ConeDot = -1; // set as the whole circle
 	if (AngleDetection != 360)
@@ -36,8 +37,8 @@ void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator
 	{
 		UHpComponent* HP = Actor->GetComponentByClass<UHpComponent>();
 		if (!HP)
-			return;
-		
+			continue;
+
 		if (AngleDetection != 360.f)
 		{
 			FVector Dir = Actor->GetActorLocation() - Instigator->GetActorLocation();
@@ -47,7 +48,8 @@ void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator
 			if (Dot < ConeDot) // 0.7f
 				continue;
 		}
-
-		HP->GetStunned(Damage, Instigator);
+		Actor->TakeDamage(0.0001f, DamageEvent, nullptr, Instigator);
+		HP->GetStunned(StunDuration, Instigator);
+		ActorsHit.Add(Actor);
 	}
 }

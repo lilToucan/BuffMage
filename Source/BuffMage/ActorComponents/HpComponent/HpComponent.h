@@ -30,11 +30,16 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Death")
 	FTimerHandle TimerHandle;
-
+	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Stun")
+	FTimerHandle StunTimerHandle;
+	
 	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
 	FOnStunnedDelegate OnStunned;
 	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
 	FOnStunnedDelegate OnStunRecovered;
+	
+	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Rage")
+	bool bAppliesRage = true;
 	
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Hp")
@@ -48,7 +53,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "HpComponent|Animations")
 	float DeathAnimDuration;
 	
-	FTimerHandle StunTimerHandle;
 	
 	bool bIsActive;
 
@@ -65,14 +69,21 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "HpComponent")
 	void OnHealingTaken(float Healing, AActor* HealingCauser);
 
+	UFUNCTION(BlueprintCallable, Category = "HpComponent|Death")
+	void Death(AActor* TheKiller);
+
+	UFUNCTION()
 	void RecoverFromStun();
+	
 	UFUNCTION(BlueprintCallable, Category = "HpComponent|Stun")
 	virtual void GetStunned(float Time, AActor* Instigator);
 
+
 protected:
+	UFUNCTION()
+	void OnDeathNotify(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload);
+	
 	virtual void BeginPlay() override;
 	void DisableOwner();
-	void OnAnimNotifyBegin(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload);
-	void Death();
 	void StartDeathTimer();
 };

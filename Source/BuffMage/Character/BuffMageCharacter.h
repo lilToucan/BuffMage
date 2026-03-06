@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "InputAction.h"
 #include "GameFramework/Character.h"
-#include "BuffMage/ActorComponents/AttackComponent.h"
+#include "BuffMage/ActorComponents/Attack/AttackComponent.h"
 #include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
 #include "BuffMage/ActorComponents/Dash/DashComponent.h"
 
@@ -31,7 +31,9 @@ protected: // variables
 
 	UPROPERTY(BlueprintreadWrite, Category="Movement")
 	float Velocity;
-
+	UPROPERTY(BlueprintreadWrite, Category="Movement")
+	bool bIsJumping = false;
+	
 	// components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|AttackComponent")
 	TObjectPtr<UAttackComponent> AttackComp;
@@ -45,6 +47,8 @@ protected: // variables
 	// inputs
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
 	UInputAction* MoveInputAction;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
+	UInputAction* JumpInputAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Aim")
 	UInputAction* LookAroundInputAction;
@@ -61,6 +65,12 @@ protected: // variables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
 	UInputAction* ChangeWeaponInputAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
+	UInputAction* ReloadInputAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
+	UInputAction* RageInputAction;
+
 public: // functions
 	ABuffMageCharacter();
 	virtual void Tick(float DeltaTime) override;
@@ -70,6 +80,9 @@ public: // functions
 	virtual void MoveInputFunction(const FInputActionValue& InputActionValue);
 	virtual void AimInputFunction(const FInputActionValue& InputActionValue);
 	virtual void AttackInputFunction(const FInputActionValue& InputActionValue);
+	virtual void ReloadInputFunction(const FInputActionValue& InputActionValue);
+	virtual void RageInputFunction(const FInputActionValue& InputActionValue);
+	virtual void JumpInputFunction(const FInputActionValue& InputActionValue);
 
 protected: // functions
 

@@ -20,6 +20,8 @@ public:
 	float AmmoMax = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")  // could be animation notify
 	float ReloadTime = 10;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
+	bool bDebugActive = true;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 	TArray<TObjectPtr<UAnimMontage>> AttackComboAnimMontage;
@@ -27,5 +29,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 	TObjectPtr<UAnimMontage> ReloadAnimMontage;
 
-	virtual void Attack(FVector StartPos, FRotator Rotation, AActor* Instigator);
+	virtual void Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit);
 };
