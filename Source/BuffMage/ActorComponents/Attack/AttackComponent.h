@@ -78,6 +78,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void SetUpWeapon(FDynamicWeaponData& WeaponAsset);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SetCooldownTime();
+
 	UFUNCTION(BlueprintCallable)
 	virtual void AddWeapon(FDynamicWeaponData& NewWeapon);
 
