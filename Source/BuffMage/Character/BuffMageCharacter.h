@@ -31,7 +31,9 @@ protected: // variables
 
 	UPROPERTY(BlueprintreadWrite, Category="Movement")
 	float Velocity;
-
+	UPROPERTY(BlueprintreadWrite, Category="Movement")
+	bool bIsJumping = false;
+	
 	// components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|AttackComponent")
 	TObjectPtr<UAttackComponent> AttackComp;
@@ -45,6 +47,8 @@ protected: // variables
 	// inputs
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
 	UInputAction* MoveInputAction;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
+	UInputAction* JumpInputAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Aim")
 	UInputAction* LookAroundInputAction;
@@ -78,6 +82,7 @@ public: // functions
 	virtual void AttackInputFunction(const FInputActionValue& InputActionValue);
 	virtual void ReloadInputFunction(const FInputActionValue& InputActionValue);
 	virtual void RageInputFunction(const FInputActionValue& InputActionValue);
+	virtual void JumpInputFunction(const FInputActionValue& InputActionValue);
 
 protected: // functions
 
