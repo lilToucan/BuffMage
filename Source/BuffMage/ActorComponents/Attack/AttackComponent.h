@@ -75,11 +75,11 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ChangeWeapon(int InputValue);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void SetUpWeapon(FDynamicWeaponData& WeaponAsset);
+	UFUNCTION(BlueprintCallable)
+	virtual void SetUpWeapon(FDynamicWeaponData& WeaponAsset);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void AddWeapon(FDynamicWeaponData& NewWeapon);
+	UFUNCTION(BlueprintCallable)
+	virtual void AddWeapon(FDynamicWeaponData& NewWeapon);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ReloadWeapon();

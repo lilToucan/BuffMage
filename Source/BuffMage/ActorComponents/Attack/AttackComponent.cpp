@@ -56,7 +56,7 @@ void UAttackComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, 
 	AddRage(-DeltaTime);
 }
 
-void UAttackComponent::SetUpWeapon_Implementation(FDynamicWeaponData& WeaponAsset)
+void UAttackComponent::SetUpWeapon(FDynamicWeaponData& WeaponAsset)
 {
 
 	if (!IsValid(WeaponAsset.WeaponData))
@@ -194,7 +194,7 @@ void UAttackComponent::ReloadWeapon_Implementation()
 }
 
 // ADD WEAPON: Called when the owner grabs a weapon pickup
-void UAttackComponent::AddWeapon_Implementation(FDynamicWeaponData& NewWeapon)
+void UAttackComponent::AddWeapon(FDynamicWeaponData& NewWeapon)
 {
 	if (!IsValid(NewWeapon.WeaponData))
 		return;
