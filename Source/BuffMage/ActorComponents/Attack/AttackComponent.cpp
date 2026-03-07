@@ -56,7 +56,7 @@ void UAttackComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, 
 	AddRage(-DeltaTime);
 }
 
-void UAttackComponent::SetUpWeapon_Implementation(FDynamicWeaponData& WeaponAsset)
+void UAttackComponent::SetUpWeapon(FDynamicWeaponData& WeaponAsset)
 {
 
 	if (!IsValid(WeaponAsset.WeaponData))
@@ -93,14 +93,20 @@ void UAttackComponent::StartAttackAnim_Implementation()
 	if (CurrentWeapon.AnimIndex >= WeaponAsset->AttackComboAnimMontage.Num()) //  0 == 1 | 1 == 2 | 2 == 3 | ...
 	{
 		CurrentWeapon.AnimIndex = 0; // reset combo after completing in 
-		CurrentWeapon.CooldownTime = GetWorld()->GetTimeSeconds() + WeaponAsset->FireRate; // get the time the fire rate will be over (ex started attack at 4s fire rate = 3s then CooldownTime = 4s+3s = 7s)
+		SetCooldownTime();
 	}
 	
 	AnimInstance->StopAllMontages(0.1f);
 	AnimInstance->Montage_Play(WeaponAsset->AttackComboAnimMontage[CurrentWeapon.AnimIndex]); // play the animation
-	
 
 	CurrentWeapon.bIsAttacking = true; // set attacking to true if not using fire rate cooldown 
+}
+
+// SET COOLDOWN TIME: Called when all anim attacks are over
+void UAttackComponent::SetCooldownTime_Implementation()
+{
+	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
+	CurrentWeapon.CooldownTime = GetWorld()->GetTimeSeconds() + WeaponAsset->FireRate; // get the time the fire rate will be over (ex started attack at 4s fire rate = 3s then CooldownTime = 4s+3s = 7s)
 }
 
 // HIT DETECTION: Called by the Attack notify inside the animation
@@ -150,11 +156,12 @@ void UAttackComponent::AttackCanBeUsedAgain_Implementation()
 // ATTACK COMPLETED: Called by the Attack Completed notify inside the animation reset's the combo
 void UAttackComponent::AttackCompleted_Implementation()
 {
-	if (CurrentWeapon.bIsAttacking) //D! Ask tutor why it still gets called when the animation is over
+	if (CurrentWeapon.bIsAttacking)
 		return;
 	AnimInstance->StopAllMontages(0.f);
 	CurrentWeapon.AnimIndex = 0;
-	//D! CurrentWeapon.CooldownTime = GetWorld()->GetTimeSeconds() + CurrentWeapon.WeaponData->FireRate; ask designers if they want to put a cooldown when you fail the combo
+	SetCooldownTime();
+	//D! ask designers if they want to put a cooldown when you fail the combo
 }
 
 // HAS AMMO BEEN DEPLETED: Called by this component to check the ammo count of the current weapon
@@ -194,7 +201,7 @@ void UAttackComponent::ReloadWeapon_Implementation()
 }
 
 // ADD WEAPON: Called when the owner grabs a weapon pickup
-void UAttackComponent::AddWeapon_Implementation(FDynamicWeaponData& NewWeapon)
+void UAttackComponent::AddWeapon(FDynamicWeaponData& NewWeapon)
 {
 	if (!IsValid(NewWeapon.WeaponData))
 		return;
