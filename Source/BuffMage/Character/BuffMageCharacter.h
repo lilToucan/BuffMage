@@ -31,8 +31,7 @@ protected: // variables
 
 	UPROPERTY(BlueprintreadWrite, Category="Movement")
 	float Velocity;
-	UPROPERTY(BlueprintreadWrite, Category="Movement")
-	bool bIsJumping = false;
+	
 	
 	// components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|AttackComponent")
@@ -83,11 +82,11 @@ public: // functions
 	virtual void ReloadInputFunction(const FInputActionValue& InputActionValue);
 	virtual void RageInputFunction(const FInputActionValue& InputActionValue);
 	virtual void JumpInputFunction(const FInputActionValue& InputActionValue);
+	
 
 protected: // functions
 
 	virtual void BeginPlay() override;
-	
 	UFUNCTION()
 	void OnStunned();
 	UFUNCTION()
