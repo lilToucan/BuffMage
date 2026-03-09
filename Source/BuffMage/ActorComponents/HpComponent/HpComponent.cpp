@@ -51,7 +51,7 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 	{
 		UAttackComponent* AttackComponent = DamageCauser->GetComponentByClass<UAttackComponent>();
 		if (IsValid(AttackComponent))
-			AttackComponent->AddRageAfterHit();
+			AttackComponent->OnAttackHit();
 	}
 	
 	if (CurrentHp <= 0)
@@ -63,6 +63,7 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 	if (!HitMontage)
 		return;
 	CharacterOwner->PlayAnimMontage(HitMontage);
+	OnStartHitAnim.Broadcast();
 }
 
 void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)

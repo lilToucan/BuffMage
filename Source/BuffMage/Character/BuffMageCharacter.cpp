@@ -67,7 +67,7 @@ void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 		// Dash Input :I
 		EnhancedInput->BindAction(DashInputAction, ETriggerEvent::Completed, DashComponent,
-		                          FName("PerformDash"));
+		                          FName("PerformDash")); // TODO: change this to a function so that you can pass if you are airborne or not
 		// interact Input :l
 		EnhancedInput->BindAction(InteractInputAction, ETriggerEvent::Triggered, this,
 		                          &ABuffMageCharacter::InteractInputFunction);
@@ -153,8 +153,10 @@ void ABuffMageCharacter::RageInputFunction(const FInputActionValue& InputActionV
 
 void ABuffMageCharacter::JumpInputFunction(const FInputActionValue& InputActionValue)
 {
-	if (!bIsJumping)
+	if (GetMovementComponent()->Velocity.Z == 0)
+	{
 		Jump();
+	}
 }
 
 void ABuffMageCharacter::OnStunned()

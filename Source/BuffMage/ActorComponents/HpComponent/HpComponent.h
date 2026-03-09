@@ -4,7 +4,7 @@
 #include "Components/ActorComponent.h"
 #include "HpComponent.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStunnedDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOHPDelegate);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class BUFFMAGE_API UHpComponent : public UActorComponent
@@ -34,10 +34,18 @@ public:
 	FTimerHandle StunTimerHandle;
 	
 	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
-	FOnStunnedDelegate OnStunned;
+	FOHPDelegate OnStunned;
 	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
-	FOnStunnedDelegate OnStunRecovered;
+	FOHPDelegate OnStunRecovered;
+
+	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
+	FOHPDelegate OnDeathStarted;
+	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
+	FOHPDelegate OnDeathEnd;
 	
+	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
+	FOHPDelegate OnStartHitAnim;
+
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Rage")
 	bool bAppliesRage = true;
 	
