@@ -4,7 +4,6 @@
 #include "Components/ActorComponent.h"
 #include "HitStopComponent.generated.h"
 
-
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class BUFFMAGE_API UHitStopComponent : public UActorComponent
 {
@@ -14,6 +13,8 @@ public:
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	bool bShake = true;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FVector2D ShakeMultPerAxis;
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float ShakeDistance;

@@ -19,13 +19,15 @@ void UHpComponent::Activate(bool bReset)
 			CurrentHp = StartingHP;
 	}
 
-	bIsActive = true;
+
+	SetActiveFlag(true);
 	
 }
 
 void UHpComponent::Deactivate()
 {
-	bIsActive = false;
+	
+	SetActiveFlag(false);
 }
 
 void UHpComponent::BeginPlay()
@@ -42,7 +44,7 @@ void UHpComponent::BeginPlay()
 
 void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	if (!bIsActive || CurrentHp <= 0)
+	if (!IsActive() || CurrentHp <= 0)
 		return;
 	
 	CurrentHp -= Damage;
@@ -60,15 +62,14 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 		return;
 	}
 
-	if (!HitMontage)
-		return;
-	CharacterOwner->PlayAnimMontage(HitMontage);
+	if (HitMontage)
+		CharacterOwner->PlayAnimMontage(HitMontage);
 	OnStartHitAnim.Broadcast();
 }
 
 void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 {
-	if (!bIsActive || CurrentHp <= 0)
+	if (!IsActive() || CurrentHp <= 0)
 		return;
 	
 	CurrentHp = FMath::Min(CurrentHp + Healing, MaxHp);

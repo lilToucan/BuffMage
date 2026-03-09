@@ -21,7 +21,9 @@ void UHitStopComponent::BeginPlay()
 	{
 		SkeletalMeshComponent = PlayerCharacter->GetMesh();
 		if (IsValid(SkeletalMeshComponent))
-			MeshStartLocation = SkeletalMeshComponent->GetComponentLocation();
+		{
+			MeshStartLocation = SkeletalMeshComponent->GetRelativeLocation();
+		}
 	}
 }
 
@@ -36,9 +38,7 @@ void UHitStopComponent::ActivateHitStun_Implementation(float TimeDilation)
 
 	if (!bShake)
 		return;
-
-	if (IsValid(SkeletalMeshComponent))
-		MeshStartLocation = SkeletalMeshComponent->GetComponentLocation();
+	
 	FrameCount = 0;
 	SetComponentTickEnabled(true);
 }
@@ -54,7 +54,7 @@ void UHitStopComponent::DeactivateHitStun_Implementation()
 
 	FrameCount = 0;
 	if (IsValid(SkeletalMeshComponent))
-		SkeletalMeshComponent->SetWorldLocation(MeshStartLocation);
+		SkeletalMeshComponent->SetRelativeLocation(MeshStartLocation);
 
 	Timer = 0;
 }
@@ -65,7 +65,6 @@ void UHitStopComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	FrameCount++;
-	UE_LOG(LogTemp, Log, TEXT("p1p5 FrameCount = %d"), FrameCount);
 	if (FrameCount > 0)
 	{
 		if (FrameCount >= FramesToStopTickFor)
@@ -78,18 +77,18 @@ void UHitStopComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	float TimerProgress = Timer / HitStunDuration;
 
-	float RandY = UKismetMathLibrary::RandomFloatInRange(-1.f, 1.f);
 	float RandX = UKismetMathLibrary::RandomFloatInRange(-1.f, 1.f);
+	float RandY = UKismetMathLibrary::RandomFloatInRange(-1.f, 1.f);
 
-	float OffsetY = GetSinOffset(TimerProgress, RandY);
-	//									   Sin((0 to 1 value * 360°) * Frequency) * Distance
-	float OffsetX = GetSinOffset(TimerProgress, RandX);
+	float OffsetX = GetSinOffset(TimerProgress, RandX) * ShakeMultPerAxis.X;
+	float OffsetY = GetSinOffset(TimerProgress, RandY) * ShakeMultPerAxis.Y;
 
 	FVector ShakeVector = MeshStartLocation;
 	ShakeVector.Y = MeshStartLocation.Y + OffsetY;
 	ShakeVector.X = MeshStartLocation.X + OffsetX;
 
-	SkeletalMeshComponent->SetWorldLocation(ShakeVector);
+	if (IsValid(SkeletalMeshComponent))
+		SkeletalMeshComponent->SetRelativeLocation(ShakeVector);
 }
 
 

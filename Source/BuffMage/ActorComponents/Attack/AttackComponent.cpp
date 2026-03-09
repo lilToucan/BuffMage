@@ -70,6 +70,7 @@ void UAttackComponent::SetUpWeapon(FDynamicWeaponData& WeaponAsset)
 	WeaponAsset.bIsAttacking = false;
 }
 
+
 // START ATTACKING: Called by the Owner of the component when inputting an attack
 void UAttackComponent::StartAttackAnim_Implementation()
 {
@@ -90,7 +91,7 @@ void UAttackComponent::StartAttackAnim_Implementation()
 		return;
 
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
-	HitActors.Empty();
+	ResetHitActors();
 
 	if (CurrentWeapon.AnimIndex >= WeaponAsset->AttackComboAnimMontage.Num()) //  0 == 1 | 1 == 2 | 2 == 3 | ...
 	{
@@ -102,6 +103,12 @@ void UAttackComponent::StartAttackAnim_Implementation()
 	AnimInstance->Montage_Play(WeaponAsset->AttackComboAnimMontage[CurrentWeapon.AnimIndex]); // play the animation
 
 	CurrentWeapon.bIsAttacking = true; // set attacking to true if not using fire rate cooldown 
+}
+
+// RESET HIT ACTORS: Resets the current held hit actors called when you start an attack and by Notifies
+void UAttackComponent::ResetHitActors_Implementation()
+{
+	HitActors.Empty();
 }
 
 // SET COOLDOWN TIME: Called when all anim attacks are over

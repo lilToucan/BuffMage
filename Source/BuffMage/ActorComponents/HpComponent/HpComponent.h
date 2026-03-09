@@ -60,9 +60,6 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "HpComponent|Animations")
 	float DeathAnimDuration;
-	
-	
-	bool bIsActive;
 
 	// functions
 public:
