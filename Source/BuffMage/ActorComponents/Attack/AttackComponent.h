@@ -5,7 +5,9 @@
 #include "Components/ActorComponent.h"
 #include "AttackComponent.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRageChangeDelegate,float,CurrentAmount,float,MaximumAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRageChangeDelegate, float, CurrentAmount, float, MaximumAmount);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAttackHitDelegate);
 
 class UCameraComponent;
 
@@ -13,11 +15,11 @@ UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), BlueprintType, B
 class BUFFMAGE_API UAttackComponent : public UActorComponent
 {
 	GENERATED_BODY()
-	
-// VARIABLES:
+
+	// VARIABLES:
 public:
 	FOnRageChangeDelegate OnRageChange;
-	
+
 	UPROPERTY(BlueprintReadWrite, Category="AttackComponent|Animations")
 	TObjectPtr<UAnimInstance> AnimInstance;
 
@@ -27,45 +29,48 @@ protected:
 	TArray<FDynamicWeaponData> WeaponsData;
 	UPROPERTY(BlueprintReadWrite, Category="AttackComponent|Weapons")
 	FDynamicWeaponData CurrentWeapon;
-	
+
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent|Weapons")
 	int WeaponIndex = 0;
 #pragma endregion
-	
-//TODO: i feel like the rage things should be it's onw components
+
+	//TODO: i feel like the rage things should be it's onw components
 #pragma region RAGE
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage")
 	FDynamicWeaponData RageWeapon;
-	
-	UPROPERTY(VisibleAnywhere,BlueprintReadWrite, Category = "AttackComponent|Weapons|Rage|Debug")
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "AttackComponent|Weapons|Rage|Debug")
 	float CurrentRageAmount = 0.f;
 
-	UPROPERTY(VisibleAnywhere,BlueprintReadWrite, Category = "AttackComponent|Weapons|Rage|Debug")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "AttackComponent|Weapons|Rage|Debug")
 	bool bIsInRage;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	float RageDuration = 100.f;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	float RageAmountAfterKilling = 10.f;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	float RageAfterGettingHit = 2.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	float RageAfterHitting = 5.0f;
 #pragma endregion
-	
+
+	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
+	FOnAttackHitDelegate OnAttackHitDel;
+
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	UCameraComponent* Cam;
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	TArray<AActor*> HitActors;
 
 
-// FUNCTIONS:
+	// FUNCTIONS:
 public:
 	UAttackComponent();
-	
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StartAttackAnim();
 
@@ -95,10 +100,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StartReloading();
-	
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ReduceAmmo();
-	
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	bool HasAmmoBeenDepleted();
 
@@ -116,12 +121,11 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StopRage();
-	
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void AddRageAfterHit();
+	void OnAttackHit();
 
 protected:
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	
 };

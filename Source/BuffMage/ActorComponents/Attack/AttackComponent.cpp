@@ -12,8 +12,10 @@ void UAttackComponent::AddToRageAfterKill_Implementation()
 	AddRage(RageAmountAfterKilling);
 }
 
-void UAttackComponent::AddRageAfterHit_Implementation()
+void UAttackComponent::OnAttackHit_Implementation()
 {
+	OnAttackHitDel.Broadcast();
+	
 	if (!bIsInRage)
 		AddRage(RageAfterHitting);
 }

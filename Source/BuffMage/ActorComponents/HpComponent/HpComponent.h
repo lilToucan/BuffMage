@@ -43,6 +43,9 @@ public:
 	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
 	FOHPDelegate OnDeathEnd;
 	
+	UPROPERTY(BlueprintCallable,BlueprintAssignable,BlueprintReadWrite, Category = "HpComponent|Stun")
+	FOHPDelegate OnStartHitAnim;
+
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Rage")
 	bool bAppliesRage = true;
 	
