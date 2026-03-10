@@ -14,18 +14,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f9f405c4-d9dd-438a-8889-74d6be4c0d3e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_CirclingEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_CirclingEnemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_HidingEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_HidingEnemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AnimNotify/AN_PerformAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AnimNotify/AN_PerformAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/TestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/TestLevel.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HitStop/HitStopComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HitStop/HitStopComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HitStop/HitStopComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HitStop/HitStopComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/CustomTasks/BTT_StartAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BheaviourTrees/CustomTasks/BTT_StartAttack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/ActorComponents/BP_EnemyAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/ActorComponents/BP_EnemyAttack.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,6 +217,7 @@
       <workItem from="1769548714698" duration="1197000" />
       <workItem from="1772303076929" duration="9230000" />
       <workItem from="1773078401167" duration="4741000" />
+      <workItem from="1773159348181" duration="116000" />
     </task>
     <servers />
   </component>
