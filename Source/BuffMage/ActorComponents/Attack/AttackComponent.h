@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.h"
 #include "Components/ActorComponent.h"
+#include "Engine/StreamableManager.h"
 #include "AttackComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRageChangeDelegate, float, CurrentAmount, float, MaximumAmount);
@@ -65,11 +66,25 @@ protected:
 	UCameraComponent* Cam;
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	TArray<AActor*> HitActors;
-
+	
+	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
+	TSoftObjectPtr<USoundBase> CurrentSoundToPlay;
+	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
+	float Volume;
+	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
+	float Pitch;
+	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
+	AActor* HitActor;
 
 	// FUNCTIONS:
 public:
 	UAttackComponent();
+	
+	UFUNCTION(BlueprintCallable)
+	void PlayAudio();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void SetUpWeapon(FDynamicWeaponData& WeaponAsset);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StartAttackAnim();
@@ -77,15 +92,12 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void HitDetection(FName SocketName);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ChangeWeapon(int InputValue);
-
-	UFUNCTION(BlueprintCallable)
-	virtual void SetUpWeapon(FDynamicWeaponData& WeaponAsset);
-
 	UFUNCTION(BlueprintCallable,BlueprintNativeEvent)
 	void ResetHitActors();
-
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ChangeWeapon(int InputValue);
+	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetCooldownTime();
 
@@ -126,7 +138,7 @@ public:
 	void StopRage();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnAttackHit();
+	void OnAttackHit(AActor* ActorHit);
 
 protected:
 	virtual void BeginPlay() override;

@@ -19,10 +19,10 @@ void UHitStopComponent::BeginPlay()
 
 	if (IsValid(PlayerCharacter))
 	{
-		SkeletalMeshComponent = PlayerCharacter->GetMesh();
-		if (IsValid(SkeletalMeshComponent))
+		SceneComponent = PlayerCharacter->GetMesh();
+		if (IsValid(SceneComponent))
 		{
-			MeshStartLocation = SkeletalMeshComponent->GetRelativeLocation();
+			MeshStartLocation = SceneComponent->GetRelativeLocation();
 		}
 	}
 }
@@ -53,8 +53,8 @@ void UHitStopComponent::DeactivateHitStun_Implementation()
 		return;
 
 	FrameCount = 0;
-	if (IsValid(SkeletalMeshComponent))
-		SkeletalMeshComponent->SetRelativeLocation(MeshStartLocation);
+	if (IsValid(SceneComponent))
+		SceneComponent->SetRelativeLocation(MeshStartLocation);
 
 	Timer = 0;
 }
@@ -87,8 +87,8 @@ void UHitStopComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	ShakeVector.Y = MeshStartLocation.Y + OffsetY;
 	ShakeVector.X = MeshStartLocation.X + OffsetX;
 
-	if (IsValid(SkeletalMeshComponent))
-		SkeletalMeshComponent->SetRelativeLocation(ShakeVector);
+	if (IsValid(SceneComponent))
+		SceneComponent->SetRelativeLocation(ShakeVector);
 }
 
 
