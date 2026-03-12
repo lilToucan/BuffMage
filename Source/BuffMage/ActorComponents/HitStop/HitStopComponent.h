@@ -20,7 +20,7 @@ public:
 	float ShakeDistance;
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	USkeletalMeshComponent* SkeletalMeshComponent;
+	USceneComponent* SceneComponent;
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float HitStunDuration = 0.2f;
