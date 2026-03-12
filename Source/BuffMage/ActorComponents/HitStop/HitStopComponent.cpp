@@ -14,15 +14,21 @@ void UHitStopComponent::BeginPlay()
 	Super::BeginPlay();
 	SetComponentTickEnabled(false);
 
-	if (!IsValid(PlayerCharacter))
-		PlayerCharacter = Cast<ACharacter>(GetOwner());
 
-	if (IsValid(PlayerCharacter))
+	if (IsValid(SceneComponent))
+		MeshStartLocation = SceneComponent->GetRelativeLocation();
+	else
 	{
-		SceneComponent = PlayerCharacter->GetMesh();
-		if (IsValid(SceneComponent))
+		if (!IsValid(PlayerCharacter))
+			PlayerCharacter = Cast<ACharacter>(GetOwner());
+
+		if (IsValid(PlayerCharacter))
 		{
-			MeshStartLocation = SceneComponent->GetRelativeLocation();
+			SceneComponent = PlayerCharacter->GetMesh();
+			if (IsValid(SceneComponent))
+			{
+				MeshStartLocation = SceneComponent->GetRelativeLocation();
+			}
 		}
 	}
 }
@@ -38,7 +44,7 @@ void UHitStopComponent::ActivateHitStun_Implementation(float TimeDilation)
 
 	if (!bShake)
 		return;
-	
+
 	FrameCount = 0;
 	SetComponentTickEnabled(true);
 }

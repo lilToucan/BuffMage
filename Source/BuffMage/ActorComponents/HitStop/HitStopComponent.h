@@ -14,7 +14,7 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	bool bShake = true;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	FVector2D ShakeMultPerAxis;
+	FVector2D ShakeMultPerAxis = FVector2D(1, 1);
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float ShakeDistance;

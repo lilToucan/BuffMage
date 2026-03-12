@@ -9,7 +9,12 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/CameraShake/BP_CamShakeHit.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/CameraShake/BP_CamShakeHit.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Lvl_PlayTest.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Lvl_PlayTest.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Testing(TODELETE)/BP_TestingDummy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Testing(TODELETE)/BP_TestingDummy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HitStop/HitStopComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HitStop/HitStopComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HitStop/HitStopComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HitStop/HitStopComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +28,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="cidr-memory-view://10" root0="FORCE_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://7" root0="FORCE_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/AssetTools/Internal/AssetHeaderPatcher.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/DerivedDataCache/Private/ZenCacheStore.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/FunctionalTesting/Private/FunctionalAITest.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -99,7 +103,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Uproject.BuffMage.executor": "Run",
-    "git-widget-placeholder": "feature/Programming/TestBranch",
+    "git-widget-placeholder": "feature/Design/PlayTest__Scene",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -226,6 +230,7 @@
       <workItem from="1773149020473" duration="2157000" />
       <workItem from="1773244914424" duration="19882000" />
       <workItem from="1773323835004" duration="126000" />
+      <workItem from="1773335144534" duration="1014000" />
     </task>
     <servers />
   </component>

@@ -18,7 +18,8 @@ void UHpComponent::BeginPlay()
 	GetOwner()->OnTakeAnyDamage.AddUniqueDynamic(this, &UHpComponent::OnDamageTaken);
 
 	CharacterOwner = Cast<ACharacter>(GetOwner());
-	CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnDeathNotify);
+	if (IsValid(CharacterOwner))
+		CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnDeathNotify);
 
 	Activate(true);
 }
@@ -138,8 +139,7 @@ void UHpComponent::PlaySound()
 	if (!IsValid(Sound))
 		return;
 
-	
-	
+
 	UGameplayStatics::PlaySoundAtLocation
 	(
 		GetOwner(),
