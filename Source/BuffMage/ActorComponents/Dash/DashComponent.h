@@ -70,6 +70,8 @@ public:
 	void LowerComponent(USceneComponent* Component,FVector StartPos,float Alpha);
 	FVector MoveVectorBasedOnCurve(FVector StartingPos, UCurveFloat* Curve, float Alpha);
 
+	virtual void Activate(bool bReset = false) override;
+	virtual void Deactivate() override;
 	
 
 protected:

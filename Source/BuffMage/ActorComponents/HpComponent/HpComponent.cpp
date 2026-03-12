@@ -1,31 +1,14 @@
 #include "HpComponent.h"
 
 #include "BuffMage/ActorComponents/Attack/AttackComponent.h"
+#include "Engine/StreamableManager.h"
 #include "GameFramework/Character.h"
+#include "Kismet/GameplayStatics.h"
 
 
 UHpComponent::UHpComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
-}
-
-void UHpComponent::Activate(bool bReset)
-{
-	if (bReset)
-	{
-		if (StartingHP == 0)
-			CurrentHp = MaxHp;
-		else
-			CurrentHp = StartingHP;
-	}
-
-	bIsActive = true;
-	
-}
-
-void UHpComponent::Deactivate()
-{
-	bIsActive = false;
 }
 
 void UHpComponent::BeginPlay()
@@ -40,55 +23,67 @@ void UHpComponent::BeginPlay()
 	Activate(true);
 }
 
+
+void UHpComponent::Activate(bool bReset)
+{
+	if (bReset)
+	{
+		if (StartingHP == 0)
+			CurrentHp = MaxHp;
+		else
+			CurrentHp = StartingHP;
+	}
+
+
+	SetActiveFlag(true);
+}
+
+void UHpComponent::Deactivate()
+{
+	SetActiveFlag(false);
+}
+
+
 void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	if (!bIsActive || CurrentHp <= 0)
+	if (!IsActive() || CurrentHp <= 0)
 		return;
-	
+
 	CurrentHp -= Damage;
 
 	if (bAppliesRage)
 	{
 		UAttackComponent* AttackComponent = DamageCauser->GetComponentByClass<UAttackComponent>();
 		if (IsValid(AttackComponent))
-			AttackComponent->AddRageAfterHit();
+			AttackComponent->OnAttackHit(GetOwner());
 	}
-	
+
 	if (CurrentHp <= 0)
 	{
 		Death(DamageCauser);
 		return;
 	}
 
-	if (!HitMontage)
-		return;
-	CharacterOwner->PlayAnimMontage(HitMontage);
+	if (HitMontage)
+		CharacterOwner->PlayAnimMontage(HitMontage);
+
+	OnHit.Broadcast();
+	if (HurtSounds.Num() > 0)
+		SoundToPlay = HurtSounds[FMath::RandRange(0, HurtSounds.Num() - 1)];
+
+	Volume = FMath::RandRange(HurtVolumeMinMax.X, HurtVolumeMinMax.Y);
+	Pitch = FMath::RandRange(HurtPitchMinMax.X, HurtPitchMinMax.Y);
+	FStreamableManager Streamable;
+	Streamable.RequestAsyncLoad(SoundToPlay.ToSoftObjectPath(),
+	                            FStreamableDelegate::CreateUObject(this, &UHpComponent::PlaySound));
 }
 
 void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 {
-	if (!bIsActive || CurrentHp <= 0)
+	if (!IsActive() || CurrentHp <= 0)
 		return;
-	
+
 	CurrentHp = FMath::Min(CurrentHp + Healing, MaxHp);
-}
-
-void UHpComponent::GetStunned(float Time, AActor* Instigator)
-{
-	if (StunTimerHandle.IsValid()) 
-		return;
-	
-	OnStunned.Broadcast();
-	
-	GetOwner()->GetWorldTimerManager().SetTimer(StunTimerHandle, this, &UHpComponent::RecoverFromStun, Time);
-}
-
-void UHpComponent::RecoverFromStun()
-{
-	GetOwner()->GetWorldTimerManager().ClearTimer(StunTimerHandle);
-	StunTimerHandle.Invalidate();
-	
-	OnStunRecovered.Broadcast();
 }
 
 void UHpComponent::Death(AActor* TheKiller)
@@ -99,15 +94,33 @@ void UHpComponent::Death(AActor* TheKiller)
 	UAttackComponent* AttackComponent = TheKiller->GetComponentByClass<UAttackComponent>();
 	if (IsValid(AttackComponent))
 		AttackComponent->AddToRageAfterKill();
-	
 	StartDeathTimer();
+
+	SoundToPlay = DeathSound;
+	Volume = FMath::RandRange(DeathVolumeMinMax.X, DeathVolumeMinMax.Y);
+	Pitch = FMath::RandRange(DeathPitchMinMax.X, DeathPitchMinMax.Y);
+
+	FStreamableManager Streamable;
+	Streamable.RequestAsyncLoad(SoundToPlay.ToSoftObjectPath(),
+	                            FStreamableDelegate::CreateUObject(this, &UHpComponent::PlaySound));
 }
 
-void UHpComponent::StartDeathTimer()
+void UHpComponent::RecoverFromStun()
 {
-	GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UHpComponent::DisableOwner, DeathAnimDuration -.5f);
-	DeathAnimDuration = 0;
+	GetOwner()->GetWorldTimerManager().ClearTimer(StunTimerHandle);
+	StunTimerHandle.Invalidate();
+
+	OnStunRecovered.Broadcast();
+}
+
+void UHpComponent::GetStunned(float Time, AActor* Instigator)
+{
+	if (StunTimerHandle.IsValid())
+		return;
+
+	OnStunned.Broadcast();
+
+	GetOwner()->GetWorldTimerManager().SetTimer(StunTimerHandle, this, &UHpComponent::RecoverFromStun, Time);
 }
 
 void UHpComponent::OnDeathNotify(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
@@ -118,9 +131,36 @@ void UHpComponent::OnDeathNotify(FName Name, const FBranchingPointNotifyPayload&
 	}
 }
 
+void UHpComponent::PlaySound()
+{
+	USoundBase* Sound = SoundToPlay.Get();
+
+	if (!IsValid(Sound))
+		return;
+
+	
+	
+	UGameplayStatics::PlaySoundAtLocation
+	(
+		GetOwner(),
+		Sound,
+		GetOwner()->GetActorLocation(),
+		GetOwner()->GetActorRotation(),
+		Volume,
+		Pitch
+	);
+}
+
 void UHpComponent::DisableOwner()
 {
 	GetOwner()->SetActorHiddenInGame(true);
 	GetOwner()->SetActorEnableCollision(false);
 	GetOwner()->SetActorTickEnabled(false);
+}
+
+void UHpComponent::StartDeathTimer()
+{
+	GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UHpComponent::DisableOwner, DeathAnimDuration - .5f);
+	DeathAnimDuration = 0;
 }

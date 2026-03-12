@@ -1,5 +1,9 @@
 #include "AttackComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Engine/StreamableManager.h"
+#include "Kismet/GameplayStatics.h"
+
+struct FStreamableManager;
 
 UAttackComponent::UAttackComponent()
 {
@@ -12,8 +16,42 @@ void UAttackComponent::AddToRageAfterKill_Implementation()
 	AddRage(RageAmountAfterKilling);
 }
 
-void UAttackComponent::AddRageAfterHit_Implementation()
+void UAttackComponent::PlayAudio()
 {
+	USoundBase* Sound = CurrentSoundToPlay.Get();
+	UE_LOG(LogTemp, Log, TEXT("p1p5: Volume = %f, Pitch = %f"),Volume,Pitch);
+	if (!IsValid(Sound))
+		return;
+	FString String = "p1p5: Sound = " + Sound->GetName();
+	UE_LOG(LogTemp, Log, TEXT("P1p5: %s"),*String);
+
+	UGameplayStatics::PlaySoundAtLocation(
+		GetOwner(),
+		Sound,
+		HitActor->GetActorLocation(),
+		HitActor->GetActorRotation(),
+		Volume,
+		Pitch
+	);
+}
+
+// ON ATTACK HIT: Called when your attack goes through and hits an enemy :) (not called if the attack killed it D:)
+void UAttackComponent::OnAttackHit_Implementation(AActor* ActorHit)
+{
+	HitActor = ActorHit;
+	if (CurrentWeapon.WeaponData->OnAttackHitSounds.Num() > 0)
+		CurrentSoundToPlay = CurrentWeapon.WeaponData->OnAttackHitSounds[FMath::RandRange(0, CurrentWeapon.WeaponData->OnAttackHitSounds.Num() - 1)];
+
+	Volume = FMath::RandRange(CurrentWeapon.WeaponData->VolumeMinMax.X,CurrentWeapon.WeaponData->VolumeMinMax.Y);
+	Pitch = FMath::RandRange(CurrentWeapon.WeaponData->PitchMinMax.X,CurrentWeapon.WeaponData->PitchMinMax.Y);
+	
+	FStreamableManager Streamable;
+	Streamable.RequestAsyncLoad(CurrentSoundToPlay.ToSoftObjectPath(),
+		FStreamableDelegate::CreateUObject(this, &UAttackComponent::PlayAudio));
+
+
+	OnAttackHitDel.Broadcast();
+
 	if (!bIsInRage)
 		AddRage(RageAfterHitting);
 }
@@ -22,7 +60,7 @@ void UAttackComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	SetComponentTickEnabled(false);
-	
+
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UAttackComponent::OnDamageReceived);
 
 	if (IsValid(Cam))
@@ -37,7 +75,7 @@ void UAttackComponent::BeginPlay()
 		{
 			SetUpWeapon(WeaponAsset);
 		}
-		
+
 		CurrentWeapon = WeaponsData[WeaponIndex];
 	}
 	SetUpWeapon(RageWeapon);
@@ -47,7 +85,7 @@ void UAttackComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, 
 {
 	if (!bIsInRage)
 		return;
-	
+
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	if (CurrentRageAmount <= 0)
@@ -58,15 +96,15 @@ void UAttackComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, 
 
 void UAttackComponent::SetUpWeapon(FDynamicWeaponData& WeaponAsset)
 {
-
 	if (!IsValid(WeaponAsset.WeaponData))
 		return;
-	
+
 	WeaponAsset.CurrentAmmo = WeaponAsset.WeaponData->AmmoMax;
 	WeaponAsset.AnimIndex = 0;
 	WeaponAsset.bIsReloading = false;
 	WeaponAsset.bIsAttacking = false;
 }
+
 
 // START ATTACKING: Called by the Owner of the component when inputting an attack
 void UAttackComponent::StartAttackAnim_Implementation()
@@ -88,18 +126,24 @@ void UAttackComponent::StartAttackAnim_Implementation()
 		return;
 
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
-	HitActors.Empty();
+	ResetHitActors();
 
 	if (CurrentWeapon.AnimIndex >= WeaponAsset->AttackComboAnimMontage.Num()) //  0 == 1 | 1 == 2 | 2 == 3 | ...
 	{
 		CurrentWeapon.AnimIndex = 0; // reset combo after completing in 
 		SetCooldownTime();
 	}
-	
+
 	AnimInstance->StopAllMontages(0.1f);
 	AnimInstance->Montage_Play(WeaponAsset->AttackComboAnimMontage[CurrentWeapon.AnimIndex]); // play the animation
 
 	CurrentWeapon.bIsAttacking = true; // set attacking to true if not using fire rate cooldown 
+}
+
+// RESET HIT ACTORS: Resets the current held hit actors called when you start an attack and by Notifies
+void UAttackComponent::ResetHitActors_Implementation()
+{
+	HitActors.Empty();
 }
 
 // SET COOLDOWN TIME: Called when all anim attacks are over
@@ -219,7 +263,7 @@ void UAttackComponent::AddRage_Implementation(float Amount)
 		CurrentRageAmount = RageDuration;
 	else if (CurrentRageAmount < 0)
 		CurrentRageAmount = 0;
-	OnRageChange.Broadcast(CurrentRageAmount,RageDuration);
+	OnRageChange.Broadcast(CurrentRageAmount, RageDuration);
 }
 
 // ON DAMAGE RECEIVED: Called when the owner has been hit by another someone
@@ -233,7 +277,7 @@ void UAttackComponent::StartRage_Implementation()
 {
 	if (CurrentRageAmount < RageDuration)
 		return;
-	
+
 	WeaponsData[WeaponIndex] = CurrentWeapon;
 	CurrentWeapon = RageWeapon;
 	bIsInRage = true;
