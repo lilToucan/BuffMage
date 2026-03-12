@@ -16,7 +16,9 @@ void UHitStopComponent::BeginPlay()
 
 
 	if (IsValid(SceneComponent))
+	{
 		MeshStartLocation = SceneComponent->GetRelativeLocation();
+	}
 	else
 	{
 		if (!IsValid(PlayerCharacter))
