@@ -153,9 +153,7 @@ void UHpComponent::PlaySound()
 
 void UHpComponent::DisableOwner()
 {
-	GetOwner()->SetActorHiddenInGame(true);
-	GetOwner()->SetActorEnableCollision(false);
-	GetOwner()->SetActorTickEnabled(false);
+	OnDeathEnd.Broadcast();
 }
 
 void UHpComponent::StartDeathTimer()
