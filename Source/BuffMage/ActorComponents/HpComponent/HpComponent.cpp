@@ -90,6 +90,7 @@ void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 void UHpComponent::Death(AActor* TheKiller)
 {
 	Deactivate();
+	OnDeathStarted.Broadcast();
 	if (DeathMontage)
 		DeathAnimDuration = CharacterOwner->PlayAnimMontage(DeathMontage);
 	UAttackComponent* AttackComponent = TheKiller->GetComponentByClass<UAttackComponent>();
