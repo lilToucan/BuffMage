@@ -202,7 +202,6 @@ void UAttackComponent::AttackCompleted_Implementation()
 {
 	if (CurrentWeapon.bIsAttacking)
 		return;
-	AnimInstance->StopAllMontages(0.f);
 	CurrentWeapon.AnimIndex = 0;
 	SetCooldownTime();
 	//D! ask designers if they want to put a cooldown when you fail the combo
@@ -211,7 +210,7 @@ void UAttackComponent::AttackCompleted_Implementation()
 // HAS AMMO BEEN DEPLETED: Called by this component to check the ammo count of the current weapon
 bool UAttackComponent::HasAmmoBeenDepleted_Implementation()
 {
-	if (CurrentWeapon.CurrentAmmo < 0)
+	if (CurrentWeapon.CurrentAmmo <= 0)
 	{
 		StartReloading(); // ask designers if this should only be called with input
 		return true;
