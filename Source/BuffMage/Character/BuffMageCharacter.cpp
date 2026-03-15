@@ -66,7 +66,7 @@ void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		                          &ABuffMageCharacter::MoveInputFunction);
 
 		// Dash Input :I
-		EnhancedInput->BindAction(DashInputAction, ETriggerEvent::Completed, DashComponent,
+		EnhancedInput->BindAction(DashInputAction, ETriggerEvent::Triggered, DashComponent,
 		                          FName("PerformDash")); // TODO: change this to a function so that you can pass if you are airborne or not
 		// interact Input :l
 		EnhancedInput->BindAction(InteractInputAction, ETriggerEvent::Triggered, this,
