@@ -3,6 +3,7 @@
 UDashComponent::UDashComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
+	bAutoActivate = true;
 }
 
 void UDashComponent::TickComponent(float DeltaTime, enum ELevelTick TickType,
@@ -33,14 +34,16 @@ void UDashComponent::ActivateIFrames()
 
 void UDashComponent::PerformDash()
 {
-	if (!bCanDash)
+	if (!bCanDash || !IsActive())
 		return;
 
 	bCanDash = false;
+	FVector OwnerVelocity = OwnersMovement->Velocity;
+	OwnerVelocity.Z = 0;
 
-	if (OwnersMovement && OwnersMovement->Velocity != FVector::ZeroVector)
+	if (OwnersMovement && OwnerVelocity != FVector::ZeroVector)
 	{
-		DashDirection = OwnersMovement->Velocity;
+		DashDirection = OwnerVelocity;
 		DashDirection.Normalize();
 	}
 	else
@@ -53,8 +56,7 @@ void UDashComponent::PerformDash()
 		MeshStartPos = OwnersSkeletalMesh->GetRelativeLocation();
 
 	DashStartPos = GetOwner()->GetActorLocation();
-
-
+	
 	SetComponentTickEnabled(true);
 
 	GetWorld()->GetTimerManager().ClearTimer(CooldownTimerHandle);
@@ -119,6 +121,17 @@ FVector UDashComponent::MoveVectorBasedOnCurve(FVector StartingPos, UCurveFloat*
 	FVector CurrentPos = StartingPos;
 	CurrentPos.Z += CurveValue;
 	return CurrentPos;
+}
+
+void UDashComponent::Activate(bool bReset)
+{
+	SetActiveFlag(true);
+}
+
+void UDashComponent::Deactivate()
+{
+	SetActiveFlag(false);
+	SetComponentTickEnabled(false);
 }
 
 void UDashComponent::MoveOwner(float Alpha)

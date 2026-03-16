@@ -14,12 +14,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f9f405c4-d9dd-438a-8889-74d6be4c0d3e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Dash/DashComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Dash/DashComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Dash/DashComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Dash/DashComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/BB_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/BB_BaseEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/CirclingEnemy/BT_EnemyCircling.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/CirclingEnemy/BT_EnemyCircling.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/HidingEnemy/BT_HidingEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/HidingEnemy/BT_HidingEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Character/BuffMageCharacter.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +32,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Core/Public/Delegates/Delegate.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Core/Public/Delegates/DelegateInstancesImpl.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Core/Public/Delegates/DelegateSignatureImpl.inl" root0="FORCE_HIGHLIGHTING" />
@@ -42,12 +42,14 @@
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/CoreUObject/Public/UObject/ObjectPtr.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Animation/AnimInstance.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Components/ActorComponent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Components/SceneComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Engine/EngineTypes.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/GameFramework/Character.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/GameFramework/GameModeBase.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/ActorComponents/AttackComponent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/Components/SceneComponent.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/alexy/Documents/SchoolProjects/Unreal/BuffMage/Source/BuffMage/ActorComponents/HitStop/HitStopComponent.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/ActorComponents/HitStop/HitStopComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/BuffMageController.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -58,8 +60,6 @@
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interactables/HealthPack/HealthPack.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interactables/HealthPack/HealthPack.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interfaces/AttackerInterface.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interfaces/AttackerInterface.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -218,6 +218,11 @@
       <workItem from="1769501431374" duration="7756000" />
       <workItem from="1769512487795" duration="235000" />
       <workItem from="1769548714698" duration="1197000" />
+      <workItem from="1772303076929" duration="9230000" />
+      <workItem from="1773078401167" duration="4741000" />
+      <workItem from="1773159348181" duration="116000" />
+      <workItem from="1773397530585" duration="420000" />
+      <workItem from="1773507309068" duration="2237000" />
     </task>
     <servers />
   </component>

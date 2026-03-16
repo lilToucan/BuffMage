@@ -11,17 +11,16 @@ ABuffMageCharacter::ABuffMageCharacter()
 	DashComponent = CreateDefaultSubobject<UDashComponent>("DashComponent");
 	HpComponent = CreateDefaultSubobject<UHpComponent>("HpComponent");
 
-	CameraComponent =  CreateDefaultSubobject<UCameraComponent>("CameraComponent");
-	CameraComponent->AttachToComponent(RootComponent,FAttachmentTransformRules::KeepRelativeTransform);
-	
+	CameraComponent = CreateDefaultSubobject<UCameraComponent>("CameraComponent");
+	CameraComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
 	if (!GetMesh())
 		return;
-	
+
 	FAttachmentTransformRules x = FAttachmentTransformRules::KeepRelativeTransform;
-	GetMesh()->AttachToComponent(CameraComponent,x);
-	
-	CameraComponent->SetRelativeLocation(FVector(30,0,40));
-	
+	GetMesh()->AttachToComponent(CameraComponent, x);
+
+	CameraComponent->SetRelativeLocation(FVector(30, 0, 40));
 }
 
 void ABuffMageCharacter::BeginPlay()
@@ -30,14 +29,14 @@ void ABuffMageCharacter::BeginPlay()
 
 	if (HpComponent)
 	{
-		HpComponent->OnStunned.AddUniqueDynamic(this,&ABuffMageCharacter::OnStunned);
+		HpComponent->OnStunned.AddUniqueDynamic(this, &ABuffMageCharacter::OnStunned);
 		HpComponent->OnStunRecovered.AddUniqueDynamic(this, &ABuffMageCharacter::OnStunRecovered);
 	}
-	
+
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	if (!IsValid(AnimInstance))
 		return;
-	
+
 	AttackComp->AnimInstance = AnimInstance;
 }
 
@@ -67,15 +66,24 @@ void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		                          &ABuffMageCharacter::MoveInputFunction);
 
 		// Dash Input :I
-		EnhancedInput->BindAction(DashInputAction, ETriggerEvent::Completed, DashComponent,
-		                          FName("PerformDash"));
+		EnhancedInput->BindAction(DashInputAction, ETriggerEvent::Triggered, DashComponent,
+		                          FName("PerformDash")); // TODO: change this to a function so that you can pass if you are airborne or not
 		// interact Input :l
 		EnhancedInput->BindAction(InteractInputAction, ETriggerEvent::Triggered, this,
 		                          &ABuffMageCharacter::InteractInputFunction);
 
 		// Change Weapon Input :U
 		EnhancedInput->BindAction(ChangeWeaponInputAction, ETriggerEvent::Triggered, this,
-								  &ABuffMageCharacter::ChangeWeaponInputFunction);
+		                          &ABuffMageCharacter::ChangeWeaponInputFunction);
+		// Reload Input :P
+		EnhancedInput->BindAction(ReloadInputAction, ETriggerEvent::Started, this,
+		                          &ABuffMageCharacter::ReloadInputFunction);
+		// Rage Input :R
+		EnhancedInput->BindAction(RageInputAction, ETriggerEvent::Started, this,
+		                          &ABuffMageCharacter::RageInputFunction);
+		// Jump Input :V
+		EnhancedInput->BindAction(JumpInputAction, ETriggerEvent::Started, this,
+		                          &ABuffMageCharacter::JumpInputFunction);
 	}
 }
 
@@ -99,7 +107,7 @@ void ABuffMageCharacter::InteractInputFunction(const FInputActionValue& InputAct
 
 void ABuffMageCharacter::ChangeWeaponInputFunction(const FInputActionValue& InputActionValue)
 {
-	float InputValue  = InputActionValue.Get<float>();
+	float InputValue = InputActionValue.Get<float>();
 	AttackComp->ChangeWeapon(InputValue);
 }
 
@@ -133,13 +141,30 @@ void ABuffMageCharacter::AttackInputFunction(const FInputActionValue& InputActio
 	AttackComp->StartAttackAnim();
 }
 
+void ABuffMageCharacter::ReloadInputFunction(const FInputActionValue& InputActionValue)
+{
+	AttackComp->StartReloading();
+}
+
+void ABuffMageCharacter::RageInputFunction(const FInputActionValue& InputActionValue)
+{
+	AttackComp->StartRage();
+}
+
+void ABuffMageCharacter::JumpInputFunction(const FInputActionValue& InputActionValue)
+{
+	if (GetMovementComponent()->Velocity.Z == 0)
+	{
+		Jump();
+	}
+}
+
 void ABuffMageCharacter::OnStunned()
 {
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
 	if (!PlayerController)
 		return;
 	DisableInput(PlayerController);
-
 }
 
 void ABuffMageCharacter::OnStunRecovered()

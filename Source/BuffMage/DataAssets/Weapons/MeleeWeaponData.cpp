@@ -1,18 +1,22 @@
 #include "MeleeWeaponData.h"
 
+#include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
 #include "Engine/DamageEvents.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-void UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator)
+void UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
 {
 	TArray<TEnumAsByte<EObjectTypeQuery>> traceObjectTypes;
 	traceObjectTypes.Append(CollisionChannel);
 
 	TArray<AActor*> IgnoreActors;
 	IgnoreActors.Add(Instigator);
+	IgnoreActors.Append(ActorsHit);
 
 	UClass* SeekClass = nullptr;
 	TArray<AActor*> OutActors;
+
+	int NumbersOfEnemiesHit = 0;
 
 	if (bDebugActive)
 		DrawDebugSphere(Instigator->GetWorld(), StartPos, Range, 12, FColor::Red, true, 100.f, 0, 0);
@@ -45,5 +49,7 @@ void UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Insti
 		}
 
 		Actor->TakeDamage(Damage, DamageEvent, nullptr, Instigator);
+		ActorsHit.Add(Actor);
+		
 	}
 }
