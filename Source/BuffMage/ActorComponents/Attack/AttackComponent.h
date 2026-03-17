@@ -66,6 +66,16 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	float RageAfterHitting = 5.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
+	float RageVolume = .15f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
+	float RageMaxPitch = 1.7f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
+	float RageMinPitch = 0.5f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
+	TSoftObjectPtr<USoundBase> StartRageSound;
 #pragma endregion
 
 	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
@@ -89,8 +99,11 @@ protected:
 public:
 	UAttackComponent();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable,BlueprintNativeEvent)
 	void PlayAudio();
+
+	UFUNCTION(BlueprintCallable)
+	void LoadSoundAsync();
 
 	UFUNCTION(BlueprintCallable)
 	virtual void SetUpWeapon(FDynamicWeaponData& WeaponAsset);
