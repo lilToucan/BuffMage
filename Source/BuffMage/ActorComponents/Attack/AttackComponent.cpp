@@ -195,6 +195,7 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 void UAttackComponent::ReduceAmmo_Implementation()
 {
 	CurrentWeapon.CurrentAmmo--;
+	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo);
 }
 
 // ATTACK CAN BE USED AGAIN: Called by the AttackCanBeUsed Notify inside the animation
@@ -218,6 +219,7 @@ void UAttackComponent::AttackCompleted_Implementation()
 // HAS AMMO BEEN DEPLETED: Called by this component to check the ammo count of the current weapon
 bool UAttackComponent::HasAmmoBeenDepleted_Implementation()
 {
+	
 	if (CurrentWeapon.CurrentAmmo <= 0)
 	{
 		StartReloading(); // ask designers if this should only be called with input
@@ -249,6 +251,7 @@ void UAttackComponent::ReloadWeapon_Implementation()
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 	CurrentWeapon.bIsReloading = false;
 	CurrentWeapon.CurrentAmmo = WeaponAsset->AmmoMax;
+	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo);
 }
 
 // ADD WEAPON: Called when the owner grabs a weapon pickup
@@ -285,19 +288,27 @@ void UAttackComponent::StartRage_Implementation()
 	if (CurrentRageAmount < RageDuration)
 		return;
 
+	bIsInRage = true;
 	WeaponsData[WeaponIndex] = CurrentWeapon;
 	CurrentWeapon = RageWeapon;
-	bIsInRage = true;
 	SetComponentTickEnabled(true);
+	OnCurrentWeaponChange();
 }
 
 // STOP RAGE: Called by the rage when it gets depleated
 void UAttackComponent::StopRage_Implementation()
 {
+	bIsInRage = false;
 	RageWeapon = CurrentWeapon;
 	CurrentWeapon = WeaponsData[WeaponIndex];
-	bIsInRage = false;
 	SetComponentTickEnabled(false);
+	OnCurrentWeaponChange();
+}
+
+void UAttackComponent::OnCurrentWeaponChange()
+{
+	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo);
+	OnWeaponIconChanged.Broadcast(CurrentWeapon.WeaponData->Icon);
 }
 
 // CHANGE WEAPON: Called by the owner of the component when switching to a different gun
@@ -321,4 +332,5 @@ void UAttackComponent::ChangeWeapon_Implementation(int InputValue)
 		WeaponIndex = 0;
 
 	CurrentWeapon = WeaponsData[WeaponIndex];
+	OnCurrentWeaponChange();
 }

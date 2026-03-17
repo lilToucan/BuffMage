@@ -9,16 +9,20 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEditorPerProjectUserSettings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEditorPerProjectUserSettings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/CirclingEnemy/BT_EnemyCircling.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/CirclingEnemy/BT_EnemyCircling.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_StartAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_StartAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_CirclingEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_CirclingEnemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/ActorComponents/BP_EnemyAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/ActorComponents/BP_EnemyAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AnimNotify/AN_PerformAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AnimNotify/AN_PerformAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/TestMeleeWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/TestMeleeWeapon.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Testing(TODELETE)/Animations/TestingDummy/Animations/Wave_Hip_Hop_Dance_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Testing(TODELETE)/Animations/TestingDummy/Animations/Wave_Hip_Hop_Dance_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_Stun_R_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_Stun_R_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestMeleeWeaponArms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestMeleeWeaponArms.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestRageWeaponArms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestRageWeaponArms.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestRangedWeaponArms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestRangedWeaponArms.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Testing(TODELETE)/BP_HitEnemyTest.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Testing(TODELETE)/BP_HitEnemyTest.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/BuffMage.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/BuffMage.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/DataAssets/WeaponDataAsset.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +110,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Uproject.BuffMage.executor": "Run",
-    "git-widget-placeholder": "feature/Programming/TestBranch",
+    "git-widget-placeholder": "feature/Programming/UI",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -235,6 +239,7 @@
       <workItem from="1773323835004" duration="126000" />
       <workItem from="1773335144534" duration="1083000" />
       <workItem from="1773336398384" duration="878000" />
+      <workItem from="1773760893114" duration="3321000" />
     </task>
     <servers />
   </component>

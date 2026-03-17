@@ -28,6 +28,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
 	bool bDebugActive = true;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+	TSoftObjectPtr<UTexture2D> Icon;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
 	TArray<TSoftObjectPtr<USoundBase>> OnAttackHitSounds;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")

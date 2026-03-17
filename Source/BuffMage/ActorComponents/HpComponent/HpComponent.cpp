@@ -61,6 +61,7 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 		return;
 
 	CurrentHp -= Damage;
+	OnHpChanged.Broadcast(CurrentHp);
 
 	if (bAppliesRage)
 	{

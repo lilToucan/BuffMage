@@ -7,6 +7,8 @@
 #include "AttackComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRageChangeDelegate, float, CurrentAmount, float, MaximumAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnValueChangeDelegate, float, CurrentAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWeaponIconChanged, TSoftObjectPtr<UTexture2D>, Icon);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAttackHitDelegate);
 
@@ -17,8 +19,9 @@ class BUFFMAGE_API UAttackComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-	// VARIABLES:
+// VARIABLES:
 public:
+	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable)
 	FOnRageChangeDelegate OnRageChange;
 
 	UPROPERTY(BlueprintReadWrite, Category="AttackComponent|Animations")
@@ -28,14 +31,20 @@ protected:
 #pragma region WEAPONS
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
 	TArray<FDynamicWeaponData> WeaponsData;
+
 	UPROPERTY(BlueprintReadWrite, Category="AttackComponent|Weapons")
 	FDynamicWeaponData CurrentWeapon;
 
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent|Weapons")
 	int WeaponIndex = 0;
+	
+	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable,Category = "AttackComponent|Weapons|Delegate")
+	FOnValueChangeDelegate OnAmmoChange;
+	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable,Category = "AttackComponent|Weapons|Delegate")
+	FOnWeaponIconChanged OnWeaponIconChanged;
 #pragma endregion
 
-	//TODO: i feel like the rage things should be it's onw components
+//TODO: i feel like the rage things should be it's onw components
 #pragma region RAGE
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage")
 	FDynamicWeaponData RageWeapon;
@@ -66,7 +75,7 @@ protected:
 	UCameraComponent* Cam;
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	TArray<AActor*> HitActors;
-	
+
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	TSoftObjectPtr<USoundBase> CurrentSoundToPlay;
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
@@ -79,7 +88,7 @@ protected:
 	// FUNCTIONS:
 public:
 	UAttackComponent();
-	
+
 	UFUNCTION(BlueprintCallable)
 	void PlayAudio();
 
@@ -92,17 +101,18 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void HitDetection(FName SocketName);
 
-	UFUNCTION(BlueprintCallable,BlueprintNativeEvent)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ResetHitActors();
-	
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ChangeWeapon(int InputValue);
-	
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetCooldownTime();
 
 	UFUNCTION(BlueprintCallable)
 	virtual void AddWeapon(FDynamicWeaponData& NewWeapon);
+	void OnCurrentWeaponChange();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ReloadWeapon();

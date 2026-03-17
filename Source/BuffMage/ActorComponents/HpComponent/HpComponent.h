@@ -5,6 +5,7 @@
 #include "HpComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FHPDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHPValueCahngeDelegate, float, CurrentHp);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnHitDelegate, AActor*, HitActor, bool, bAppliesRage);
 
@@ -35,18 +36,21 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Stun")
 	FTimerHandle StunTimerHandle;
 
-	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Stun")
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
 	FHPDelegate OnStunned;
-	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Stun")
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
 	FHPDelegate OnStunRecovered;
 
-	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Stun")
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
 	FHPDelegate OnDeathStarted;
-	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Stun")
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
 	FHPDelegate OnDeathEnd;
 
-	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Stun")
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
 	FHPDelegate OnHit;
+
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
+	FHPValueCahngeDelegate OnHpChanged;
 
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Rage")
 	bool bAppliesRage = true;
