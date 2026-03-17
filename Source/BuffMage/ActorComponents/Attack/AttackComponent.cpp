@@ -19,11 +19,9 @@ void UAttackComponent::AddToRageAfterKill_Implementation()
 void UAttackComponent::PlayAudio()
 {
 	USoundBase* Sound = CurrentSoundToPlay.Get();
-	UE_LOG(LogTemp, Log, TEXT("p1p5: Volume = %f, Pitch = %f"),Volume,Pitch);
+	
 	if (!IsValid(Sound))
 		return;
-	FString String = "p1p5: Sound = " + Sound->GetName();
-	UE_LOG(LogTemp, Log, TEXT("P1p5: %s"),*String);
 
 	UGameplayStatics::PlaySoundAtLocation(
 		GetOwner(),
@@ -103,6 +101,16 @@ void UAttackComponent::SetUpWeapon(FDynamicWeaponData& WeaponAsset)
 	WeaponAsset.AnimIndex = 0;
 	WeaponAsset.bIsReloading = false;
 	WeaponAsset.bIsAttacking = false;
+	for (TSoftObjectPtr<USoundBase> Sound : WeaponAsset.WeaponData->OnAttackHitSounds)
+	{
+		HitActor = GetOwner();
+		Volume = 0.f;
+		Pitch = 0.f;
+		CurrentSoundToPlay = Sound;
+		FStreamableManager Streamable;
+		Streamable.RequestAsyncLoad(CurrentSoundToPlay.ToSoftObjectPath(),
+			FStreamableDelegate::CreateUObject(this, &UAttackComponent::PlayAudio));
+	}
 }
 
 
