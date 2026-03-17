@@ -22,6 +22,16 @@ void UHpComponent::BeginPlay()
 		CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnDeathNotify);
 
 	Activate(true);
+
+	for (TSoftObjectPtr<USoundBase> Sound : HurtSounds)
+	{
+		Volume = 0.f;
+		SoundToPlay = Sound;
+		PlaySound();
+	}
+	
+	SoundToPlay = DeathSound;
+	PlaySound();
 }
 
 
@@ -90,6 +100,7 @@ void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 void UHpComponent::Death(AActor* TheKiller)
 {
 	Deactivate();
+	OnDeathStarted.Broadcast();
 	if (DeathMontage)
 		DeathAnimDuration = CharacterOwner->PlayAnimMontage(DeathMontage);
 	UAttackComponent* AttackComponent = TheKiller->GetComponentByClass<UAttackComponent>();

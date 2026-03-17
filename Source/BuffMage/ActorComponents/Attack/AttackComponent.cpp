@@ -19,11 +19,9 @@ void UAttackComponent::AddToRageAfterKill_Implementation()
 void UAttackComponent::PlayAudio()
 {
 	USoundBase* Sound = CurrentSoundToPlay.Get();
-	UE_LOG(LogTemp, Log, TEXT("p1p5: Volume = %f, Pitch = %f"),Volume,Pitch);
+	
 	if (!IsValid(Sound))
 		return;
-	FString String = "p1p5: Sound = " + Sound->GetName();
-	UE_LOG(LogTemp, Log, TEXT("P1p5: %s"),*String);
 
 	UGameplayStatics::PlaySoundAtLocation(
 		GetOwner(),
@@ -103,6 +101,16 @@ void UAttackComponent::SetUpWeapon(FDynamicWeaponData& WeaponAsset)
 	WeaponAsset.AnimIndex = 0;
 	WeaponAsset.bIsReloading = false;
 	WeaponAsset.bIsAttacking = false;
+	for (TSoftObjectPtr<USoundBase> Sound : WeaponAsset.WeaponData->OnAttackHitSounds)
+	{
+		HitActor = GetOwner();
+		Volume = 0.f;
+		Pitch = 0.f;
+		CurrentSoundToPlay = Sound;
+		FStreamableManager Streamable;
+		Streamable.RequestAsyncLoad(CurrentSoundToPlay.ToSoftObjectPath(),
+			FStreamableDelegate::CreateUObject(this, &UAttackComponent::PlayAudio));
+	}
 }
 
 
@@ -202,7 +210,6 @@ void UAttackComponent::AttackCompleted_Implementation()
 {
 	if (CurrentWeapon.bIsAttacking)
 		return;
-	AnimInstance->StopAllMontages(0.f);
 	CurrentWeapon.AnimIndex = 0;
 	SetCooldownTime();
 	//D! ask designers if they want to put a cooldown when you fail the combo
@@ -211,7 +218,7 @@ void UAttackComponent::AttackCompleted_Implementation()
 // HAS AMMO BEEN DEPLETED: Called by this component to check the ammo count of the current weapon
 bool UAttackComponent::HasAmmoBeenDepleted_Implementation()
 {
-	if (CurrentWeapon.CurrentAmmo < 0)
+	if (CurrentWeapon.CurrentAmmo <= 0)
 	{
 		StartReloading(); // ask designers if this should only be called with input
 		return true;
