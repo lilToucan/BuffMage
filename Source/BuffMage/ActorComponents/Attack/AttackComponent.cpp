@@ -3,7 +3,6 @@
 #include "Engine/StreamableManager.h"
 #include "Kismet/GameplayStatics.h"
 
-struct FStreamableManager;
 
 UAttackComponent::UAttackComponent()
 {
@@ -16,7 +15,7 @@ void UAttackComponent::AddToRageAfterKill_Implementation()
 	AddRage(RageAmountAfterKilling);
 }
 
-void UAttackComponent::PlayAudio()
+void UAttackComponent::PlayAudio_Implementation()
 {
 	USoundBase* Sound = CurrentSoundToPlay.Get();
 	
@@ -33,6 +32,13 @@ void UAttackComponent::PlayAudio()
 	);
 }
 
+void UAttackComponent::LoadSoundAsync()
+{
+	FStreamableManager Streamable;
+	Streamable.RequestAsyncLoad(CurrentSoundToPlay.ToSoftObjectPath(),
+	                            FStreamableDelegate::CreateUObject(this, &UAttackComponent::PlayAudio));
+}
+
 // ON ATTACK HIT: Called when your attack goes through and hits an enemy :) (not called if the attack killed it D:)
 void UAttackComponent::OnAttackHit_Implementation(AActor* ActorHit)
 {
@@ -43,9 +49,7 @@ void UAttackComponent::OnAttackHit_Implementation(AActor* ActorHit)
 	Volume = FMath::RandRange(CurrentWeapon.WeaponData->VolumeMinMax.X,CurrentWeapon.WeaponData->VolumeMinMax.Y);
 	Pitch = FMath::RandRange(CurrentWeapon.WeaponData->PitchMinMax.X,CurrentWeapon.WeaponData->PitchMinMax.Y);
 	
-	FStreamableManager Streamable;
-	Streamable.RequestAsyncLoad(CurrentSoundToPlay.ToSoftObjectPath(),
-		FStreamableDelegate::CreateUObject(this, &UAttackComponent::PlayAudio));
+	LoadSoundAsync();
 
 
 	OnAttackHitDel.Broadcast();
@@ -77,6 +81,8 @@ void UAttackComponent::BeginPlay()
 		CurrentWeapon = WeaponsData[WeaponIndex];
 	}
 	SetUpWeapon(RageWeapon);
+	CurrentSoundToPlay = StartRageSound;
+	LoadSoundAsync();
 }
 
 void UAttackComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -107,9 +113,7 @@ void UAttackComponent::SetUpWeapon(FDynamicWeaponData& WeaponAsset)
 		Volume = 0.f;
 		Pitch = 0.f;
 		CurrentSoundToPlay = Sound;
-		FStreamableManager Streamable;
-		Streamable.RequestAsyncLoad(CurrentSoundToPlay.ToSoftObjectPath(),
-			FStreamableDelegate::CreateUObject(this, &UAttackComponent::PlayAudio));
+		LoadSoundAsync();
 	}
 }
 
@@ -195,6 +199,7 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 void UAttackComponent::ReduceAmmo_Implementation()
 {
 	CurrentWeapon.CurrentAmmo--;
+	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo);
 }
 
 // ATTACK CAN BE USED AGAIN: Called by the AttackCanBeUsed Notify inside the animation
@@ -218,6 +223,7 @@ void UAttackComponent::AttackCompleted_Implementation()
 // HAS AMMO BEEN DEPLETED: Called by this component to check the ammo count of the current weapon
 bool UAttackComponent::HasAmmoBeenDepleted_Implementation()
 {
+	
 	if (CurrentWeapon.CurrentAmmo <= 0)
 	{
 		StartReloading(); // ask designers if this should only be called with input
@@ -249,6 +255,7 @@ void UAttackComponent::ReloadWeapon_Implementation()
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 	CurrentWeapon.bIsReloading = false;
 	CurrentWeapon.CurrentAmmo = WeaponAsset->AmmoMax;
+	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo);
 }
 
 // ADD WEAPON: Called when the owner grabs a weapon pickup
@@ -285,19 +292,32 @@ void UAttackComponent::StartRage_Implementation()
 	if (CurrentRageAmount < RageDuration)
 		return;
 
+	bIsInRage = true;
 	WeaponsData[WeaponIndex] = CurrentWeapon;
 	CurrentWeapon = RageWeapon;
-	bIsInRage = true;
+	OnCurrentWeaponChange();
+	Volume = .1;
+	Pitch = FMath::RandRange(RageMinPitch,RageMaxPitch);
+	HitActor = GetOwner();
+	CurrentSoundToPlay = StartRageSound;
+	LoadSoundAsync();
 	SetComponentTickEnabled(true);
 }
 
 // STOP RAGE: Called by the rage when it gets depleated
 void UAttackComponent::StopRage_Implementation()
 {
+	bIsInRage = false;
 	RageWeapon = CurrentWeapon;
 	CurrentWeapon = WeaponsData[WeaponIndex];
-	bIsInRage = false;
 	SetComponentTickEnabled(false);
+	OnCurrentWeaponChange();
+}
+
+void UAttackComponent::OnCurrentWeaponChange()
+{
+	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo);
+	OnWeaponIconChanged.Broadcast(CurrentWeapon.WeaponData->Icon);
 }
 
 // CHANGE WEAPON: Called by the owner of the component when switching to a different gun
@@ -321,4 +341,5 @@ void UAttackComponent::ChangeWeapon_Implementation(int InputValue)
 		WeaponIndex = 0;
 
 	CurrentWeapon = WeaponsData[WeaponIndex];
+	OnCurrentWeaponChange();
 }
