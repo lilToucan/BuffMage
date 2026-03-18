@@ -147,7 +147,7 @@ void UAttackComponent::StartAttackAnim_Implementation()
 	}
 
 	AnimInstance->StopAllMontages(0.1f);
-	AnimInstance->Montage_Play(WeaponAsset->AttackComboAnimMontage[CurrentWeapon.AnimIndex]); // play the animation
+	AnimInstance->Montage_Play(WeaponAsset->AttackComboAnimMontage[CurrentWeapon.AnimIndex],WeaponAsset->AnimSpeedMult ); // play the animation
 
 	CurrentWeapon.bIsAttacking = true; // set attacking to true if not using fire rate cooldown 
 }
@@ -162,7 +162,7 @@ void UAttackComponent::ResetHitActors_Implementation()
 void UAttackComponent::SetCooldownTime_Implementation()
 {
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
-	CurrentWeapon.CooldownTime = GetWorld()->GetTimeSeconds() + WeaponAsset->FireRate; // get the time the fire rate will be over (ex started attack at 4s fire rate = 3s then CooldownTime = 4s+3s = 7s)
+	CurrentWeapon.CooldownTime = GetWorld()->GetTimeSeconds() + WeaponAsset->CooldownBetweenCombos; // get the time the fire rate will be over (ex started attack at 4s fire rate = 3s then CooldownTime = 4s+3s = 7s)
 }
 
 // HIT DETECTION: Called by the Attack notify inside the animation
@@ -235,8 +235,13 @@ bool UAttackComponent::HasAmmoBeenDepleted_Implementation()
 // START RELOAD: called after performing an attack with 0 ammo or by the player's input
 void UAttackComponent::StartReloading_Implementation()
 {
+	if (CurrentWeapon.bIsReloading ||
+		CurrentWeapon.bIsAttacking||
+		WeaponsData.Num() < 1)
+		return;
+	
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
-	if (CurrentWeapon.CurrentAmmo == WeaponAsset->AmmoMax)
+	if (WeaponAsset != nullptr || CurrentWeapon.CurrentAmmo == WeaponAsset->AmmoMax)
 		return;
 
 	CurrentWeapon.bIsAttacking = false;
@@ -289,14 +294,19 @@ void UAttackComponent::OnDamageReceived_Implementation(AActor* Actor, float X, c
 // START RAGE: Called by the owner via input
 void UAttackComponent::StartRage_Implementation()
 {
+	// D! ask if they want this
+	// if (bIsInRage)
+	// 	StopRage();
+	
 	if (CurrentRageAmount < RageDuration)
 		return;
 
 	bIsInRage = true;
 	WeaponsData[WeaponIndex] = CurrentWeapon;
 	CurrentWeapon = RageWeapon;
-	OnCurrentWeaponChange();
-	Volume = .1;
+	OnCurrentWeaponChange(); // update Weapon UI
+	
+	Volume = RageVolume;
 	Pitch = FMath::RandRange(RageMinPitch,RageMaxPitch);
 	HitActor = GetOwner();
 	CurrentSoundToPlay = StartRageSound;
@@ -323,9 +333,10 @@ void UAttackComponent::OnCurrentWeaponChange()
 // CHANGE WEAPON: Called by the owner of the component when switching to a different gun
 void UAttackComponent::ChangeWeapon_Implementation(int InputValue)
 {
-	if (WeaponsData.Num() < 1 || // if there is only 1 weapon
-		CurrentWeapon.bIsAttacking || // if its currently attacking
-		CurrentWeapon.bIsReloading) // if its currently reloading
+	if (WeaponsData.Num() < 1 || // if there's 0 weapons
+		CurrentWeapon.bIsAttacking || // if it's currently attacking
+		CurrentWeapon.bIsReloading || // if it's currently reloading
+		bIsInRage) // if it's currently in rage mode 
 		return;
 
 	if (AnimInstance)

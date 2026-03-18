@@ -17,10 +17,13 @@ public:
 	float PositionOffsetX = 400;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
-	float FireRate = 3;
+	float CooldownBetweenCombos = 3;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
 	float AmmoMax = 10;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = 0.f), Category = "Attack")
+	float AnimSpeedMult = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack") // could be animation notify
 	float ReloadTime = 10;
@@ -30,7 +33,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
 	TSoftObjectPtr<UTexture2D> Icon;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
 	TArray<TSoftObjectPtr<USoundBase>> OnAttackHitSounds;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
