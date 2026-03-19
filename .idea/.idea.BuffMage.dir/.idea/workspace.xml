@@ -8,55 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/Assets/2D/Testing/TDA_Melee.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/2D/Testing/TDA_Rage.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/2D/Testing/TDA_Ranged.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/2D/Testing/TDA_Stun.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/2D/Testing/TUI_Health.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/2D/Testing/TUI_Shield.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Montages/Anim_Player_Ranged_Punch_L_Montage.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Montages/Anim_Player_Ranged_Punch_R_Montage.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Anim_Player_Hook.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Anim_Player_Hook.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Anim_Player_Idle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Anim_Player_Idle.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Anim_Player_Punch_L.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Anim_Player_Punch_L.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Anim_Player_Punch_R.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Anim_Player_Punch_R.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Anim_Player_Ranged_Idle_L.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Anim_Player_Ranged_Idle_L.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Anim_Player_Ranged_Idle_R.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Anim_Player_Ranged_Idle_R.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Anim_Player_Ranged_Punch_L.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Anim_Player_Ranged_Punch_L.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Anim_Player_Ranged_Punch_R.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Anim_Player_Ranged_Punch_R.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Anim_Player_Stun_L.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Anim_Player_Stun_L.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Anim_Player_Stun_R.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Anim_Player_Stun_R.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Anim_Player_Walk.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Anim_Player_Walk.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_Hook_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Montages/Anim_Player_Hook_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_Punch_L_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Montages/Anim_Player_Punch_L_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_Punch_R_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Montages/Anim_Player_Punch_R_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_Ranged_Idle_L_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Montages/Anim_Player_Ranged_Idle_L_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_Ranged_Idle_R_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Montages/Anim_Player_Ranged_Idle_R_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_Ranged_Punch_L_Montage.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_Ranged_Punch_R_Montage.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_Stun_L_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Montages/Anim_Player_Stun_L_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Anim/Montages/Anim_Player_Stun_R_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Anim/Montages/Anim_Player_Stun_R_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/AnimationBlueprint/ABP_PlayerArms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/AnimationBlueprint/ABP_PlayerArms.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Mesh/Player_Arms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Mesh/Player_Arms.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Mesh/Player_Arms_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Mesh/Player_Arms_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Textures/Arm_Low_standardSurface1_AO.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Textures/Arm_Low_standardSurface1_AO.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Textures/Arm_Low_standardSurface1_BaseColor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Textures/Arm_Low_standardSurface1_BaseColor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Textures/Arm_Low_standardSurface1_Height.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Textures/Arm_Low_standardSurface1_Height.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Textures/Arm_Low_standardSurface1_Metalness.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Textures/Arm_Low_standardSurface1_Metalness.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Textures/Arm_Low_standardSurface1_Normal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Textures/Arm_Low_standardSurface1_Normal.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Textures/Arm_Low_standardSurface1_Roughness.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Textures/Arm_Low_standardSurface1_Roughness.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/3D/Player_Arms/Textures/Player_Mat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Player_Arms/Textures/Player_Mat.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestMeleeWeaponArms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestMeleeWeaponArms.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AnimNotify/ANS_ContinuousAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AnimNotify/ANS_ContinuousAttack.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestRageWeaponArms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestRageWeaponArms.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestRangedWeaponArms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestRangedWeaponArms.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestStunWeaponArms.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/PlayerWeapons/TestStunWeaponArms.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/TestStunWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/TestStunWeapon.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +26,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="cidr-memory-view://2" root0="FORCE_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/AssetTools/Internal/AssetHeaderPatcher.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/DerivedDataCache/Private/ZenCacheStore.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/FunctionalTesting/Private/FunctionalAITest.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -144,7 +100,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Uproject.BuffMage.executor": "Run",
-    "git-widget-placeholder": "Merging feature/Programming/TestBranch",
+    "git-widget-placeholder": "feature/Programming/TestBranch",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -277,6 +233,8 @@
       <workItem from="1773766114423" duration="835000" />
       <workItem from="1773871005727" duration="2649000" />
       <workItem from="1773954470754" duration="643000" />
+      <workItem from="1773955594798" duration="387000" />
+      <workItem from="1773956132326" duration="1296000" />
     </task>
     <servers />
   </component>

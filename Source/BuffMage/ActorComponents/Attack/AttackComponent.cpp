@@ -18,7 +18,7 @@ void UAttackComponent::AddToRageAfterKill_Implementation()
 void UAttackComponent::PlayAudio_Implementation()
 {
 	USoundBase* Sound = CurrentSoundToPlay.Get();
-	
+
 	if (!IsValid(Sound))
 		return;
 
@@ -46,9 +46,9 @@ void UAttackComponent::OnAttackHit_Implementation(AActor* ActorHit)
 	if (CurrentWeapon.WeaponData->OnAttackHitSounds.Num() > 0)
 		CurrentSoundToPlay = CurrentWeapon.WeaponData->OnAttackHitSounds[FMath::RandRange(0, CurrentWeapon.WeaponData->OnAttackHitSounds.Num() - 1)];
 
-	Volume = FMath::RandRange(CurrentWeapon.WeaponData->VolumeMinMax.X,CurrentWeapon.WeaponData->VolumeMinMax.Y);
-	Pitch = FMath::RandRange(CurrentWeapon.WeaponData->PitchMinMax.X,CurrentWeapon.WeaponData->PitchMinMax.Y);
-	
+	Volume = FMath::RandRange(CurrentWeapon.WeaponData->VolumeMinMax.X, CurrentWeapon.WeaponData->VolumeMinMax.Y);
+	Pitch = FMath::RandRange(CurrentWeapon.WeaponData->PitchMinMax.X, CurrentWeapon.WeaponData->PitchMinMax.Y);
+
 	LoadSoundAsync();
 
 
@@ -81,6 +81,7 @@ void UAttackComponent::BeginPlay()
 		CurrentWeapon = WeaponsData[WeaponIndex];
 	}
 	SetUpWeapon(RageWeapon);
+
 	CurrentSoundToPlay = StartRageSound;
 	LoadSoundAsync();
 }
@@ -135,7 +136,10 @@ void UAttackComponent::StartAttackAnim_Implementation()
 		return;
 	// Check if you have ammo
 	if (HasAmmoBeenDepleted())
+	{
+		//StartReloading();
 		return;
+	}
 
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 	ResetHitActors();
@@ -147,7 +151,7 @@ void UAttackComponent::StartAttackAnim_Implementation()
 	}
 
 	AnimInstance->StopAllMontages(0.1f);
-	AnimInstance->Montage_Play(WeaponAsset->AttackComboAnimMontage[CurrentWeapon.AnimIndex],WeaponAsset->AnimSpeedMult ); // play the animation
+	AnimInstance->Montage_Play(WeaponAsset->AttackComboAnimMontage[CurrentWeapon.AnimIndex], WeaponAsset->AnimSpeedMult); // play the animation
 
 	CurrentWeapon.bIsAttacking = true; // set attacking to true if not using fire rate cooldown 
 }
@@ -172,10 +176,6 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 		!AnimInstance || // has the animation instance
 		!CurrentWeapon.WeaponData || // the weapon is valid
 		CurrentWeapon.bIsReloading) // is reloading
-		return;
-
-	// Check if you have ammo
-	if (HasAmmoBeenDepleted())
 		return;
 
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
@@ -223,10 +223,8 @@ void UAttackComponent::AttackCompleted_Implementation()
 // HAS AMMO BEEN DEPLETED: Called by this component to check the ammo count of the current weapon
 bool UAttackComponent::HasAmmoBeenDepleted_Implementation()
 {
-	
 	if (CurrentWeapon.CurrentAmmo <= 0)
 	{
-		StartReloading(); // ask designers if this should only be called with input
 		return true;
 	}
 	return false;
@@ -236,12 +234,16 @@ bool UAttackComponent::HasAmmoBeenDepleted_Implementation()
 void UAttackComponent::StartReloading_Implementation()
 {
 	if (CurrentWeapon.bIsReloading ||
-		CurrentWeapon.bIsAttacking||
+		CurrentWeapon.bIsAttacking ||
 		WeaponsData.Num() < 1)
 		return;
-	
+
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
-	if (WeaponAsset != nullptr || CurrentWeapon.CurrentAmmo == WeaponAsset->AmmoMax)
+
+	if (!WeaponAsset)
+		return;
+
+	if (CurrentWeapon.CurrentAmmo == WeaponAsset->AmmoMax)
 		return;
 
 	CurrentWeapon.bIsAttacking = false;
@@ -294,10 +296,18 @@ void UAttackComponent::OnDamageReceived_Implementation(AActor* Actor, float X, c
 // START RAGE: Called by the owner via input
 void UAttackComponent::StartRage_Implementation()
 {
-	// D! ask if they want this
-	// if (bIsInRage)
-	// 	StopRage();
+
+	if (CurrentWeapon.bIsAttacking ||
+		CurrentWeapon.bIsReloading ||
+		!RageWeapon.WeaponData)
+		return;
 	
+	if (bIsInRage)
+	{
+		StopRage();
+		return;
+	}
+
 	if (CurrentRageAmount < RageDuration)
 		return;
 
@@ -305,9 +315,9 @@ void UAttackComponent::StartRage_Implementation()
 	WeaponsData[WeaponIndex] = CurrentWeapon;
 	CurrentWeapon = RageWeapon;
 	OnCurrentWeaponChange(); // update Weapon UI
-	
+
 	Volume = RageVolume;
-	Pitch = FMath::RandRange(RageMinPitch,RageMaxPitch);
+	Pitch = FMath::RandRange(RageMinPitch, RageMaxPitch);
 	HitActor = GetOwner();
 	CurrentSoundToPlay = StartRageSound;
 	LoadSoundAsync();
@@ -319,6 +329,9 @@ void UAttackComponent::StopRage_Implementation()
 {
 	bIsInRage = false;
 	RageWeapon = CurrentWeapon;
+	RageWeapon.CurrentAmmo = RageWeapon.WeaponData->AmmoMax;
+	RageWeapon.bIsAttacking = false;
+	RageWeapon.bIsReloading = false;
 	CurrentWeapon = WeaponsData[WeaponIndex];
 	SetComponentTickEnabled(false);
 	OnCurrentWeaponChange();
