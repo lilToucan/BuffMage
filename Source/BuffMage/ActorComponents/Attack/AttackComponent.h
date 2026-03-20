@@ -7,7 +7,9 @@
 #include "AttackComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRageChangeDelegate, float, CurrentAmount, float, MaximumAmount);
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnValueChangeDelegate, float, CurrentAmount);
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWeaponIconChanged, TSoftObjectPtr<UTexture2D>, Icon);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAttackHitDelegate);
@@ -19,7 +21,7 @@ class BUFFMAGE_API UAttackComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-// VARIABLES:
+	// VARIABLES:
 public:
 	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable)
 	FOnRageChangeDelegate OnRageChange;
@@ -37,20 +39,22 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent|Weapons")
 	int WeaponIndex = 0;
-	
-	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable,Category = "AttackComponent|Weapons|Delegate")
+
+	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category = "AttackComponent|Weapons|Delegate")
 	FOnValueChangeDelegate OnAmmoChange;
-	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable,Category = "AttackComponent|Weapons|Delegate")
+	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category = "AttackComponent|Weapons|Delegate")
 	FOnWeaponIconChanged OnWeaponIconChanged;
 #pragma endregion
 
-//TODO: i feel like the rage things should be it's onw components
+	//TODO: i feel like the rage things should be it's onw components
 #pragma region RAGE
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage")
 	FDynamicWeaponData RageWeapon;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "AttackComponent|Weapons|Rage|Debug")
 	float CurrentRageAmount = 0.f;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "AttackComponent|Weapons|Rage|Debug")
+	float CurrentRageTime = 0.f;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "AttackComponent|Weapons|Rage|Debug")
 	bool bIsInRage;
@@ -59,7 +63,11 @@ protected:
 	float RageDuration = 100.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
+	float RageMaxPoints = 100.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	float RageAmountAfterKilling = 10.f;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	float RageAfterGettingHit = 2.0f;
@@ -67,13 +75,16 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	float RageAfterHitting = 5.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
+	bool bRemoveRageWhenStopped;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
 	float RageVolume = .15f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
 	float RageMaxPitch = 1.7f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
 	float RageMinPitch = 0.5f;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
 	TSoftObjectPtr<USoundBase> StartRageSound;
 #pragma endregion
@@ -96,18 +107,25 @@ protected:
 	AActor* HitActor;
 
 	// FUNCTIONS:
+#pragma region DefaultFunctions
+
 public:
 	UAttackComponent();
 
-	UFUNCTION(BlueprintCallable,BlueprintNativeEvent)
+protected:
+	virtual void BeginPlay() override;
+#pragma endregion
+
+public:
+#pragma region SoundFunctions
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PlayAudio();
 
 	UFUNCTION(BlueprintCallable)
 	void LoadSoundAsync();
+#pragma endregion
 
-	UFUNCTION(BlueprintCallable)
-	virtual void SetUpWeapon(FDynamicWeaponData& WeaponAsset);
-
+#pragma region AttackFunctions
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StartAttackAnim();
 
@@ -116,6 +134,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ResetHitActors();
+#pragma endregion
+
+	UFUNCTION(BlueprintCallable)
+	virtual void SetUpWeapon(FDynamicWeaponData& WeaponAsset);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ChangeWeapon(int InputValue);
@@ -149,6 +171,17 @@ public:
 	void OnDamageReceived(AActor* Actor, float X, const UDamageType* Damage, AController* Controller, AActor* Actor1);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnAttackHit(AActor* ActorHit);
+
+#pragma region RageFunctions
+
+public:
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SetRage(float RageValue);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void RemoveRageTime(float DeltaTime);
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void AddRage(float Amount);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -160,10 +193,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StopRage();
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnAttackHit(AActor* ActorHit);
-
 protected:
-	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+#pragma endregion
 };
