@@ -71,11 +71,11 @@ public:
 	FVector2D DeathPitchMinMax = FVector2D(0.7f, 1.3f);
 
 protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Debug")
 	TSoftObjectPtr<USoundBase> SoundToPlay;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Debug")
 	float Volume;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Debug")
 	float Pitch;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Hp")

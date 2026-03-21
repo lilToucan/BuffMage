@@ -19,7 +19,11 @@ void UHpComponent::BeginPlay()
 
 	CharacterOwner = Cast<ACharacter>(GetOwner());
 	if (IsValid(CharacterOwner))
-		CharacterOwner->GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnDeathNotify);
+	{
+		auto AnimInstance = CharacterOwner->GetMesh()->GetAnimInstance();
+		AnimInstance->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnDeathNotify);
+	}
+
 
 	Activate(true);
 
@@ -29,7 +33,7 @@ void UHpComponent::BeginPlay()
 		SoundToPlay = Sound;
 		PlaySound();
 	}
-	
+
 	SoundToPlay = DeathSound;
 	PlaySound();
 }
