@@ -14,6 +14,9 @@ struct FDynamicWeaponData
 
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	int AnimIndex = 0;
+	
+	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
+	int IdleAnimIndex = 0;
 
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	float CooldownTime = 0;

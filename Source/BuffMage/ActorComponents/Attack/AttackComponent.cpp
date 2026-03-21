@@ -171,6 +171,10 @@ void UAttackComponent::AttackCanBeUsedAgain_Implementation()
 	// go to next Anim 
 	CurrentWeapon.AnimIndex++;
 	CurrentWeapon.bIsAttacking = false;
+
+	CurrentWeapon.IdleAnimIndex++;
+	UpdateIdle();
+
 }
 
 // ATTACK COMPLETED: Called by the Attack Completed notify inside the animation reset's the combo
@@ -179,6 +183,7 @@ void UAttackComponent::AttackCompleted_Implementation()
 	if (CurrentWeapon.bIsAttacking)
 		return;
 	CurrentWeapon.AnimIndex = 0;
+	CurrentWeapon.IdleAnimIndex = 0;
 	SetCooldownTime();
 	//D! ask designers if they want to put a cooldown when you fail the combo
 }
@@ -209,7 +214,11 @@ void UAttackComponent::StartReloading_Implementation()
 	if (CurrentWeapon.CurrentAmmo == WeaponAsset->AmmoMax)
 		return;
 
+	AttackCompleted();
+
 	CurrentWeapon.bIsAttacking = false;
+	CurrentWeapon.IdleAnimIndex = 0;
+	UpdateIdle();
 
 	AnimInstance->StopSlotAnimation(0);
 	AnimInstance->Montage_Play(WeaponAsset->ReloadAnimMontage);
@@ -245,11 +254,27 @@ void UAttackComponent::OnDamageReceived_Implementation(AActor* Actor, float X, c
 	AddRage(RageAfterGettingHit);
 }
 
+void UAttackComponent::UpdateIdle()
+{
+	if (CurrentWeapon.WeaponData->IdleAnim.Num() < 1)
+	{
+		OnIdleAnimChanged.Broadcast(nullptr);
+		return;
+	}
+
+	if (CurrentWeapon.IdleAnimIndex >= CurrentWeapon.WeaponData->IdleAnim.Num())
+		CurrentWeapon.IdleAnimIndex = 0;
+
+	OnIdleAnimChanged.Broadcast(CurrentWeapon.WeaponData->IdleAnim[CurrentWeapon.IdleAnimIndex]);
+}
+
 // ON WEAPON CHANGE: Called when you change weapons
 void UAttackComponent::OnCurrentWeaponChange()
 {
 	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo);
 	OnWeaponIconChanged.Broadcast(CurrentWeapon.WeaponData->Icon);
+
+	UpdateIdle();
 }
 
 // CHANGE WEAPON: Called by the owner of the component when switching to a different gun
@@ -330,7 +355,7 @@ void UAttackComponent::SetRage_Implementation(float RageValue)
 void UAttackComponent::RemoveRageTime_Implementation(float DeltaTime)
 {
 	CurrentRageTime -= DeltaTime;
-	SetRage(RageMaxPoints * (CurrentRageTime/RageDuration));
+	SetRage(RageMaxPoints * (CurrentRageTime / RageDuration));
 }
 
 // START RAGE: Called by the owner via input
@@ -372,11 +397,11 @@ void UAttackComponent::StopRage_Implementation()
 	RageWeapon.bIsAttacking = false;
 	RageWeapon.bIsReloading = false;
 	CurrentWeapon = WeaponsData[WeaponIndex];
-	
+
 	CurrentRageTime = 0;
 	if (bRemoveRageWhenStopped)
 		SetRage(0);
-	
+
 	SetComponentTickEnabled(false);
 	OnCurrentWeaponChange();
 }

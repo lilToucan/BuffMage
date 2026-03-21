@@ -12,6 +12,8 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnValueChangeDelegate, float, Curre
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWeaponIconChanged, TSoftObjectPtr<UTexture2D>, Icon);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnIdleChange, UAnimSequenceBase*, IdleAnim);
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAttackHitDelegate);
 
 class UCameraComponent;
@@ -44,8 +46,11 @@ protected:
 	FOnValueChangeDelegate OnAmmoChange;
 	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category = "AttackComponent|Weapons|Delegate")
 	FOnWeaponIconChanged OnWeaponIconChanged;
-#pragma endregion
 
+	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category = "AttackComponent|Weapons|Delegate")
+	FOnIdleChange OnIdleAnimChanged;
+
+#pragma endregion
 	//TODO: i feel like the rage things should be it's onw components
 #pragma region RAGE
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage")
@@ -147,6 +152,11 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	virtual void AddWeapon(FDynamicWeaponData& NewWeapon);
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateIdle();
+
+	UFUNCTION(BlueprintCallable)
 	void OnCurrentWeaponChange();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -180,7 +190,7 @@ public:
 	void SetRage(float RageValue);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void RemoveRageTime(float DeltaTime);
-	
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void AddRage(float Amount);
 
