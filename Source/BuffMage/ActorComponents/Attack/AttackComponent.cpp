@@ -226,7 +226,7 @@ void UAttackComponent::StartReloading_Implementation()
 	CurrentWeapon.bIsAttacking = false;
 	CurrentWeapon.IdleAnimIndex = 0;
 	UpdateIdle();
-	OnActivatingRage.Broadcast();
+	
 
 	CurrentWeapon.bIsReloading = true;
 
@@ -338,9 +338,6 @@ void UAttackComponent::PlayAudio_Implementation()
 // LOAD SOUND ASYNC: Called when you want to play a sound
 void UAttackComponent::LoadSoundAsync()
 {
-	if (!CurrentSoundToPlay)
-		return;
-	
 	FStreamableManager Streamable;
 	Streamable.RequestAsyncLoad(CurrentSoundToPlay.ToSoftObjectPath(),
 	                            FStreamableDelegate::CreateUObject(this, &UAttackComponent::PlayAudio));
@@ -398,6 +395,8 @@ void UAttackComponent::StartRage_Implementation()
 	CurrentWeapon = RageWeapon;
 	OnCurrentWeaponChange(); // update Weapon UI
 
+	OnActivatingRage.Broadcast();
+	
 	Volume = RageVolume;
 	Pitch = FMath::RandRange(RageMinPitch, RageMaxPitch);
 	HitActor = GetOwner();
@@ -415,6 +414,8 @@ void UAttackComponent::StopRage_Implementation()
 	RageWeapon.bIsAttacking = false;
 	RageWeapon.bIsReloading = false;
 	CurrentWeapon = WeaponsData[WeaponIndex];
+
+	OnDeactivatingRage.Broadcast();
 
 	CurrentRageTime = 0;
 	if (bRemoveRageWhenStopped)
