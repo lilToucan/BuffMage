@@ -138,7 +138,16 @@ void UAttackComponent::OnAttackHit_Implementation(AActor* ActorHit)
 {
 	HitActor = ActorHit;
 	if (CurrentWeapon.WeaponData->OnAttackHitSounds.Num() > 0)
-		CurrentSoundToPlay = CurrentWeapon.WeaponData->OnAttackHitSounds[FMath::RandRange(0, CurrentWeapon.WeaponData->OnAttackHitSounds.Num() - 1)];
+	{
+		if (TSoftObjectPtr<USoundBase> Sound = CurrentWeapon.WeaponData->OnAttackHitSounds[FMath::RandRange(0, CurrentWeapon.WeaponData->OnAttackHitSounds.Num() - 1)])
+		{
+			CurrentSoundToPlay = Sound;
+		}
+		else
+		{
+			CurrentSoundToPlay = nullptr;
+		}
+	}
 
 	Volume = FMath::RandRange(CurrentWeapon.WeaponData->VolumeMinMax.X, CurrentWeapon.WeaponData->VolumeMinMax.Y);
 	Pitch = FMath::RandRange(CurrentWeapon.WeaponData->PitchMinMax.X, CurrentWeapon.WeaponData->PitchMinMax.Y);
@@ -174,7 +183,6 @@ void UAttackComponent::AttackCanBeUsedAgain_Implementation()
 
 	CurrentWeapon.IdleAnimIndex++;
 	UpdateIdle();
-
 }
 
 // ATTACK COMPLETED: Called by the Attack Completed notify inside the animation reset's the combo
@@ -215,14 +223,21 @@ void UAttackComponent::StartReloading_Implementation()
 		return;
 
 	AttackCompleted();
-
 	CurrentWeapon.bIsAttacking = false;
 	CurrentWeapon.IdleAnimIndex = 0;
 	UpdateIdle();
+	OnActivatingRage.Broadcast();
+
+	CurrentWeapon.bIsReloading = true;
+
+	if (!AnimInstance || !WeaponAsset->ReloadAnimMontage)
+	{
+		ReloadWeapon();
+		return;
+	}
 
 	AnimInstance->StopSlotAnimation(0);
 	AnimInstance->Montage_Play(WeaponAsset->ReloadAnimMontage);
-	CurrentWeapon.bIsReloading = true;
 }
 
 // RELOAD WEAPON: Called by the Reload notify inside the animation
@@ -323,6 +338,9 @@ void UAttackComponent::PlayAudio_Implementation()
 // LOAD SOUND ASYNC: Called when you want to play a sound
 void UAttackComponent::LoadSoundAsync()
 {
+	if (!CurrentSoundToPlay)
+		return;
+	
 	FStreamableManager Streamable;
 	Streamable.RequestAsyncLoad(CurrentSoundToPlay.ToSoftObjectPath(),
 	                            FStreamableDelegate::CreateUObject(this, &UAttackComponent::PlayAudio));
