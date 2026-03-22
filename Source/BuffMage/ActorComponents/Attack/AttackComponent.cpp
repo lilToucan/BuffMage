@@ -266,7 +266,8 @@ void UAttackComponent::AddWeapon(FDynamicWeaponData& NewWeapon)
 // ON DAMAGE RECEIVED: Called when the owner has been hit by another someone
 void UAttackComponent::OnDamageReceived_Implementation(AActor* Actor, float X, const UDamageType* Damage, AController* Controller, AActor* Actor1)
 {
-	AddRage(RageAfterGettingHit);
+	if (!bIsInRage)
+		AddRage(RageAfterGettingHit);
 }
 
 void UAttackComponent::UpdateIdle()
