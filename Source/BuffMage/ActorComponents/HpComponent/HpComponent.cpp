@@ -100,6 +100,7 @@ void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 		return;
 
 	CurrentHp = FMath::Min(CurrentHp + Healing, MaxHp);
+	OnHpChanged.Broadcast(CurrentHp);
 }
 
 void UHpComponent::Death(AActor* TheKiller)
