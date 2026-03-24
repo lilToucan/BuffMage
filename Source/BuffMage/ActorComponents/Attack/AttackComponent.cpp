@@ -138,7 +138,16 @@ void UAttackComponent::OnAttackHit_Implementation(AActor* ActorHit)
 {
 	HitActor = ActorHit;
 	if (CurrentWeapon.WeaponData->OnAttackHitSounds.Num() > 0)
-		CurrentSoundToPlay = CurrentWeapon.WeaponData->OnAttackHitSounds[FMath::RandRange(0, CurrentWeapon.WeaponData->OnAttackHitSounds.Num() - 1)];
+	{
+		if (TSoftObjectPtr<USoundBase> Sound = CurrentWeapon.WeaponData->OnAttackHitSounds[FMath::RandRange(0, CurrentWeapon.WeaponData->OnAttackHitSounds.Num() - 1)])
+		{
+			CurrentSoundToPlay = Sound;
+		}
+		else
+		{
+			CurrentSoundToPlay = nullptr;
+		}
+	}
 
 	Volume = FMath::RandRange(CurrentWeapon.WeaponData->VolumeMinMax.X, CurrentWeapon.WeaponData->VolumeMinMax.Y);
 	Pitch = FMath::RandRange(CurrentWeapon.WeaponData->PitchMinMax.X, CurrentWeapon.WeaponData->PitchMinMax.Y);
@@ -174,7 +183,6 @@ void UAttackComponent::AttackCanBeUsedAgain_Implementation()
 
 	CurrentWeapon.IdleAnimIndex++;
 	UpdateIdle();
-
 }
 
 // ATTACK COMPLETED: Called by the Attack Completed notify inside the animation reset's the combo
@@ -215,14 +223,21 @@ void UAttackComponent::StartReloading_Implementation()
 		return;
 
 	AttackCompleted();
-
 	CurrentWeapon.bIsAttacking = false;
 	CurrentWeapon.IdleAnimIndex = 0;
 	UpdateIdle();
+	
+
+	CurrentWeapon.bIsReloading = true;
+
+	if (!AnimInstance || !WeaponAsset->ReloadAnimMontage)
+	{
+		ReloadWeapon();
+		return;
+	}
 
 	AnimInstance->StopSlotAnimation(0);
 	AnimInstance->Montage_Play(WeaponAsset->ReloadAnimMontage);
-	CurrentWeapon.bIsReloading = true;
 }
 
 // RELOAD WEAPON: Called by the Reload notify inside the animation
@@ -251,7 +266,8 @@ void UAttackComponent::AddWeapon(FDynamicWeaponData& NewWeapon)
 // ON DAMAGE RECEIVED: Called when the owner has been hit by another someone
 void UAttackComponent::OnDamageReceived_Implementation(AActor* Actor, float X, const UDamageType* Damage, AController* Controller, AActor* Actor1)
 {
-	AddRage(RageAfterGettingHit);
+	if (!bIsInRage)
+		AddRage(RageAfterGettingHit);
 }
 
 void UAttackComponent::UpdateIdle()
@@ -380,6 +396,8 @@ void UAttackComponent::StartRage_Implementation()
 	CurrentWeapon = RageWeapon;
 	OnCurrentWeaponChange(); // update Weapon UI
 
+	OnActivatingRage.Broadcast();
+	
 	Volume = RageVolume;
 	Pitch = FMath::RandRange(RageMinPitch, RageMaxPitch);
 	HitActor = GetOwner();
@@ -397,6 +415,8 @@ void UAttackComponent::StopRage_Implementation()
 	RageWeapon.bIsAttacking = false;
 	RageWeapon.bIsReloading = false;
 	CurrentWeapon = WeaponsData[WeaponIndex];
+
+	OnDeactivatingRage.Broadcast();
 
 	CurrentRageTime = 0;
 	if (bRemoveRageWhenStopped)

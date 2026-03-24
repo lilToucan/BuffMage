@@ -9,7 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" afterDir="false" />
     </list>
@@ -93,22 +94,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Uproject.BuffMage.executor": "Run",
-    "git-widget-placeholder": "feature/Programming/TestBranch",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Uproject.BuffMage.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/Programming/TestBranch&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CidrLocalAttachDebugger.recentlyUsed">
       <recent name="com.jetbrains.rider.cpp.debugger.RiderCppLLDBDriverConfiguration" />
@@ -235,6 +236,8 @@
       <workItem from="1773955594798" duration="387000" />
       <workItem from="1773956132326" duration="1296000" />
       <workItem from="1774008234163" duration="3696000" />
+      <workItem from="1774209680686" duration="4082000" />
+      <workItem from="1774214821434" duration="412000" />
     </task>
     <servers />
   </component>

@@ -97,6 +97,12 @@ protected:
 	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
 	FOnAttackHitDelegate OnAttackHitDel;
 
+	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
+	FOnAttackHitDelegate OnActivatingRage;
+
+	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
+	FOnAttackHitDelegate OnDeactivatingRage;
+
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	UCameraComponent* Cam;
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
