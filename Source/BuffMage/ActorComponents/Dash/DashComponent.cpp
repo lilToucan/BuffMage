@@ -56,7 +56,7 @@ void UDashComponent::PerformDash()
 		MeshStartPos = OwnersSkeletalMesh->GetRelativeLocation();
 
 	DashStartPos = GetOwner()->GetActorLocation();
-	
+
 	SetComponentTickEnabled(true);
 
 	GetWorld()->GetTimerManager().ClearTimer(CooldownTimerHandle);
@@ -70,6 +70,8 @@ void UDashComponent::DashUpdate(float DeltaTime)
 {
 	TimePassed += DeltaTime;
 	float Alpha = TimePassed / DashDuration;
+
+	OnDashChange.Broadcast(TimePassed, DashDuration);
 
 	if (TimePassed > DashDuration)
 	{
@@ -98,7 +100,7 @@ void UDashComponent::DashFinished()
 void UDashComponent::RefreshDash()
 {
 	bCanDash = true;
-	
+
 	if (OwnersHpComponent)
 		OwnersHpComponent->Activate();
 	else
