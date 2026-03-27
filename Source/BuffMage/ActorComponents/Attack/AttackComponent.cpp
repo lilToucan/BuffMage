@@ -1,6 +1,7 @@
 #include "AttackComponent.h"
+
 #include "Camera/CameraComponent.h"
-#include "Engine/StreamableManager.h"
+#include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -16,7 +17,7 @@ void UAttackComponent::BeginPlay()
 
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UAttackComponent::OnDamageReceived);
 
-	if (IsValid(Cam))
+	if (!IsValid(Cam))
 		Cam = GetOwner()->GetComponentByClass<UCameraComponent>();
 
 	if (!AnimInstance)
@@ -33,8 +34,8 @@ void UAttackComponent::BeginPlay()
 	}
 	SetUpWeapon(RageWeapon);
 
-	CurrentSoundToPlay = StartRageSound;
-	LoadSoundAsync();
+
+	// LoadSoundAsync();
 }
 
 // SETUP WEAPON: Called at the start of the game to give default values to the WeaponAsset
@@ -47,14 +48,13 @@ void UAttackComponent::SetUpWeapon(FDynamicWeaponData& WeaponAsset)
 	WeaponAsset.AnimIndex = 0;
 	WeaponAsset.bIsReloading = false;
 	WeaponAsset.bIsAttacking = false;
-	for (TSoftObjectPtr<USoundBase> Sound : WeaponAsset.WeaponData->OnAttackHitSounds)
-	{
-		HitActor = GetOwner();
-		Volume = 0.f;
-		Pitch = 0.f;
-		CurrentSoundToPlay = Sound;
-		LoadSoundAsync();
-	}
+	// for (USoundBase* Sound : WeaponAsset.WeaponData->OnAttackHitSounds)
+	// {
+	// 	HitActor = GetOwner();
+	// 	Volume = 0.f;
+	// 	Pitch = 0.f;
+	// 	LoadSoundAsync(Sound,GetOwner(),);
+	// }
 }
 
 // START ATTACKING: Called by the Owner of the component when inputting an attack
@@ -136,24 +136,11 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 // ON ATTACK HIT: Called when your attack goes through and hits an enemy :) (not called if the attack killed it D:)
 void UAttackComponent::OnAttackHit_Implementation(AActor* ActorHit)
 {
-	HitActor = ActorHit;
-	if (CurrentWeapon.WeaponData->OnAttackHitSounds.Num() > 0)
-	{
-		if (TSoftObjectPtr<USoundBase> Sound = CurrentWeapon.WeaponData->OnAttackHitSounds[FMath::RandRange(0, CurrentWeapon.WeaponData->OnAttackHitSounds.Num() - 1)])
-		{
-			CurrentSoundToPlay = Sound;
-		}
-		else
-		{
-			CurrentSoundToPlay = nullptr;
-		}
-	}
+	USoundBase* Sound = CurrentWeapon.WeaponData->OnAttackHitSounds[FMath::RandRange(0, CurrentWeapon.WeaponData->OnAttackHitSounds.Num() - 1)];
+	float Volume = FMath::RandRange(CurrentWeapon.WeaponData->VolumeMinMax.X, CurrentWeapon.WeaponData->VolumeMinMax.Y);
+	float Pitch = FMath::RandRange(CurrentWeapon.WeaponData->PitchMinMax.X, CurrentWeapon.WeaponData->PitchMinMax.Y);
 
-	Volume = FMath::RandRange(CurrentWeapon.WeaponData->VolumeMinMax.X, CurrentWeapon.WeaponData->VolumeMinMax.Y);
-	Pitch = FMath::RandRange(CurrentWeapon.WeaponData->PitchMinMax.X, CurrentWeapon.WeaponData->PitchMinMax.Y);
-
-	LoadSoundAsync();
-
+	PlaySound(Sound, ActorHit, Volume, Pitch, CurrentWeapon.WeaponData->SoundAttenuation);
 
 	OnAttackHitDel.Broadcast();
 
@@ -201,6 +188,9 @@ bool UAttackComponent::HasAmmoBeenDepleted_Implementation()
 {
 	if (CurrentWeapon.CurrentAmmo <= 0)
 	{
+		float Volume = FMath::RandRange(AmmoFinishedVolume.X, AmmoFinishedVolume.Y);
+		float Pitch = FMath::RandRange(AmmoFinishedPitch.X, AmmoFinishedPitch.Y);
+		PlaySound(OnAmmoFinished, GetOwner(), Volume, Pitch);
 		return true;
 	}
 	return false;
@@ -226,7 +216,7 @@ void UAttackComponent::StartReloading_Implementation()
 	CurrentWeapon.bIsAttacking = false;
 	CurrentWeapon.IdleAnimIndex = 0;
 	UpdateIdle();
-	
+
 
 	CurrentWeapon.bIsReloading = true;
 
@@ -318,30 +308,26 @@ void UAttackComponent::ChangeWeapon_Implementation(int InputValue)
 	OnCurrentWeaponChange();
 }
 
-// PLAY AUDIO: Called when audio has been loaded
-void UAttackComponent::PlayAudio_Implementation()
-{
-	USoundBase* Sound = CurrentSoundToPlay.Get();
 
-	if (!IsValid(Sound))
+// LOAD SOUND ASYNC: Called when you want to play a sound
+void UAttackComponent::PlaySound(USoundBase* CurrentSoundToPlay, AActor* HitActor, float Volume, float Pitch, USoundAttenuation* SoundAttenuation)
+{
+	if (!CurrentSoundToPlay)
 		return;
 
 	UGameplayStatics::PlaySoundAtLocation(
 		GetOwner(),
-		Sound,
+		CurrentSoundToPlay,
 		HitActor->GetActorLocation(),
 		HitActor->GetActorRotation(),
 		Volume,
-		Pitch
+		Pitch,
+		0,
+		SoundAttenuation,
+		nullptr,
+		nullptr,
+		nullptr
 	);
-}
-
-// LOAD SOUND ASYNC: Called when you want to play a sound
-void UAttackComponent::LoadSoundAsync()
-{
-	FStreamableManager Streamable;
-	Streamable.RequestAsyncLoad(CurrentSoundToPlay.ToSoftObjectPath(),
-	                            FStreamableDelegate::CreateUObject(this, &UAttackComponent::PlayAudio));
 }
 
 #pragma region RAGE
@@ -358,7 +344,10 @@ void UAttackComponent::SetRage_Implementation(float RageValue)
 	CurrentRageAmount = RageValue;
 
 	if (CurrentRageAmount > RageMaxPoints)
+	{
 		CurrentRageAmount = RageMaxPoints;
+		PlaySound(OnRageFullSound, GetOwner(), OnRageFullVolume, FMath::RandRange(OnRageFullPitch.X, OnRageFullPitch.Y));
+	}
 	else if (CurrentRageAmount < 0)
 		CurrentRageAmount = 0;
 
@@ -397,12 +386,8 @@ void UAttackComponent::StartRage_Implementation()
 	OnCurrentWeaponChange(); // update Weapon UI
 
 	OnActivatingRage.Broadcast();
-	
-	Volume = RageVolume;
-	Pitch = FMath::RandRange(RageMinPitch, RageMaxPitch);
-	HitActor = GetOwner();
-	CurrentSoundToPlay = StartRageSound;
-	LoadSoundAsync();
+
+	PlaySound(StartRageSound, GetOwner(), StartRageVolume, FMath::RandRange(StartRagePitch.X, StartRagePitch.Y));
 	SetComponentTickEnabled(true);
 }
 
