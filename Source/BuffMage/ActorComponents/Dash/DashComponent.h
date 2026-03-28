@@ -7,7 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "DashComponent.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRechargeBarDelegate, float, CurrentAmount, float, MaxAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRechargeBarDelegate, float, Alpha, float, MaxAmount);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class BUFFMAGE_API UDashComponent : public UActorComponent
@@ -60,10 +60,12 @@ protected:
 	FVector CameraStartPos;
 
 	FVector MeshStartPos;
+	bool bIsDashing;
 
 	// functions
 public:
 	UDashComponent();
+	void CooldownBar( float DeltaTime);
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable)
