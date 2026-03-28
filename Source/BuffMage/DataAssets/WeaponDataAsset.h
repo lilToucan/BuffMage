@@ -35,12 +35,14 @@ public:
 	TSoftObjectPtr<UTexture2D> Icon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
-	TArray<TSoftObjectPtr<USoundBase>> OnAttackHitSounds;
+	TArray<USoundBase*> OnAttackHitSounds;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
 	FVector2D VolumeMinMax = FVector2D(1.f, 1.f);
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
 	FVector2D PitchMinMax = FVector2D(0.7f, 1.3f);
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
+	USoundAttenuation* SoundAttenuation;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 	TArray<TObjectPtr<UAnimMontage>> AttackComboAnimMontage;
 
