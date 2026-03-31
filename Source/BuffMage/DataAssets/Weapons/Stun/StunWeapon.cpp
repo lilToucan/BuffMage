@@ -48,8 +48,8 @@ void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator
 			if (Dot < ConeDot) // 0.7f
 				continue;
 		}
-		Actor->TakeDamage(0.0001f, DamageEvent, nullptr, Instigator);
 		HP->GetStunned(StunDuration, Instigator);
+		Actor->TakeDamage(0.0001f, DamageEvent, nullptr, Instigator);
 		ActorsHit.Add(Actor);
 	}
 }

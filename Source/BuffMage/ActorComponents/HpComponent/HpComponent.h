@@ -33,8 +33,11 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Death")
 	FTimerHandle TimerHandle;
+
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Stun")
 	FTimerHandle StunTimerHandle;
+	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Stun")
+	bool bIsStunned = false;
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
 	FHPDelegate OnStunned;
@@ -69,6 +72,8 @@ public:
 	FVector2D DeathVolumeMinMax = FVector2D(1.f, 1.f);
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Death")
 	FVector2D DeathPitchMinMax = FVector2D(0.7f, 1.3f);
+
+	
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Debug")
