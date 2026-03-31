@@ -36,6 +36,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
 	TArray<FDynamicWeaponData> WeaponsData;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Sound|AmmoFinished")
+	USoundBase* OnAmmoFinished;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Sound|AmmoFinished")
+	FVector2D AmmoFinishedVolume = FVector2D(1.0f, 1.0f);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Sound|AmmoFinished")
+	FVector2D AmmoFinishedPitch = FVector2D(1.0f, 1.0f);
+
+
 	UPROPERTY(BlueprintReadWrite, Category="AttackComponent|Weapons")
 	FDynamicWeaponData CurrentWeapon;
 
@@ -51,7 +59,7 @@ protected:
 	FOnIdleChange OnIdleAnimChanged;
 
 #pragma endregion
-	//TODO: i feel like the rage things should be it's onw components
+
 #pragma region RAGE
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage")
 	FDynamicWeaponData RageWeapon;
@@ -83,15 +91,20 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	bool bRemoveRageWhenStopped;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
-	float RageVolume = .15f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
-	float RageMaxPitch = 1.7f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
-	float RageMinPitch = 0.5f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound|Start")
+	USoundBase* StartRageSound;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound|Start")
+	float StartRageVolume = 1.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound|Start")
+	FVector2D StartRagePitch;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound")
-	TSoftObjectPtr<USoundBase> StartRageSound;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound|OnFull")
+	USoundBase* OnRageFullSound;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound|OnFull")
+	float OnRageFullVolume = 1.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound|OnFull")
+	FVector2D OnRageFullPitch = FVector2D(1, 1);
+
 #pragma endregion
 
 	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
@@ -108,15 +121,6 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	TArray<AActor*> HitActors;
 
-	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
-	TSoftObjectPtr<USoundBase> CurrentSoundToPlay;
-	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
-	float Volume;
-	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
-	float Pitch;
-	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
-	AActor* HitActor;
-
 	// FUNCTIONS:
 #pragma region DefaultFunctions
 
@@ -129,11 +133,9 @@ protected:
 
 public:
 #pragma region SoundFunctions
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void PlayAudio();
 
 	UFUNCTION(BlueprintCallable)
-	void LoadSoundAsync();
+	void PlaySound(USoundBase* CurrentSoundToPlay, AActor* HitActor, float Volume, float Pitch, USoundAttenuation* SoundAttenuation = nullptr);
 #pragma endregion
 
 #pragma region AttackFunctions

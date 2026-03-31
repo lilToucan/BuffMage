@@ -6,11 +6,23 @@ UDashComponent::UDashComponent()
 	bAutoActivate = true;
 }
 
+void UDashComponent::CooldownBar(float DeltaTime)
+{
+	TimePassed += DeltaTime;
+
+
+	OnDashChange.Broadcast(TimePassed,DashCooldown);
+	
+}
+
 void UDashComponent::TickComponent(float DeltaTime, enum ELevelTick TickType,
                                    FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	DashUpdate(DeltaTime);
+	if (bIsDashing)
+		DashUpdate(DeltaTime);
+	else
+		CooldownBar(DeltaTime);
 }
 
 
@@ -56,7 +68,9 @@ void UDashComponent::PerformDash()
 		MeshStartPos = OwnersSkeletalMesh->GetRelativeLocation();
 
 	DashStartPos = GetOwner()->GetActorLocation();
-	
+
+	bIsDashing = true;
+
 	SetComponentTickEnabled(true);
 
 	GetWorld()->GetTimerManager().ClearTimer(CooldownTimerHandle);
@@ -90,13 +104,16 @@ void UDashComponent::DashFinished()
 	LowerComponent(OwnersSkeletalMesh, MeshStartPos, 1);
 
 	TimePassed = 0;
-	SetComponentTickEnabled(false);
+	bIsDashing = false;
+	// SetComponentTickEnabled(false);
 	GetWorld()->GetTimerManager().ClearTimer(CooldownTimerHandle);
 	GetWorld()->GetTimerManager().SetTimer(CooldownTimerHandle, this, &UDashComponent::RefreshDash, DashCooldown);
 }
 
 void UDashComponent::RefreshDash()
 {
+	TimePassed = 0;
+	SetComponentTickEnabled(false);
 	bCanDash = true;
 	
 	if (OwnersHpComponent)
