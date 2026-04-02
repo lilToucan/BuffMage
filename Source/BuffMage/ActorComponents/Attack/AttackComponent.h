@@ -88,10 +88,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	float RageAfterHitting = 5.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config|Debug")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	bool bRemoveRageWhenStopped;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config|Debug")
-	bool bReloadWhenAmmoFinished = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound|Start")
 	USoundBase* StartRageSound;

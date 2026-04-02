@@ -75,8 +75,7 @@ void UAttackComponent::StartAttackAnim_Implementation()
 	// Check if you have ammo
 	if (HasAmmoBeenDepleted())
 	{
-		if (bReloadWhenAmmoFinished)
-			StartReloading();
+		//StartReloading();
 		return;
 	}
 
@@ -342,11 +341,6 @@ void UAttackComponent::AddRage_Implementation(float Amount)
 // SET RAGE: Called every time you need to set the rage amount
 void UAttackComponent::SetRage_Implementation(float RageValue)
 {
-	if ((CurrentRageAmount >= RageMaxPoints && RageValue >= RageMaxPoints) || // if it's already at the max and the value isn't smaller than the max
-		(CurrentRageAmount <= 0 && RageValue <= 0) || // if it's already at the min and the value isn't bigger than the min
-		CurrentRageAmount == RageValue) // if the value is the same as the current one
-		return;
-
 	CurrentRageAmount = RageValue;
 
 	if (CurrentRageAmount > RageMaxPoints)
