@@ -65,7 +65,6 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 		return;
 
 	CurrentHp -= Damage;
-	OnHpChanged.Broadcast(CurrentHp);
 
 	if (bAppliesRage && !bIsStunned)
 	{
@@ -76,10 +75,14 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 
 	if (CurrentHp <= 0)
 	{
+		CurrentHp = 0;
+		OnHpChanged.Broadcast(CurrentHp);
 		Death(DamageCauser);
 		return;
 	}
-
+	
+	OnHpChanged.Broadcast(CurrentHp); // update UI
+	
 	if (HitMontage)
 		CharacterOwner->PlayAnimMontage(HitMontage);
 
