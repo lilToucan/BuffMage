@@ -65,9 +65,8 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 		return;
 
 	CurrentHp -= Damage;
-	OnHpChanged.Broadcast(CurrentHp);
 
-	if (bAppliesRage)
+	if (bAppliesRage && !bIsStunned)
 	{
 		UAttackComponent* AttackComponent = DamageCauser->GetComponentByClass<UAttackComponent>();
 		if (IsValid(AttackComponent))
@@ -76,10 +75,14 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 
 	if (CurrentHp <= 0)
 	{
+		CurrentHp = 0;
+		OnHpChanged.Broadcast(CurrentHp);
 		Death(DamageCauser);
 		return;
 	}
-
+	
+	OnHpChanged.Broadcast(CurrentHp); // update UI
+	
 	if (HitMontage)
 		CharacterOwner->PlayAnimMontage(HitMontage);
 
@@ -87,6 +90,7 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 	if (HurtSounds.Num() > 0)
 		SoundToPlay = HurtSounds[FMath::RandRange(0, HurtSounds.Num() - 1)];
 
+	// change into normal sound
 	Volume = FMath::RandRange(HurtVolumeMinMax.X, HurtVolumeMinMax.Y);
 	Pitch = FMath::RandRange(HurtPitchMinMax.X, HurtPitchMinMax.Y);
 	FStreamableManager Streamable;
@@ -125,6 +129,7 @@ void UHpComponent::Death(AActor* TheKiller)
 
 void UHpComponent::RecoverFromStun()
 {
+	bIsStunned = false;
 	GetOwner()->GetWorldTimerManager().ClearTimer(StunTimerHandle);
 	StunTimerHandle.Invalidate();
 
@@ -136,8 +141,9 @@ void UHpComponent::GetStunned(float Time, AActor* Instigator)
 	if (StunTimerHandle.IsValid())
 		return;
 
+	bIsStunned = true;
 	OnStunned.Broadcast();
-
+	
 	GetOwner()->GetWorldTimerManager().SetTimer(StunTimerHandle, this, &UHpComponent::RecoverFromStun, Time);
 }
 
