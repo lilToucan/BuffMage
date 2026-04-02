@@ -80,7 +80,7 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 		return;
 	}
 
-	if (HitMontage && !bIsStunned)
+	if (HitMontage)
 		CharacterOwner->PlayAnimMontage(HitMontage);
 
 	OnHit.Broadcast();
