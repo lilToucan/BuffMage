@@ -89,9 +89,11 @@ void UAttackComponent::StartAttackAnim_Implementation()
 		SetCooldownTime();
 	}
 
-	AnimInstance->StopAllMontages(0.1f);
 	AnimInstance->Montage_Play(WeaponAsset->AttackComboAnimMontage[CurrentWeapon.AnimIndex], WeaponAsset->AnimSpeedMult); // play the animation
-
+	
+	CurrentWeapon.IdleAnimIndex++;
+	UpdateIdle();
+	
 	CurrentWeapon.bIsAttacking = true; // set attacking to true if not using fire rate cooldown 
 }
 
@@ -169,8 +171,6 @@ void UAttackComponent::AttackCanBeUsedAgain_Implementation()
 	CurrentWeapon.AnimIndex++;
 	CurrentWeapon.bIsAttacking = false;
 
-	CurrentWeapon.IdleAnimIndex++;
-	UpdateIdle();
 }
 
 // ATTACK COMPLETED: Called by the Attack Completed notify inside the animation reset's the combo
