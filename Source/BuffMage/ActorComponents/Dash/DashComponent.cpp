@@ -8,9 +8,9 @@ UDashComponent::UDashComponent()
 
 void UDashComponent::CooldownBar(float DeltaTime)
 {
-	TimePassed += DeltaTime;
-
-
+	// TimePassed += DeltaTime;
+	
+	TimePassed = GetWorld()->GetTimerManager().GetTimerElapsed(CooldownTimerHandle);
 	OnDashChange.Broadcast(TimePassed,DashCooldown);
 	
 }
@@ -77,6 +77,7 @@ void UDashComponent::PerformDash()
 
 	GetWorld()->GetTimerManager().SetTimer(CooldownTimerHandle, this, &UDashComponent::ActivateIFrames,
 	                                       WaitTimeBeforeIFrames);
+	
 }
 
 
