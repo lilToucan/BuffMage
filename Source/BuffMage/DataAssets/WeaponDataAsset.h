@@ -50,7 +50,10 @@ public:
 	TObjectPtr<UAnimMontage> ReloadAnimMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-	TArray<UAnimSequenceBase*> IdleAnim;
+	TArray<UAnimSequenceBase*> IdleAnims;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+	TArray<UAnimSequenceBase*> WalkAnims;
 	
 	virtual void Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit);
 };
