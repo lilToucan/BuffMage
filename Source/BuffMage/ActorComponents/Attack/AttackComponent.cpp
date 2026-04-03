@@ -90,10 +90,12 @@ void UAttackComponent::StartAttackAnim_Implementation()
 	}
 
 	AnimInstance->Montage_Play(WeaponAsset->AttackComboAnimMontage[CurrentWeapon.AnimIndex], WeaponAsset->AnimSpeedMult); // play the animation
-	
+
 	CurrentWeapon.IdleAnimIndex++;
 	UpdateIdle();
-	
+	CurrentWeapon.WalkAnimIndex++;
+	UpdateWalk();
+
 	CurrentWeapon.bIsAttacking = true; // set attacking to true if not using fire rate cooldown 
 }
 
@@ -170,7 +172,6 @@ void UAttackComponent::AttackCanBeUsedAgain_Implementation()
 	// go to next Anim 
 	CurrentWeapon.AnimIndex++;
 	CurrentWeapon.bIsAttacking = false;
-
 }
 
 // ATTACK COMPLETED: Called by the Attack Completed notify inside the animation reset's the combo
@@ -180,6 +181,7 @@ void UAttackComponent::AttackCompleted_Implementation()
 		return;
 	CurrentWeapon.AnimIndex = 0;
 	CurrentWeapon.IdleAnimIndex = 0;
+	CurrentWeapon.WalkAnimIndex = 0;
 	SetCooldownTime();
 	//D! ask designers if they want to put a cooldown when you fail the combo
 }
@@ -217,6 +219,8 @@ void UAttackComponent::StartReloading_Implementation()
 	CurrentWeapon.bIsAttacking = false;
 	CurrentWeapon.IdleAnimIndex = 0;
 	UpdateIdle();
+	CurrentWeapon.WalkAnimIndex = 0;
+	UpdateWalk();
 
 
 	CurrentWeapon.bIsReloading = true;
@@ -263,16 +267,30 @@ void UAttackComponent::OnDamageReceived_Implementation(AActor* Actor, float X, c
 
 void UAttackComponent::UpdateIdle()
 {
-	if (CurrentWeapon.WeaponData->IdleAnim.Num() < 1)
+	if (CurrentWeapon.WeaponData->IdleAnims.Num() < 1)
 	{
 		OnIdleAnimChanged.Broadcast(nullptr);
 		return;
 	}
 
-	if (CurrentWeapon.IdleAnimIndex >= CurrentWeapon.WeaponData->IdleAnim.Num())
+	if (CurrentWeapon.IdleAnimIndex >= CurrentWeapon.WeaponData->IdleAnims.Num())
 		CurrentWeapon.IdleAnimIndex = 0;
 
-	OnIdleAnimChanged.Broadcast(CurrentWeapon.WeaponData->IdleAnim[CurrentWeapon.IdleAnimIndex]);
+	OnIdleAnimChanged.Broadcast(CurrentWeapon.WeaponData->IdleAnims[CurrentWeapon.IdleAnimIndex]);
+}
+
+void UAttackComponent::UpdateWalk()
+{
+	if (CurrentWeapon.WeaponData->WalkAnims.Num() < 1)
+	{
+		OnWalkAnimChanged.Broadcast(nullptr);
+		return;
+	}
+
+	if (CurrentWeapon.WalkAnimIndex >= CurrentWeapon.WeaponData->WalkAnims.Num())
+		CurrentWeapon.WalkAnimIndex = 0;
+
+	OnWalkAnimChanged.Broadcast(CurrentWeapon.WeaponData->WalkAnims[CurrentWeapon.WalkAnimIndex]);
 }
 
 // ON WEAPON CHANGE: Called when you change weapons
@@ -282,6 +300,7 @@ void UAttackComponent::OnCurrentWeaponChange()
 	OnWeaponIconChanged.Broadcast(CurrentWeapon.WeaponData->Icon);
 
 	UpdateIdle();
+	UpdateWalk();
 }
 
 // CHANGE WEAPON: Called by the owner of the component when switching to a different gun

@@ -12,7 +12,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnValueChangeDelegate, float, Curre
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWeaponIconChanged, TSoftObjectPtr<UTexture2D>, Icon);
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnIdleChange, UAnimSequenceBase*, IdleAnim);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAnimationChange, UAnimSequenceBase*, IdleAnim);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAttackHitDelegate);
 
@@ -56,7 +56,9 @@ protected:
 	FOnWeaponIconChanged OnWeaponIconChanged;
 
 	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category = "AttackComponent|Weapons|Delegate")
-	FOnIdleChange OnIdleAnimChanged;
+	FOnAnimationChange OnIdleAnimChanged;
+	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category = "AttackComponent|Weapons|Delegate")
+	FOnAnimationChange OnWalkAnimChanged;
 
 #pragma endregion
 
@@ -166,6 +168,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UpdateIdle();
 
+	UFUNCTION(BlueprintCallable)
+	void UpdateWalk();
+	
 	UFUNCTION(BlueprintCallable)
 	void OnCurrentWeaponChange();
 
