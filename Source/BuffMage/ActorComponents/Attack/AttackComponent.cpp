@@ -314,19 +314,34 @@ void UAttackComponent::ChangeWeapon_Implementation(int InputValue)
 
 	if (AnimInstance)
 		AnimInstance->StopAllMontages(0.2f);
+	
+	SetWeapon(WeaponIndex + InputValue);
+}
 
-	WeaponsData[WeaponIndex] = CurrentWeapon;
 
-	WeaponIndex += InputValue;
-	// if the index goes out of the bounds of the array then loop it 
-	if (WeaponIndex < 0)
-		WeaponIndex = WeaponsData.Num() - 1;
+void UAttackComponent::SetWeapon_Implementation(int InputValue)
+{
+	if (WeaponsData.Num() < 1 || // if there's 0 weapons
+		CurrentWeapon.bIsAttacking || // if it's currently attacking
+		CurrentWeapon.bIsReloading || // if it's currently reloading
+		bIsInRage) // if it's currently in rage mode 
+			return;
+
+	WeaponsData[WeaponIndex] = CurrentWeapon; // set the old weapon's value 
+	
+	WeaponIndex = InputValue;
+
+	// if the index goes out of the bounds of the array then loop it to the other end ( -1 == Max, Max+1 = 0) 
+	if (WeaponIndex < 0) 
+		WeaponIndex = WeaponsData.Num() - 1; 
 	else if (WeaponIndex >= WeaponsData.Num())
 		WeaponIndex = 0;
 
+	
 	CurrentWeapon = WeaponsData[WeaponIndex];
 	OnCurrentWeaponChange();
 }
+
 
 
 // LOAD SOUND ASYNC: Called when you want to play a sound

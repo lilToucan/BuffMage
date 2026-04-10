@@ -160,6 +160,9 @@ public:
 	void ChangeWeapon(int InputValue);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SetWeapon(int InputValue);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetCooldownTime();
 
 	UFUNCTION(BlueprintCallable)
