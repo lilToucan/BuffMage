@@ -36,6 +36,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
 	TArray<FDynamicWeaponData> WeaponsData;
 
+	UPROPERTY(BlueprintReadWrite, Category="AttackComponent|Weapons")
+	bool bCanChangeWeapon = true;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Sound|AmmoFinished")
 	USoundBase* OnAmmoFinished;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Sound|AmmoFinished")

@@ -34,8 +34,7 @@ void UAttackComponent::BeginPlay()
 	}
 	SetUpWeapon(RageWeapon);
 
-
-	// LoadSoundAsync();
+	bCanChangeWeapon = true;
 }
 
 // SETUP WEAPON: Called at the start of the game to give default values to the WeaponAsset
@@ -48,13 +47,6 @@ void UAttackComponent::SetUpWeapon(FDynamicWeaponData& WeaponAsset)
 	WeaponAsset.AnimIndex = 0;
 	WeaponAsset.bIsReloading = false;
 	WeaponAsset.bIsAttacking = false;
-	// for (USoundBase* Sound : WeaponAsset.WeaponData->OnAttackHitSounds)
-	// {
-	// 	HitActor = GetOwner();
-	// 	Volume = 0.f;
-	// 	Pitch = 0.f;
-	// 	LoadSoundAsync(Sound,GetOwner(),);
-	// }
 }
 
 // START ATTACKING: Called by the Owner of the component when inputting an attack
@@ -96,7 +88,8 @@ void UAttackComponent::StartAttackAnim_Implementation()
 	CurrentWeapon.WalkAnimIndex++;
 	UpdateWalk();
 
-	CurrentWeapon.bIsAttacking = true; // set attacking to true if not using fire rate cooldown 
+	CurrentWeapon.bIsAttacking = true; // set attacking to true if not using fire rate cooldown
+	bCanChangeWeapon = false;
 }
 
 // RESET HIT ACTORS: Resets the current held hit actors called when you start an attack and by Notifies
@@ -172,6 +165,7 @@ void UAttackComponent::AttackCanBeUsedAgain_Implementation()
 	// go to next Anim 
 	CurrentWeapon.AnimIndex++;
 	CurrentWeapon.bIsAttacking = false;
+	bCanChangeWeapon = true;
 }
 
 // ATTACK COMPLETED: Called by the Attack Completed notify inside the animation reset's the combo
@@ -221,7 +215,7 @@ void UAttackComponent::StartReloading_Implementation()
 	UpdateIdle();
 	CurrentWeapon.WalkAnimIndex = 0;
 	UpdateWalk();
-
+	bCanChangeWeapon = false;
 
 	CurrentWeapon.bIsReloading = true;
 
@@ -239,10 +233,10 @@ void UAttackComponent::StartReloading_Implementation()
 void UAttackComponent::ReloadWeapon_Implementation()
 {
 	CurrentWeapon.bIsAttacking = false;
-
+	CurrentWeapon.bIsReloading = false;
+	bCanChangeWeapon = true;
 	CurrentWeapon.AnimIndex = 0;
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
-	CurrentWeapon.bIsReloading = false;
 	CurrentWeapon.CurrentAmmo = WeaponAsset->AmmoMax;
 	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo);
 }
@@ -306,42 +300,43 @@ void UAttackComponent::OnCurrentWeaponChange()
 // CHANGE WEAPON: Called by the owner of the component when switching to a different gun
 void UAttackComponent::ChangeWeapon_Implementation(int InputValue)
 {
-	if (WeaponsData.Num() < 1 || // if there's 0 weapons
-		CurrentWeapon.bIsAttacking || // if it's currently attacking
-		CurrentWeapon.bIsReloading || // if it's currently reloading
+	if (!bCanChangeWeapon || // if it can change the current weapon
+		WeaponsData.Num() < 1 || // if there's 0 weapons
 		bIsInRage) // if it's currently in rage mode 
 		return;
 
 	if (AnimInstance)
 		AnimInstance->StopAllMontages(0.2f);
-	
+
 	SetWeapon(WeaponIndex + InputValue);
 }
 
-
+// SET WEAPON: Called when you wanna change the currently held weapon 
 void UAttackComponent::SetWeapon_Implementation(int InputValue)
 {
-	if (WeaponsData.Num() < 1 || // if there's 0 weapons
-		CurrentWeapon.bIsAttacking || // if it's currently attacking
-		CurrentWeapon.bIsReloading || // if it's currently reloading
+	if (!bCanChangeWeapon || // if it can change the current weapon
+		WeaponsData.Num() < 1 || // if there's 0 weapons
 		bIsInRage) // if it's currently in rage mode 
-			return;
+		return;
 
-	WeaponsData[WeaponIndex] = CurrentWeapon; // set the old weapon's value 
+	CurrentWeapon.bIsAttacking = false;
+	CurrentWeapon.bIsReloading = false;
+	AnimInstance->StopAllMontages(.2f);
 	
+	WeaponsData[WeaponIndex] = CurrentWeapon; // set the old weapon's value 
+
 	WeaponIndex = InputValue;
 
 	// if the index goes out of the bounds of the array then loop it to the other end ( -1 == Max, Max+1 = 0) 
-	if (WeaponIndex < 0) 
-		WeaponIndex = WeaponsData.Num() - 1; 
+	if (WeaponIndex < 0)
+		WeaponIndex = WeaponsData.Num() - 1;
 	else if (WeaponIndex >= WeaponsData.Num())
 		WeaponIndex = 0;
 
-	
+
 	CurrentWeapon = WeaponsData[WeaponIndex];
 	OnCurrentWeaponChange();
 }
-
 
 
 // LOAD SOUND ASYNC: Called when you want to play a sound
@@ -439,6 +434,7 @@ void UAttackComponent::StopRage_Implementation()
 	RageWeapon.CurrentAmmo = RageWeapon.WeaponData->AmmoMax;
 	RageWeapon.bIsAttacking = false;
 	RageWeapon.bIsReloading = false;
+	bCanChangeWeapon = false;
 	CurrentWeapon = WeaponsData[WeaponIndex];
 
 	OnDeactivatingRage.Broadcast();
