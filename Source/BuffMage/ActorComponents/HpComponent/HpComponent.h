@@ -60,14 +60,14 @@ public:
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Hurt")
-	TArray<TSoftObjectPtr<USoundBase>> HurtSounds;
+	TArray<USoundBase*> HurtSounds;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Hurt")
 	FVector2D HurtVolumeMinMax = FVector2D(1.f, 1.f);
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Hurt")
 	FVector2D HurtPitchMinMax = FVector2D(0.7f, 1.3f);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Death")
-	TSoftObjectPtr<USoundBase> DeathSound;
+	USoundBase* DeathSound;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Death")
 	FVector2D DeathVolumeMinMax = FVector2D(1.f, 1.f);
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Death")
@@ -76,12 +76,6 @@ public:
 	
 
 protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Debug")
-	TSoftObjectPtr<USoundBase> SoundToPlay;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Debug")
-	float Volume;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Sound|Debug")
-	float Pitch;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Hp")
 	float CurrentHp;
@@ -121,7 +115,8 @@ protected:
 	void OnDeathNotify(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload);
 
 	virtual void BeginPlay() override;
-	void PlaySound();
+	UFUNCTION(BlueprintCallable, Category = "HpComponent|Sound")
+	void PlaySound(USoundBase* CurrentSoundToPlay, AActor* HitActor, float Volume, float Pitch, USoundAttenuation* SoundAttenuation = nullptr);
 	void DisableOwner();
 	void StartDeathTimer();
 };

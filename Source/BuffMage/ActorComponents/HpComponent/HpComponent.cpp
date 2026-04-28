@@ -1,6 +1,8 @@
 #include "HpComponent.h"
 
+#include "BlendSpaceAnalysis.h"
 #include "BuffMage/ActorComponents/Attack/AttackComponent.h"
+#include "CompGeom/FitOrientedBox3.h"
 #include "Engine/StreamableManager.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
@@ -23,19 +25,8 @@ void UHpComponent::BeginPlay()
 		auto AnimInstance = CharacterOwner->GetMesh()->GetAnimInstance();
 		AnimInstance->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnDeathNotify);
 	}
-
-
+	
 	Activate(true);
-
-	for (TSoftObjectPtr<USoundBase> Sound : HurtSounds)
-	{
-		Volume = 0.f;
-		SoundToPlay = Sound;
-		PlaySound();
-	}
-
-	SoundToPlay = DeathSound;
-	PlaySound();
 }
 
 
@@ -80,22 +71,26 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 		Death(DamageCauser);
 		return;
 	}
-	
+
 	OnHpChanged.Broadcast(CurrentHp); // update UI
-	
+
 	if (HitMontage)
 		CharacterOwner->PlayAnimMontage(HitMontage);
 
 	OnHit.Broadcast();
-	if (HurtSounds.Num() > 0)
-		SoundToPlay = HurtSounds[FMath::RandRange(0, HurtSounds.Num() - 1)];
+
+	// play hurt sound
+	
+	if (HurtSounds.Num() <= 0)
+		return;
+
+	USoundBase* SoundToPlay = HurtSounds[FMath::RandRange(0, HurtSounds.Num() - 1)];
 
 	// change into normal sound
-	Volume = FMath::RandRange(HurtVolumeMinMax.X, HurtVolumeMinMax.Y);
-	Pitch = FMath::RandRange(HurtPitchMinMax.X, HurtPitchMinMax.Y);
-	FStreamableManager Streamable;
-	Streamable.RequestAsyncLoad(SoundToPlay.ToSoftObjectPath(),
-	                            FStreamableDelegate::CreateUObject(this, &UHpComponent::PlaySound));
+	float Volume = FMath::RandRange(HurtVolumeMinMax.X, HurtVolumeMinMax.Y);
+	float Pitch = FMath::RandRange(HurtPitchMinMax.X, HurtPitchMinMax.Y);
+
+	PlaySound(SoundToPlay, GetOwner(), Volume, Pitch);
 }
 
 void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
@@ -118,13 +113,10 @@ void UHpComponent::Death(AActor* TheKiller)
 		AttackComponent->AddToRageAfterKill();
 	StartDeathTimer();
 
-	SoundToPlay = DeathSound;
-	Volume = FMath::RandRange(DeathVolumeMinMax.X, DeathVolumeMinMax.Y);
-	Pitch = FMath::RandRange(DeathPitchMinMax.X, DeathPitchMinMax.Y);
+	float Volume = FMath::RandRange(DeathVolumeMinMax.X, DeathVolumeMinMax.Y);
+	float Pitch = FMath::RandRange(DeathPitchMinMax.X, DeathPitchMinMax.Y);
 
-	FStreamableManager Streamable;
-	Streamable.RequestAsyncLoad(SoundToPlay.ToSoftObjectPath(),
-	                            FStreamableDelegate::CreateUObject(this, &UHpComponent::PlaySound));
+	PlaySound(DeathSound, GetOwner(), Volume, Pitch);
 }
 
 void UHpComponent::RecoverFromStun()
@@ -143,7 +135,7 @@ void UHpComponent::GetStunned(float Time, AActor* Instigator)
 
 	bIsStunned = true;
 	OnStunned.Broadcast();
-	
+
 	GetOwner()->GetWorldTimerManager().SetTimer(StunTimerHandle, this, &UHpComponent::RecoverFromStun, Time);
 }
 
@@ -155,22 +147,23 @@ void UHpComponent::OnDeathNotify(FName Name, const FBranchingPointNotifyPayload&
 	}
 }
 
-void UHpComponent::PlaySound()
+void UHpComponent::PlaySound(USoundBase* CurrentSoundToPlay, AActor* HitActor, float Volume, float Pitch, USoundAttenuation* SoundAttenuation)
 {
-	USoundBase* Sound = SoundToPlay.Get();
-
-	if (!IsValid(Sound))
+	if (!CurrentSoundToPlay)
 		return;
 
-
-	UGameplayStatics::PlaySoundAtLocation
-	(
+	UGameplayStatics::PlaySoundAtLocation(
 		GetOwner(),
-		Sound,
-		GetOwner()->GetActorLocation(),
-		GetOwner()->GetActorRotation(),
+		CurrentSoundToPlay,
+		HitActor->GetActorLocation(),
+		HitActor->GetActorRotation(),
 		Volume,
-		Pitch
+		Pitch,
+		0,
+		SoundAttenuation,
+		nullptr,
+		nullptr,
+		nullptr
 	);
 }
 
