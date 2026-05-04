@@ -3,7 +3,6 @@
 #include "CoreMinimal.h"
 #include "BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.h"
 #include "Components/ActorComponent.h"
-#include "Engine/StreamableManager.h"
 #include "AttackComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRageChangeDelegate, float, CurrentAmount, float, MaximumAmount);

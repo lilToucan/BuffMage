@@ -1,6 +1,5 @@
 #include "MeleeWeaponData.h"
 
-#include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
 #include "Engine/DamageEvents.h"
 #include "Kismet/KismetSystemLibrary.h"
 
