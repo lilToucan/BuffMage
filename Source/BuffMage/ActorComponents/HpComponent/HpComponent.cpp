@@ -16,12 +16,12 @@ void UHpComponent::BeginPlay()
 	GetOwner()->OnTakeAnyDamage.AddUniqueDynamic(this, &UHpComponent::OnDamageTaken);
 
 	CharacterOwner = Cast<ACharacter>(GetOwner());
-	if (IsValid(CharacterOwner))
-	{
-		auto AnimInstance = CharacterOwner->GetMesh()->GetAnimInstance();
-		AnimInstance->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnDeathNotify);
-	}
-	
+	// if (IsValid(CharacterOwner))
+	// {
+	// 	auto AnimInstance = CharacterOwner->GetMesh()->GetAnimInstance();
+	// 	AnimInstance->OnPlayMontageNotifyBegin.AddUniqueDynamic(this, &UHpComponent::OnDeathNotify);
+	// }
+
 	Activate(true);
 }
 
@@ -76,7 +76,7 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 	OnHit.Broadcast();
 
 	// play hurt sound
-	
+
 	if (HurtSounds.Num() <= 0)
 		return;
 
@@ -101,9 +101,15 @@ void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 void UHpComponent::Death(AActor* TheKiller)
 {
 	Deactivate();
+	FBranchingPointNotifyPayload x;
 	OnDeathStarted.Broadcast();
 	if (DeathMontage)
+	{
 		DeathAnimDuration = CharacterOwner->PlayAnimMontage(DeathMontage);
+	}
+	else
+		DeathAnimDuration = .5f;
+
 	UAttackComponent* AttackComponent = TheKiller->GetComponentByClass<UAttackComponent>();
 	if (IsValid(AttackComponent))
 		AttackComponent->AddToRageAfterKill();
@@ -135,13 +141,13 @@ void UHpComponent::GetStunned(float Time, AActor* Instigator)
 	GetOwner()->GetWorldTimerManager().SetTimer(StunTimerHandle, this, &UHpComponent::RecoverFromStun, Time);
 }
 
-void UHpComponent::OnDeathNotify(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
-{
-	if (Name == DeathNotifyName)
-	{
-		StartDeathTimer();
-	}
-}
+// void UHpComponent::OnDeathNotify(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload)
+// {
+// 	if (Name == DeathNotifyName)
+// 	{
+// 		StartDeathTimer();
+// 	}
+// }
 
 void UHpComponent::PlaySound(USoundBase* CurrentSoundToPlay, AActor* HitActor, float Volume, float Pitch, USoundAttenuation* SoundAttenuation)
 {

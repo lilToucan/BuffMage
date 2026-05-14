@@ -112,7 +112,7 @@ public:
 
 protected:
 	UFUNCTION()
-	void OnDeathNotify(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload);
+	// void OnDeathNotify(FName Name, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload);
 
 	virtual void BeginPlay() override;
 	UFUNCTION(BlueprintCallable, Category = "HpComponent|Sound")
