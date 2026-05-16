@@ -9,11 +9,11 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Dash/DashComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Dash/DashComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Dash/DashComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Dash/DashComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/DialogueTrigger/DialogueTrigger.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/DialogueTrigger/DialogueTrigger.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/DialogueTrigger/DialogueTrigger.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/DialogueTrigger/DialogueTrigger.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Structs/Phrases/FPhrase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Structs/Phrases/FPhrase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Subsystems/DialogueSystem/DialogueSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Subsystems/DialogueSystem/DialogueSystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Subsystems/DialogueSystem/DialogueSystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Subsystems/DialogueSystem/DialogueSystem.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +55,7 @@
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Components/SkeletalMeshComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Components/SkinnedMeshComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Engine/DataAsset.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Engine/DataTable.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Engine/LevelScriptActor.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Engine/TimerHandle.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/GameFramework/Character.h" root0="FORCE_HIGHLIGHTING" />
@@ -68,16 +69,24 @@
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Public/DrawDebugHelpers.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/SignalProcessing/Public/DSP/Envelope.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Windows/AudioMixerXAudio2/Private/AudioMixerPlatformXAudio2.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/ActorComponents/DialogueTrigger/DialogueTrigger.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/ActorComponents/DialogueTrigger/DialogueTrigger.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interfaces/Poolable/ProjectilePoolable.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interfaces/Poolable/ProjectilePoolable.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/Dialogue/FDialogue.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/Dialogue/FDialogue.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/ObjectPool/FObjcetPool.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/ObjectPool/FObjcetPool.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/Phrases/FPhrase.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/Phrases/FPhrase.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Subsystems/DialogueSystem/DialogueSystem.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Subsystems/DialogueSystem/DialogueSystem.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Subsystems/ObjectPooling/ObjectPoolingSubsystem.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Subsystems/ObjectPooling/ObjectPoolingSubsystem.h" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -99,8 +108,8 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Uproject.BuffMage.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/Design/PlayTest__Scene&quot;,
+    &quot;Uproject.BuffMage.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/Programming/DialogueSystem__2&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -240,6 +249,8 @@
       <workItem from="1774214821434" duration="412000" />
       <workItem from="1774606674336" duration="5012000" />
       <workItem from="1774731862666" duration="2057000" />
+      <workItem from="1778070563263" duration="7034000" />
+      <workItem from="1778156144074" duration="6428000" />
     </task>
     <servers />
   </component>
