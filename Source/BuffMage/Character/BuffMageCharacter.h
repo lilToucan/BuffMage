@@ -44,9 +44,9 @@ protected: // variables
 	TObjectPtr<UCameraComponent> CameraComponent;
 
 	// inputs
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Basics")
 	UInputAction* MoveInputAction;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Basics")
 	UInputAction* JumpInputAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Aim")
@@ -64,11 +64,14 @@ protected: // variables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
 	UInputAction* ChangeWeaponInputAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Reload")
 	UInputAction* ReloadInputAction;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Rage")
 	UInputAction* RageInputAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
+	UInputAction* PauseInput;
 
 public: // functions
 	ABuffMageCharacter();
@@ -82,6 +85,9 @@ public: // functions
 	virtual void ReloadInputFunction(const FInputActionValue& InputActionValue);
 	virtual void RageInputFunction(const FInputActionValue& InputActionValue);
 	virtual void JumpInputFunction(const FInputActionValue& InputActionValue);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void PauseFunction(const FInputActionValue& InputActionValue);
 	
 
 protected: // functions

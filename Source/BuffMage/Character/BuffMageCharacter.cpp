@@ -84,6 +84,9 @@ void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		// Jump Input :V
 		EnhancedInput->BindAction(JumpInputAction, ETriggerEvent::Started, this,
 		                          &ABuffMageCharacter::JumpInputFunction);
+		// Pause Input :3
+		EnhancedInput->BindAction(PauseInput, ETriggerEvent::Started, this,
+		                          &ABuffMageCharacter::PauseFunction);
 	}
 }
 
@@ -157,6 +160,11 @@ void ABuffMageCharacter::JumpInputFunction(const FInputActionValue& InputActionV
 	{
 		Jump();
 	}
+}
+
+void ABuffMageCharacter::PauseFunction_Implementation(const FInputActionValue& InputActionValue)
+{
+	
 }
 
 void ABuffMageCharacter::OnStunned()
