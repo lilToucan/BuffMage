@@ -10,9 +10,11 @@ struct FPhrase : public FTableRowBase
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString Phrase;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta=(ToolTip=" how long does the line take to be written"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta=(ToolTip="- the name of whoever is speaking"))
+	FName Name;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta=(ToolTip="- how long does the line take to be written"))
 	float WriteTime;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta=(ToolTip=" how many seconds does the line linger on screen"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta=(ToolTip="- how many seconds does the line linger on screen"))
 	float OnScreenTime;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite,meta=(ToolTip="- The image of the protagonist \n- if left empty it will show previous image"))
 	TSoftObjectPtr<UTexture> MageImage;
