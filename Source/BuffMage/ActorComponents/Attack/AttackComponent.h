@@ -13,7 +13,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWeaponIconChanged, TSoftObjectPtr
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAnimationChange, UAnimSequenceBase*, IdleAnim);
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAttackHitDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FNormalDelegate);
 
 class UCameraComponent;
 
@@ -31,6 +31,8 @@ public:
 	TObjectPtr<UAnimInstance> AnimInstance;
 
 protected:
+	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
+	FNormalDelegate OnEnemyKilled;
 #pragma region WEAPONS
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons")
 	TArray<FDynamicWeaponData> WeaponsData;
@@ -114,13 +116,13 @@ protected:
 #pragma endregion
 
 	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
-	FOnAttackHitDelegate OnAttackHitDel;
+	FNormalDelegate OnAttackHitDel;
 
 	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
-	FOnAttackHitDelegate OnActivatingRage;
+	FNormalDelegate OnActivatingRage;
 
 	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
-	FOnAttackHitDelegate OnDeactivatingRage;
+	FNormalDelegate OnDeactivatingRage;
 
 	UPROPERTY(BlueprintReadWrite, Category = "AttackComponent")
 	UCameraComponent* Cam;

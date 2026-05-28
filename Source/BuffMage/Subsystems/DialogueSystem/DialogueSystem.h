@@ -11,10 +11,12 @@ UCLASS()
 class BUFFMAGE_API UDialogueSystem : public UWorldSubsystem
 {
 	GENERATED_BODY()
+
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "DialogueSystem")
 	FOnNextPhraseDelegate OnStartDialogue;
-	
+
 	UFUNCTION(BlueprintCallable, Category = "DialogueSystem")
-	void StartDialogue(/*pass an array of phrases = string text , float time*/ UDataTable* Dialogue);
+	void StartDialogue(/*pass an array of phrases = string text , float time*/ UPARAM(meta = (RowType ="FPhrase")) UDataTable*Dialogue);
+	
 };

@@ -95,6 +95,7 @@ void ABuffMageCharacter::InteractInputFunction(const FInputActionValue& InputAct
 	TArray<TEnumAsByte<EObjectTypeQuery>> traceObjectTypes;
 	traceObjectTypes.Add(UEngineTypes::ConvertToObjectType(InteractCollisionChannel));
 	TArray<AActor*> ignoreActors;
+	ignoreActors.Add(this);
 	TArray<AActor*> outActors;
 	FVector sphereSpawnLocation = GetActorLocation();
 	UClass* seekClass = nullptr;
@@ -102,8 +103,17 @@ void ABuffMageCharacter::InteractInputFunction(const FInputActionValue& InputAct
 
 	for (AActor* Actor : outActors)
 	{
-		if (!Actor->Implements<UInteractables>())
+		if (!Actor->Implements<UInteractables>()) // if the actor isn't an interactable then check it's components
+		{
+			UInteractables* InteractComponent = Actor->FindComponentByInterface<UInteractables>();
+			
+			if (!InteractComponent)
+				continue;
+			
+			IInteractables::Execute_Interact(InteractComponent,this);
 			continue;
+		}
+		
 		IInteractables::Execute_Interact(Actor, this);
 	}
 }

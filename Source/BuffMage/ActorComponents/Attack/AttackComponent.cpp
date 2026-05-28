@@ -150,6 +150,7 @@ void UAttackComponent::OnAttackHit_Implementation(AActor* ActorHit)
 void UAttackComponent::AddToRageAfterKill_Implementation()
 {
 	AddRage(RageAmountAfterKilling);
+	OnEnemyKilled.Broadcast();
 }
 
 // REDUCE AMMO: Called by the Attack Notify inside the animation
