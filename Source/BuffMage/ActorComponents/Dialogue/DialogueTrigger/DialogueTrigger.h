@@ -20,7 +20,7 @@ public:
 public:
 	UDialogueTrigger();
 
-	UFUNCTION(BlueprintNativeEvent, Category = "Dialogue")
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category = "Dialogue")
 	void TriggerDialogue();
 
 };
