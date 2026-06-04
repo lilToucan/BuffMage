@@ -4,7 +4,9 @@
 #include "Components/ActorComponent.h"
 #include "HpComponent.generated.h"
 
+class UAttackComponent;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FHPDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDeathDelegate, UAttackComponent*, KillersAttackComponent);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHPValueCahngeDelegate, float, CurrentHp);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnHitDelegate, AActor*, HitActor, bool, bAppliesRage);
@@ -45,7 +47,7 @@ public:
 	FHPDelegate OnStunRecovered;
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
-	FHPDelegate OnDeathStarted;
+	FDeathDelegate OnDeathStarted;
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
 	FHPDelegate OnDeathEnd;
 

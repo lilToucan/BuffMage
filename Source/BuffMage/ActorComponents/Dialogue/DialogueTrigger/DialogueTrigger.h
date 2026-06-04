@@ -1,12 +1,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BuffMage/Interfaces/DialogueTriggerer/DialogueTriggerer.h"
 #include "Components/ActorComponent.h"
 #include "DialogueTrigger.generated.h"
 
 
 UCLASS(Blueprintable, BlueprintType, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class BUFFMAGE_API UDialogueTrigger : public UActorComponent
+class BUFFMAGE_API UDialogueTrigger : public UActorComponent, public IDialogueTriggerer
 {
 	GENERATED_BODY()
 
@@ -19,8 +20,8 @@ public:
 
 public:
 	UDialogueTrigger();
-
-	UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category = "Dialogue")
-	void TriggerDialogue();
+	
+	virtual void TriggerDialogue_Implementation();
+	virtual void DialogueFailed_Implementation();
 
 };

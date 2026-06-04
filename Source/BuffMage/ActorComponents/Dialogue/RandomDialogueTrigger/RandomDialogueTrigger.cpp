@@ -7,32 +7,46 @@ URandomDialogueTrigger::URandomDialogueTrigger()
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
-void URandomDialogueTrigger::TriggerDialogue(ERandomDialogueTriggerType DialogueId)
+void URandomDialogueTrigger::TriggerRandomDialogue(ERandomDialogueTriggerType DialogueId)
 {
-	URandomDialogueData* Data = *Dialogues.Find(DialogueId);
-	
-	if (!Data)
+	CurrentData = Dialogues.Find(DialogueId);
+
+	if (!CurrentData)
 	{
-		if(GEngine)
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Uobject Data is invalid!"));	
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Uobject Data is invalid!"));
 		return;
 	}
-	
-	float Rand = FMath::RandRange(0.f, 1.f);
-	
-	if (Rand <= Data->CurrentPercentage)
+
+	TriggerDialogue_Implementation();
+}
+
+void URandomDialogueTrigger::DialogueFailed_Implementation()
+{
+	CurrentData->GetDefaultObject()->CurrentPercentage = CurrentData->GetDefaultObject()->LastPercentage;
+}
+
+void URandomDialogueTrigger::TriggerDialogue_Implementation()
+{
+	float RandomChance = FMath::RandRange(0.f, 1.f);
+
+	if (RandomChance <= CurrentData->GetDefaultObject()->CurrentPercentage)
 	{
-		GetOwner()->GetWorld()->GetSubsystem<UDialogueSystem>()->StartDialogue(Data->Dialogues[FMath::RandRange(0, Data->Dialogues.Num() - 1)]);
-		Data->CurrentPercentage = 0;
+		const int RandData = FMath::RandRange(0, CurrentData->GetDefaultObject()->Dialogues.Num() - 1);
+		UDataTable* DataTable = CurrentData->GetDefaultObject()->Dialogues[RandData];
+		GetOwner()->GetWorld()->GetSubsystem<UDialogueSystem>()->StartDialogue(DataTable, this);
+		CurrentData->GetDefaultObject()->LastPercentage = CurrentData->GetDefaultObject()->CurrentPercentage;
+		CurrentData->GetDefaultObject()->CurrentPercentage = 0;
 	}
 	else
 	{
-		Data->CurrentPercentage += Data->PercentageAdded;
-		
-		if (Data->CurrentPercentage > Data->MaxPercentage)
+		CurrentData->GetDefaultObject()->CurrentPercentage += CurrentData->GetDefaultObject()->PercentageAdded;
+
+		if (CurrentData->GetDefaultObject()->CurrentPercentage > CurrentData->GetDefaultObject()->MaxPercentage)
 		{
-			Data->CurrentPercentage = Data->MaxPercentage;
+			CurrentData->GetDefaultObject()->CurrentPercentage = CurrentData->GetDefaultObject()->MaxPercentage;
 		}
+		
+		CurrentData->GetDefaultObject()->LastPercentage = CurrentData->GetDefaultObject()->CurrentPercentage;
 	}
-	
 }

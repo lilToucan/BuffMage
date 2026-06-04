@@ -157,7 +157,7 @@ void UAttackComponent::AddToRageAfterKill_Implementation()
 void UAttackComponent::ReduceAmmo_Implementation()
 {
 	CurrentWeapon.CurrentAmmo--;
-	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo);
+	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo,CurrentWeapon.WeaponData->AmmoMax);
 }
 
 // ATTACK CAN BE USED AGAIN: Called by the AttackCanBeUsed Notify inside the animation
@@ -239,7 +239,7 @@ void UAttackComponent::ReloadWeapon_Implementation()
 	CurrentWeapon.AnimIndex = 0;
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 	CurrentWeapon.CurrentAmmo = WeaponAsset->AmmoMax;
-	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo);
+	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo,CurrentWeapon.WeaponData->AmmoMax);
 }
 
 // ADD WEAPON: Called when the owner grabs a weapon pickup
@@ -291,7 +291,7 @@ void UAttackComponent::UpdateWalk()
 // ON WEAPON CHANGE: Called when you change weapons
 void UAttackComponent::OnCurrentWeaponChange()
 {
-	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo);
+	OnAmmoChange.Broadcast(CurrentWeapon.CurrentAmmo,CurrentWeapon.WeaponData->AmmoMax);
 	OnWeaponIconChanged.Broadcast(CurrentWeapon.WeaponData->Icon);
 
 	UpdateIdle();

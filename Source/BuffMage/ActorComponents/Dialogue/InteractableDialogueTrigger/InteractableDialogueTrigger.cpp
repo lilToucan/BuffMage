@@ -10,12 +10,17 @@ UInteractableDialogueTrigger::UInteractableDialogueTrigger()
 
 void UInteractableDialogueTrigger::TriggerDialogue_Implementation()
 {
-	GetOwner()->GetWorld()->GetSubsystem<UDialogueSystem>()->StartDialogue(Dialogues[DialogueIndex]);
+	GetOwner()->GetWorld()->GetSubsystem<UDialogueSystem>()->StartDialogue(Dialogues[DialogueIndex],this);
 
 	DialogueIndex++;
 
 	if (DialogueIndex >= Dialogues.Num())
 		DialogueIndex = 0;
+}
+
+void UInteractableDialogueTrigger::DialogueFailed_Implementation()
+{
+	Super::DialogueFailed_Implementation();
 }
 
 void UInteractableDialogueTrigger::Interact_Implementation(ABuffMageCharacter* Player)

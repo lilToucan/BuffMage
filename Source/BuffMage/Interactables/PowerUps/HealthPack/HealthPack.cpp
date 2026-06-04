@@ -27,6 +27,8 @@ void AHealthPack::Interact_Implementation(ABuffMageCharacter* Player)
 	PlayerHp->OnHealingTaken(HealingAmount,GetOwner());
 
 	DisableActor();
+	
+	Super::Interact_Implementation(Player);
 }
 
 void AHealthPack::DisableActor()

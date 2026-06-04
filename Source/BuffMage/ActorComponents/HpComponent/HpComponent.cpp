@@ -102,7 +102,6 @@ void UHpComponent::Death(AActor* TheKiller)
 {
 	Deactivate();
 	FBranchingPointNotifyPayload x;
-	OnDeathStarted.Broadcast();
 	if (DeathMontage)
 	{
 		DeathAnimDuration = CharacterOwner->PlayAnimMontage(DeathMontage);
@@ -111,6 +110,8 @@ void UHpComponent::Death(AActor* TheKiller)
 		DeathAnimDuration = .5f;
 
 	UAttackComponent* AttackComponent = TheKiller->GetComponentByClass<UAttackComponent>();
+	OnDeathStarted.Broadcast(AttackComponent);
+	
 	if (IsValid(AttackComponent))
 		AttackComponent->AddToRageAfterKill();
 	StartDeathTimer();

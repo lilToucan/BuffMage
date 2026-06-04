@@ -5,7 +5,7 @@
 #include "Components/ActorComponent.h"
 #include "AttackComponent.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRageChangeDelegate, float, CurrentAmount, float, MaximumAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnPercentageChangeDelegate, float, CurrentAmount, float, MaximumAmount);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnValueChangeDelegate, float, CurrentAmount);
 
@@ -25,7 +25,7 @@ class BUFFMAGE_API UAttackComponent : public UActorComponent
 	// VARIABLES:
 public:
 	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable)
-	FOnRageChangeDelegate OnRageChange;
+	FOnPercentageChangeDelegate OnRageChange;
 
 	UPROPERTY(BlueprintReadWrite, Category="AttackComponent|Animations")
 	TObjectPtr<UAnimInstance> AnimInstance;
@@ -55,7 +55,7 @@ protected:
 	int WeaponIndex = 0;
 
 	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category = "AttackComponent|Weapons|Delegate")
-	FOnValueChangeDelegate OnAmmoChange;
+	FOnPercentageChangeDelegate OnAmmoChange;
 	UPROPERTY(BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category = "AttackComponent|Weapons|Delegate")
 	FOnWeaponIconChanged OnWeaponIconChanged;
 

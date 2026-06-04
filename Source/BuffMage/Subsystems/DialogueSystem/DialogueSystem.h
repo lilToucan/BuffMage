@@ -5,7 +5,8 @@
 #include "Subsystems/WorldSubsystem.h"
 #include "DialogueSystem.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNextPhraseDelegate, FDialogue, Dialogue);
+class IDialogueTriggerer;
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnNextPhraseDelegate, FDialogue, Dialogue,TScriptInterface<IDialogueTriggerer>,Trigger);
 
 UCLASS()
 class BUFFMAGE_API UDialogueSystem : public UWorldSubsystem
@@ -17,6 +18,7 @@ public:
 	FOnNextPhraseDelegate OnStartDialogue;
 
 	UFUNCTION(BlueprintCallable, Category = "DialogueSystem")
-	void StartDialogue(/*pass an array of phrases = string text , float time*/ UPARAM(meta = (RowType ="FPhrase")) UDataTable*Dialogue);
-	
+	void StartDialogue(
+		/*pass an array of phrases = string text , float time*/
+		UPARAM(meta = (RowType ="FPhrase")) UDataTable* Dialogue, TScriptInterface<IDialogueTriggerer> DialogueTrigger);
 };

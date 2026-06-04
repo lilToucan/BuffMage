@@ -8,10 +8,17 @@ UDialogueTrigger::UDialogueTrigger()
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
+void UDialogueTrigger::DialogueFailed_Implementation()
+{
+	DialogueIndex--;
+
+	if (DialogueIndex < 0)
+		DialogueIndex = Dialogues.Num() - 1;
+}
+
 void UDialogueTrigger::TriggerDialogue_Implementation()
 {
-
-	GetOwner()->GetWorld()->GetSubsystem<UDialogueSystem>()->StartDialogue(Dialogues[DialogueIndex]);
+	GetOwner()->GetWorld()->GetSubsystem<UDialogueSystem>()->StartDialogue(Dialogues[DialogueIndex],this);
 
 	DialogueIndex++;
 

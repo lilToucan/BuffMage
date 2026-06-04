@@ -15,6 +15,7 @@ public:
 	UInteractableDialogueTrigger();
 	
 	virtual void TriggerDialogue_Implementation() override;
+	virtual void DialogueFailed_Implementation() override;
 
 	virtual void Interact_Implementation(ABuffMageCharacter* Player) override;
 	

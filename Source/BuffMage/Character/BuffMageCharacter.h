@@ -12,6 +12,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FVoidFloat, float, Velocity);
 
+
 UCLASS(abstract)
 class BUFFMAGE_API ABuffMageCharacter : public ACharacter
 {
@@ -46,6 +47,7 @@ protected: // variables
 	// inputs
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Basics")
 	UInputAction* MoveInputAction;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Basics")
 	UInputAction* JumpInputAction;
 
@@ -60,6 +62,7 @@ protected: // variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Interact")
 	UInputAction* InteractInputAction;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|ChangeWeapon")
 	UInputAction* ChangeWeaponInputAction;

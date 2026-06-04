@@ -13,12 +13,15 @@ class BUFFMAGE_API URandomDialogueData : public UObject
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<UDataTable*> Dialogues;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMax = 1, clampMin = 0, UIMin = 0, UIMax = 100))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMax = 1, clampMin = 0))
 	float MaxPercentage;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMax = 1, clampMin = 0, UIMin = 0, UIMax = 100, ToolTip ="The percentage added after every failed trigger"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMax = 1, clampMin = 0, ToolTip ="The percentage added after every failed trigger"))
 	float PercentageAdded;
 	
-	UPROPERTY(BlueprintReadWrite, meta = (ClampMax = 1, clampMin = 0, UIMin = 0, UIMax = 100))
+	UPROPERTY(BlueprintReadWrite, meta = (ClampMax = 1, clampMin = 0))
 	float CurrentPercentage;
+	
+	UPROPERTY(BlueprintReadWrite, meta = (ClampMax = 1, clampMin = 0))
+	float LastPercentage;
 };

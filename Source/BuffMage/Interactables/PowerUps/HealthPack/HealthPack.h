@@ -1,12 +1,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BuffMage/Interfaces/Interactables.h"
+#include "BuffMage/Interactables/PowerUps/PowerUp.h"
 #include "GameFramework/Actor.h"
 #include "HealthPack.generated.h"
 
 UCLASS()
-class BUFFMAGE_API AHealthPack : public AActor, public IInteractables
+class BUFFMAGE_API AHealthPack : public APowerUp
 {
 	GENERATED_BODY()
 

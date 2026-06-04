@@ -1,7 +1,9 @@
 #include "DialogueSystem.h"
 
+#include "BuffMage/Interfaces/DialogueTriggerer/DialogueTriggerer.h"
 
-void UDialogueSystem::StartDialogue(UDataTable* Dialogue)
+
+void UDialogueSystem::StartDialogue(UDataTable* Dialogue, TScriptInterface<IDialogueTriggerer> DialogueTrigger)
 {
 	FDialogue DialogueStruct;
 	TArray<FPhrase*> PhraseArray;
@@ -12,6 +14,6 @@ void UDialogueSystem::StartDialogue(UDataTable* Dialogue)
 		DialogueStruct.Conversation.Add(*line);
 	}
 
-	OnStartDialogue.Broadcast(DialogueStruct);
+	OnStartDialogue.Broadcast(DialogueStruct,DialogueTrigger);
 	
 }
