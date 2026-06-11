@@ -43,6 +43,8 @@ protected: // variables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|CameraComponent")
 	TObjectPtr<UCameraComponent> CameraComponent;
 
+
+
 	// inputs
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Basics")
 	UInputAction* MoveInputAction;
@@ -78,6 +80,7 @@ public: // functions
 	virtual void Tick(float DeltaTime) override;
 	virtual void InteractInputFunction(const FInputActionValue& InputActionValue);
 	virtual void ChangeWeaponInputFunction(const FInputActionValue& InputActionValue);
+	virtual void DashInputFunction(const FInputActionValue& InputActionValue);
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void MoveInputFunction(const FInputActionValue& InputActionValue);
 	virtual void AimInputFunction(const FInputActionValue& InputActionValue);

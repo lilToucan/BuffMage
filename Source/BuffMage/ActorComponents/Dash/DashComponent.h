@@ -8,6 +8,7 @@
 #include "DashComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRechargeBarDelegate, float, Alpha, float, MaxAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDash);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class BUFFMAGE_API UDashComponent : public UActorComponent
@@ -33,7 +34,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category ="DashComponent|Delegate")
 	FRechargeBarDelegate OnDashChange;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category ="DashComponent|Delegate")
+	FOnDash OnDashPerformed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category ="DashComponent|Delegate")
+	FOnDash OnDashEnded;
 protected:
 	UPROPERTY(BlueprintReadWrite, Category = "DashComponent")
 	bool bCanDash = true;
