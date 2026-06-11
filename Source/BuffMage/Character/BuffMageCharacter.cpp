@@ -7,12 +7,13 @@ ABuffMageCharacter::ABuffMageCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	// BoxCollider = CreateDefaultSubobject<UBoxComponent>(FName("BoxCollider"));
 	AttackComp = CreateDefaultSubobject<UAttackComponent>("AttackComponent");
 	DashComponent = CreateDefaultSubobject<UDashComponent>("DashComponent");
 	HpComponent = CreateDefaultSubobject<UHpComponent>("HpComponent");
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("CameraComponent");
-	CameraComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	CameraComponent->AttachToComponent(BoxCollider, FAttachmentTransformRules::KeepRelativeTransform);
 
 	if (!GetMesh())
 		return;

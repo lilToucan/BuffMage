@@ -6,6 +6,7 @@
 #include "BuffMage/ActorComponents/Attack/AttackComponent.h"
 #include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
 #include "BuffMage/ActorComponents/Dash/DashComponent.h"
+#include "Components/BoxComponent.h"
 
 #include "BuffMageCharacter.generated.h"
 
@@ -42,7 +43,8 @@ protected: // variables
 	TObjectPtr<UHpComponent> HpComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|CameraComponent")
 	TObjectPtr<UCameraComponent> CameraComponent;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|BoxComponent")
+	TObjectPtr<UBoxComponent> BoxCollider;
 
 
 	// inputs
