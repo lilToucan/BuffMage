@@ -49,10 +49,12 @@ void UDashComponent::PerformDash()
 	if (!bCanDash || !IsActive())
 		return;
 
+	OnDashPerformed.Broadcast();
+	
 	bCanDash = false;
 	FVector OwnerVelocity = OwnersMovement->Velocity;
 	OwnerVelocity.Z = 0;
-
+	
 	if (OwnersMovement && OwnerVelocity != FVector::ZeroVector)
 	{
 		DashDirection = OwnerVelocity;
@@ -101,12 +103,14 @@ void UDashComponent::DashUpdate(float DeltaTime)
 
 void UDashComponent::DashFinished()
 {
+	OnDashEnded.Broadcast();
 	LowerComponent(OwnersCamera, CameraStartPos, 1);
 	LowerComponent(OwnersSkeletalMesh, MeshStartPos, 1);
 
 	TimePassed = 0;
 	bIsDashing = false;
 	// SetComponentTickEnabled(false);
+	
 	GetWorld()->GetTimerManager().ClearTimer(CooldownTimerHandle);
 	GetWorld()->GetTimerManager().SetTimer(CooldownTimerHandle, this, &UDashComponent::RefreshDash, DashCooldown);
 }

@@ -66,8 +66,8 @@ void ABuffMageCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 		                          &ABuffMageCharacter::MoveInputFunction);
 
 		// Dash Input :I
-		EnhancedInput->BindAction(DashInputAction, ETriggerEvent::Triggered, DashComponent,
-		                          FName("PerformDash")); // TODO: change this to a function so that you can pass if you are airborne or not
+		EnhancedInput->BindAction(DashInputAction, ETriggerEvent::Triggered, this,
+		                          &ABuffMageCharacter::DashInputFunction); // TODO: change this to a function so that you can pass if you are airborne or not
 		// interact Input :l
 		EnhancedInput->BindAction(InteractInputAction, ETriggerEvent::Triggered, this,
 		                          &ABuffMageCharacter::InteractInputFunction);
@@ -106,14 +106,14 @@ void ABuffMageCharacter::InteractInputFunction(const FInputActionValue& InputAct
 		if (!Actor->Implements<UInteractables>()) // if the actor isn't an interactable then check it's components
 		{
 			UInteractables* InteractComponent = Actor->FindComponentByInterface<UInteractables>();
-			
+
 			if (!InteractComponent)
 				continue;
-			
-			IInteractables::Execute_Interact(InteractComponent,this);
+
+			IInteractables::Execute_Interact(InteractComponent, this);
 			continue;
 		}
-		
+
 		IInteractables::Execute_Interact(Actor, this);
 	}
 }
@@ -122,6 +122,14 @@ void ABuffMageCharacter::ChangeWeaponInputFunction(const FInputActionValue& Inpu
 {
 	float InputValue = InputActionValue.Get<float>();
 	AttackComp->ChangeWeapon(InputValue);
+}
+
+void ABuffMageCharacter::DashInputFunction(const FInputActionValue& InputActionValue)
+{
+	if (GetCharacterMovement()->IsFalling() || GetCharacterMovement()->IsFlying())
+		return;
+
+	DashComponent->PerformDash();
 }
 
 void ABuffMageCharacter::MoveInputFunction(const FInputActionValue& InputActionValue)
@@ -174,7 +182,6 @@ void ABuffMageCharacter::JumpInputFunction(const FInputActionValue& InputActionV
 
 void ABuffMageCharacter::PauseFunction_Implementation(const FInputActionValue& InputActionValue)
 {
-	
 }
 
 void ABuffMageCharacter::OnStunned()
