@@ -96,16 +96,16 @@ public:
 	virtual void Deactivate() override;
 
 	UFUNCTION(BlueprintCallable, Category = "HpComponent")
-	void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
+	virtual void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 
 	UFUNCTION(BlueprintCallable, Category = "HpComponent")
-	void OnHealingTaken(float Healing, AActor* HealingCauser);
+	virtual void OnHealingTaken(float Healing, AActor* HealingCauser);
 
 	UFUNCTION(BlueprintCallable, Category = "HpComponent|Death")
-	void Death(AActor* TheKiller);
+	virtual void Death(AActor* TheKiller);
 
 	UFUNCTION()
-	void RecoverFromStun();
+	virtual void RecoverFromStun();
 
 	UFUNCTION(BlueprintCallable, Category = "HpComponent|Stun")
 	virtual void GetStunned(float Time, AActor* Instigator);
@@ -116,7 +116,7 @@ protected:
 
 	virtual void BeginPlay() override;
 	UFUNCTION(BlueprintCallable, Category = "HpComponent|Sound")
-	void PlaySound(USoundBase* CurrentSoundToPlay, AActor* HitActor, float Volume, float Pitch, USoundAttenuation* SoundAttenuation = nullptr);
-	void DisableOwner();
-	void StartDeathTimer();
+	virtual void PlaySound(USoundBase* CurrentSoundToPlay, AActor* HitActor, float Volume, float Pitch, USoundAttenuation* SoundAttenuation = nullptr);
+	virtual void DisableOwner();
+	virtual void StartDeathTimer();
 };
