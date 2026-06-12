@@ -108,7 +108,7 @@ void UHpComponent::Death(AActor* TheKiller)
 		DeathAnimDuration = CharacterOwner->PlayAnimMontage(DeathMontage);
 	}
 	else
-		DeathAnimDuration = .5f;
+		DeathAnimDuration = 1.f;
 
 	UAttackComponent* AttackComponent = TheKiller->GetComponentByClass<UAttackComponent>();
 	if (IsValid(AttackComponent))
