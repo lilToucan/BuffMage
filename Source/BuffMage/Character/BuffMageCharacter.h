@@ -43,8 +43,8 @@ protected: // variables
 	TObjectPtr<UHpComponent> HpComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|CameraComponent")
 	TObjectPtr<UCameraComponent> CameraComponent;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|BoxComponent")
-	TObjectPtr<UBoxComponent> BoxCollider;
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|BoxComponent")
+	// TObjectPtr<UBoxComponent> BoxCollider;
 
 
 	// inputs

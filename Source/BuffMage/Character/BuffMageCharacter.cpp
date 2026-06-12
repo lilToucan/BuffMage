@@ -13,7 +13,7 @@ ABuffMageCharacter::ABuffMageCharacter()
 	HpComponent = CreateDefaultSubobject<UHpComponent>("HpComponent");
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("CameraComponent");
-	CameraComponent->AttachToComponent(BoxCollider, FAttachmentTransformRules::KeepRelativeTransform);
+	CameraComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	if (!GetMesh())
 		return;
