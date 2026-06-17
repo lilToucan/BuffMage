@@ -177,6 +177,7 @@ void ABuffMageCharacter::JumpInputFunction(const FInputActionValue& InputActionV
 {
 	if (GetMovementComponent()->Velocity.Z == 0)
 	{
+		OnJump.Broadcast();
 		Jump();
 	}
 }

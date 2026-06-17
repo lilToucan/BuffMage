@@ -13,15 +13,20 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FVoidFloat, float, Velocity);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FVoidDelegate);
+
 UCLASS(abstract)
 class BUFFMAGE_API ABuffMageCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public: // variables
-	
+
 	UPROPERTY(BlueprintAssignable, Category = "Input")
 	FVoidFloat OnMovementInput;
+
+	UPROPERTY(BlueprintreadWrite, BlueprintAssignable, BlueprintCallable, Category="Movement")
+	FVoidDelegate OnJump;
 
 protected: // variables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Interact")
@@ -32,8 +37,8 @@ protected: // variables
 
 	UPROPERTY(BlueprintreadWrite, Category="Movement")
 	float Velocity;
-	
-	
+
+
 	// components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components|AttackComponent")
 	TObjectPtr<UAttackComponent> AttackComp;
@@ -70,10 +75,10 @@ protected: // variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Reload")
 	UInputAction* ReloadInputAction;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input|Rage")
 	UInputAction* RageInputAction;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Input")
 	UInputAction* PauseInput;
 
@@ -93,7 +98,6 @@ public: // functions
 
 	UFUNCTION(BlueprintNativeEvent)
 	void PauseFunction(const FInputActionValue& InputActionValue);
-	
 
 protected: // functions
 
