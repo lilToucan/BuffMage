@@ -54,6 +54,8 @@ public:
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
 	FHPValueCahngeDelegate OnHpChanged;
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
+	FHPValueCahngeDelegate OnHpDirectlyChanged;
 
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Rage")
 	bool bAppliesRage = true;
@@ -97,6 +99,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "HpComponent")
 	virtual void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
+
+	UFUNCTION(BlueprintCallable, Category = "HpComponent")
+	virtual void ApplyDamageDirectly(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser, bool bShouldFade);
 
 	UFUNCTION(BlueprintCallable, Category = "HpComponent")
 	virtual void OnHealingTaken(float Healing, AActor* HealingCauser);
