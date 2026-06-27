@@ -117,18 +117,25 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 
 	FVector AttackPosition;
+	FRotator AttackRotation;
 
-	if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName)) // if the socket given does not exist 
+	if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName))
+	{
 		AttackPosition = GetOwner()->GetActorLocation(); // get owner position
+		AttackRotation = GetOwner()->GetActorRotation();
+	} // if the socket given does not exist 
 	else
+	{
 		AttackPosition = AnimInstance->GetSkelMeshComponent()->GetSocketLocation(SocketName); // get the position of the socket
+		AttackRotation = AnimInstance->GetSkelMeshComponent()->GetSocketRotation(SocketName);
+	}
 
 	AttackPosition += GetOwner()->GetActorForwardVector() * WeaponAsset->PositionOffsetX; // offset the position forward by PositionOffsetX
 
 	if (Cam != nullptr) // if we have the ref to the cam
 		WeaponAsset->Attack(AttackPosition, Cam->GetComponentRotation(), GetOwner(), HitActors); // rotate attack by the cam
 	else
-		WeaponAsset->Attack(AttackPosition, GetOwner()->GetActorRotation(), GetOwner(), HitActors); // rotate attack by the owner's rotation
+		WeaponAsset->Attack(AttackPosition, AttackRotation, GetOwner(), HitActors); // rotate attack by the owner's rotation
 }
 
 // ON ATTACK HIT: Called when your attack goes through and hits an enemy :) (not called if the attack killed it D:)
@@ -323,7 +330,7 @@ void UAttackComponent::SetWeapon_Implementation(int InputValue)
 	CurrentWeapon.bIsAttacking = false;
 	CurrentWeapon.bIsReloading = false;
 	AnimInstance->StopAllMontages(.2f);
-	
+
 	WeaponsData[WeaponIndex] = CurrentWeapon; // set the old weapon's value 
 
 	WeaponIndex = InputValue;

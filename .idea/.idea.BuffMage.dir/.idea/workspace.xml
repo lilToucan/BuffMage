@@ -9,16 +9,22 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/Inputs/IMC_TESTING.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_MainMenuController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_MainMenuController.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Lava/BP_LavaPit.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Lava/BP_LavaPit.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_PauseMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_PauseMenu.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/TestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/TestLevel.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonAttack_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonAttack_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonDamaged_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonDamaged_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonReload_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonReload_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonAttack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonDamaged.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonDamaged.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonIdle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonIdle.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonReload.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonReload.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonWalk.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonWalk.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Skeleton.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Placeholder/Animations/ABP_SkeletonRangedPlaceholder.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Placeholder/Ranged_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Placeholder/Ranged_Skeleton.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Placeholder/Ranged_Skeleton_PhysicsAsset.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Ranged_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Ranged_Skeleton.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_HidingEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_HidingEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +121,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Uproject.BuffMage.executor": "Run",
-    "git-widget-placeholder": "feature/Programming/Gameplay/FirePit/Reconstruction",
+    "git-widget-placeholder": "feature/Programming/TestBranch",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -265,6 +271,7 @@
       <workItem from="1781226400470" duration="1004000" />
       <workItem from="1781686757415" duration="1949000" />
       <workItem from="1781786280209" duration="1736000" />
+      <workItem from="1782590083664" duration="391000" />
     </task>
     <servers />
   </component>
