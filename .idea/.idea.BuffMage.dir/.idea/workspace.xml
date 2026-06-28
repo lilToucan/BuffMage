@@ -9,42 +9,10 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BP_EnemyController.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/BB_BaseEnemy.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/CirclingEnemy/BB_EnemyCircling.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/CirclingEnemy/BT_EnemyCircling.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/HidingEnemy/BB_HidingEnemy.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/HidingEnemy/BT_HidingEnemy.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomDecorators/BTD_DistanceFromTargetCheck.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomService/BTS_LookAtTarget.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomService/BTS_RaycastTargetFromPosition.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomService/BTS_SearchForPlayer.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_AddNumber.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_GetPositionFromEntety.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_MoveToEntety.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_PlayAnimMontage.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_SearchPlayer.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_StartAttack.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/EQC_TargetActor.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/EQ_DotsMelee.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/EQ_FindAttackSpot.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/EQ_FindHidingSpot.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/Testing/BP_EQSTest.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_CirclingEnemy.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_Gargoyle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_HidingEnemy.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/SwarmBrain/BP_SwarmBrain.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Core/GameModes/GM_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Core/GameModes/GM_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Projectiles/BP_PLayerProjectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Projectiles/BP_PLayerProjectile.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Projectiles/BP_Projectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Projectiles/BP_Projectile.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/Blockout/Blockout.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Blockout/Blockout.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/Blockout/Blockout_Def.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Blockout/Blockout_Def.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Arena/BP_EnemyArena.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Arena/BP_EnemyArena.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Enemies/BP_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Enemies/BP_BaseEnemy.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/TestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/TestLevel.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_InternalTests.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_InternalTests.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Testing(TODELETE)/BP_RoomStarter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Testing(TODELETE)/BP_RoomStarter.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,7 +266,7 @@
       <workItem from="1782590083664" duration="391000" />
       <workItem from="1782647029185" duration="4358000" />
       <workItem from="1782653002079" duration="1000" />
-      <workItem from="1782653311781" duration="5498000" />
+      <workItem from="1782653311781" duration="7335000" />
     </task>
     <servers />
   </component>
