@@ -9,22 +9,42 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonAttack_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonAttack_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonDamaged_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonDamaged_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonReload_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Montages/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonReload_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonDamaged.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonDamaged.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonIdle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonIdle.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonReload.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonReload.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonWalk.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Anim_RangedSkeletonArmature_RangedSkeletonWalk.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Animation/Ranged_Skeleton_Skeleton.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Placeholder/Animations/ABP_SkeletonRangedPlaceholder.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Placeholder/Ranged_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Placeholder/Ranged_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Placeholder/Ranged_Skeleton_PhysicsAsset.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Ranged_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/3D/Skeleton_Mage/Mesh/Ranged_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_HidingEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_HidingEnemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BP_EnemyController.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/BB_BaseEnemy.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/CirclingEnemy/BB_EnemyCircling.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/CirclingEnemy/BT_EnemyCircling.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/HidingEnemy/BB_HidingEnemy.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/Bheaviours/HidingEnemy/BT_HidingEnemy.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomDecorators/BTD_DistanceFromTargetCheck.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomService/BTS_LookAtTarget.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomService/BTS_RaycastTargetFromPosition.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomService/BTS_SearchForPlayer.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_AddNumber.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_GetPositionFromEntety.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_MoveToEntety.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_PlayAnimMontage.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_SearchPlayer.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/BehaviourTrees/CustomTasks/BTT_StartAttack.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/EQC_TargetActor.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/EQ_DotsMelee.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/EQ_FindAttackSpot.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/EQ_FindHidingSpot.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/EQS/Testing/BP_EQSTest.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_BaseEnemy.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_CirclingEnemy.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_Gargoyle.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/Enemies/BP_HidingEnemy.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AI/SwarmBrain/BP_SwarmBrain.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Core/GameModes/GM_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Core/GameModes/GM_BuffMage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Projectiles/BP_PLayerProjectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Projectiles/BP_PLayerProjectile.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Projectiles/BP_Projectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Projectiles/BP_Projectile.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Blockout/Blockout.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Blockout/Blockout.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Blockout/Blockout_Def.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Blockout/Blockout_Def.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/TestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/TestLevel.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_InternalTests.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_InternalTests.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Testing(TODELETE)/BP_RoomStarter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Testing(TODELETE)/BP_RoomStarter.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +91,7 @@
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Engine/DataTable.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Engine/LevelScriptActor.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Engine/TimerHandle.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/GameFramework/Character.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/GameFramework/Pawn.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/GameFramework/PlayerController.h" root0="FORCE_HIGHLIGHTING" />
@@ -80,6 +101,7 @@
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/LevelScriptActor.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/Pawn.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Public/DrawDebugHelpers.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/NavigationSystem/Public/NavModifierComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/SignalProcessing/Public/DSP/Envelope.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Windows/AudioMixerXAudio2/Private/AudioMixerPlatformXAudio2.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/BuffMage/UHT/AttackComponent.gen.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -95,8 +117,10 @@
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/DynamicWeaponData/FDynamicWeaponData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/ObjectPool/FObjcetPool.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/ObjectPool/FObjcetPool.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/Phrases/FPhrase.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/Phrases/FPhrase.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/Wave/FWave.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/Wave/FWave.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/WaveData/FWaveData.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Structs/WaveData/FWaveData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Subsystems/DialogueSystem/DialogueSystem.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Subsystems/DialogueSystem/DialogueSystem.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Subsystems/ObjectPooling/ObjectPoolingSubsystem.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -115,22 +139,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Uproject.BuffMage.executor": "Run",
-    "git-widget-placeholder": "feature/Programming/TestBranch",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Uproject.BuffMage.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/Programming/Gameplay/ArenaFight&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CidrLocalAttachDebugger.recentlyUsed">
       <recent name="com.jetbrains.rider.cpp.debugger.RiderCppLLDBDriverConfiguration" />
@@ -272,6 +296,9 @@
       <workItem from="1781686757415" duration="1949000" />
       <workItem from="1781786280209" duration="1736000" />
       <workItem from="1782590083664" duration="391000" />
+      <workItem from="1782647029185" duration="4358000" />
+      <workItem from="1782653002079" duration="1000" />
+      <workItem from="1782653311781" duration="5498000" />
     </task>
     <servers />
   </component>
