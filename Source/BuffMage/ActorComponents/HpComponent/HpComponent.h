@@ -23,10 +23,10 @@ public:
 	float StartingHP;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
-	float MaxShield;
+	float MaxShield = 100;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
-	float StartingShield;
+	float StartingShield = 0;
 
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Hit")
@@ -123,7 +123,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "HpComponent")
 	virtual void OnHealingTaken(float Healing, AActor* HealingCauser);
 	UFUNCTION(BlueprintCallable, Category = "HpComponent")
-	virtual void OnHealShieldTaken(float Healing, AActor* HealingCauser);
+	virtual void OnHealShieldTaken(float ShieldAmount, AActor* HealingCauser);
 
 	UFUNCTION(BlueprintCallable, Category = "HpComponent|Death")
 	virtual void Death(AActor* TheKiller);

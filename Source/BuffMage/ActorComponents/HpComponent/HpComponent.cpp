@@ -124,12 +124,12 @@ void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 	OnHpChanged.Broadcast(CurrentHp);
 }
 
-void UHpComponent::OnHealShieldTaken(float Healing, AActor* HealingCauser)
+void UHpComponent::OnHealShieldTaken(float ShieldAmount, AActor* HealingCauser)
 {
 	if (!IsActive() || CurrentHp <= 0)
 		return;
 
-	CurrentShield = FMath::Min(CurrentShield + Healing, MaxShield);
+	CurrentShield = FMath::Min(CurrentShield + ShieldAmount, MaxShield);
 	OnShieldChanged.Broadcast(CurrentShield);
 }
 

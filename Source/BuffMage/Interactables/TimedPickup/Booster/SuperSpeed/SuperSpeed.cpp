@@ -9,13 +9,16 @@ void ASuperSpeed::ResetBoost()
 {
 	GetWorldTimerManager().ClearTimer(Timer);
 	PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = OriginalBoostedValue;
-	DisableActor_Implementation();
+
 }
 
 void ASuperSpeed::PickUp_Implementation(ABuffMageCharacter* Player)
 {
-	OriginalBoostedValue = PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed;
+	PlayerCharacter = Player;
+	
+	OriginalBoostedValue = PlayerCharacter->GetCharacterMovement()->GetMaxSpeed();
 	PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed+= BoostAmount;
+	DisableActor_Implementation();
 	GetWorldTimerManager().ClearTimer(Timer);
 	GetWorldTimerManager().SetTimer(Timer, this, &ASuperSpeed::ResetBoost, Duration);
 	

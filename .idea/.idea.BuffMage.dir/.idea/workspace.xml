@@ -9,10 +9,17 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BuffMage.uproject.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/BuffMage.uproject.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/EnemyWeapon/RangedSkeleton/DA_RangedSkeletonWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/EnemyWeapon/RangedSkeleton/DA_RangedSkeletonWeapon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Interactables/HealthPack/HealthPack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Interactables/HealthPack/HealthPack.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Interactables/HealthPack/HealthPack.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Interactables/HealthPack/HealthPack.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/Booster/SuperJump/SuperJump.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/Booster/SuperJump/SuperJump.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/Booster/SuperSpeed/SuperSpeed.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/Booster/SuperSpeed/SuperSpeed.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/ShieldPack/ShieldPack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/ShieldPack/ShieldPack.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +33,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="cidr-memory-view://9" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/AssetTools/Internal/AssetHeaderPatcher.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/DerivedDataCache/Private/ZenCacheStore.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Developer/FunctionalTesting/Private/FunctionalAITest.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -65,6 +73,7 @@
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/GameFramework/PlayerController.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/Character.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/Components/ActorComponent.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/Components/CharacterMovementComponent.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/DrawDebugHelpers.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/LevelScriptActor.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/Pawn.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -77,14 +86,6 @@
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/MeleeWeaponData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/DataAssets/Weapons/Ranged/RangedWeaponData.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interactables/Booster/Booster.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interactables/Booster/Booster.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interactables/Booster/SuperJump/SuperJump.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interactables/Booster/SuperJump/SuperJump.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interactables/Booster/SuperSpeed/SuperSpeed.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interactables/Booster/SuperSpeed/SuperSpeed.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interactables/ShieldPack/ShieldPack.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interactables/ShieldPack/ShieldPack.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interfaces/Pickupable/Pickupable.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interfaces/Pickupable/Pickupable.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/BuffMage/Interfaces/Poolable/ProjectilePoolable.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -304,6 +305,11 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/CoreUObject/Public/UObject/ObjectPtr.h</url>
+          <line>276</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

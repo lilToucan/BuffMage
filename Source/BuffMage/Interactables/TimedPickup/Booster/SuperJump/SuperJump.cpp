@@ -14,7 +14,7 @@ void ASuperJump::ResetBoost()
 {
 	GetWorldTimerManager().ClearTimer(Timer);
 	PlayerCharacter->GetCharacterMovement()->JumpZVelocity = OriginalBoostedValue;
-	DisableActor_Implementation();
+	
 }
 
 void ASuperJump::PickUp_Implementation(ABuffMageCharacter* Player)
@@ -22,6 +22,7 @@ void ASuperJump::PickUp_Implementation(ABuffMageCharacter* Player)
 	PlayerCharacter = Player;
 	OriginalBoostedValue = Player->GetCharacterMovement()->JumpZVelocity;
 	Player->GetCharacterMovement()->JumpZVelocity += BoostAmount;
+	DisableActor_Implementation();
 	GetWorldTimerManager().ClearTimer(Timer);
 	GetWorldTimerManager().SetTimer(Timer, this, &ASuperJump::ResetBoost, Duration);
 }

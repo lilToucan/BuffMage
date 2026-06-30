@@ -18,6 +18,7 @@ void AShieldPack::PickUp_Implementation(ABuffMageCharacter* Player)
 		return;
 
 	PlayerHp->OnHealShieldTaken(ShieldAmount, GetOwner());
-	DisableActor();
+	
+	Super::PickUp_Implementation(Player);
 }
 
