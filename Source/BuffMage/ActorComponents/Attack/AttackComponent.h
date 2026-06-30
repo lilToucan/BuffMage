@@ -31,6 +31,9 @@ public:
 	TObjectPtr<UAnimInstance> AnimInstance;
 
 protected:
+	UPROPERTY(BlueprintReadWrite)
+	float AddedAttack;
+	
 	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
 	FNormalDelegate OnEnemyKilled;
 #pragma region WEAPONS
@@ -205,9 +208,13 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnAttackHit(AActor* ActorHit);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void AddAttackDamageToAttacks(float Damage);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ResetAddedAttackDamage();
+	
 #pragma region RageFunctions
-
-public:
+	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetRage(float RageValue);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)

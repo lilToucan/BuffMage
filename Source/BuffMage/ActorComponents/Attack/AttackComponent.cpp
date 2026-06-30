@@ -133,9 +133,9 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 	AttackPosition += GetOwner()->GetActorForwardVector() * WeaponAsset->PositionOffsetX; // offset the position forward by PositionOffsetX
 
 	if (Cam != nullptr) // if we have the ref to the cam
-		WeaponAsset->Attack(AttackPosition, Cam->GetComponentRotation(), GetOwner(), HitActors); // rotate attack by the cam
+		WeaponAsset->Attack(AddedAttack,AttackPosition, Cam->GetComponentRotation(), GetOwner(), HitActors); // rotate attack by the cam
 	else
-		WeaponAsset->Attack(AttackPosition, AttackRotation, GetOwner(), HitActors); // rotate attack by the owner's rotation
+		WeaponAsset->Attack(AddedAttack,AttackPosition, AttackRotation, GetOwner(), HitActors); // rotate attack by the owner's rotation
 }
 
 // ON ATTACK HIT: Called when your attack goes through and hits an enemy :) (not called if the attack killed it D:)
@@ -453,6 +453,16 @@ void UAttackComponent::StopRage_Implementation()
 
 	SetComponentTickEnabled(false);
 	OnCurrentWeaponChange();
+}
+
+void UAttackComponent::AddAttackDamageToAttacks_Implementation(float Damage)
+{
+	AddedAttack = Damage;
+}
+
+void UAttackComponent::ResetAddedAttackDamage_Implementation()
+{
+	AddAttackDamageToAttacks_Implementation(0);
 }
 
 // TICK
