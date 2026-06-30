@@ -46,12 +46,26 @@ void UHpComponent::Deactivate()
 }
 
 
-void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+bool UHpComponent::TakeDamage(float Damage, AActor* DamageCauser)
 {
 	if (!IsActive() || CurrentHp <= 0)
-		return;
+		return false;
 
-	CurrentHp -= Damage;
+
+	if (CurrentShield > 0)
+	{
+		CurrentShield -= Damage;
+		if (CurrentShield <= 0) // if it's negative then apply the remaining damage to hp
+		{
+			CurrentHp += CurrentShield;
+			CurrentShield = 0;
+		}
+		OnShieldChanged.Broadcast(CurrentShield);
+	}
+	else
+	{
+		CurrentHp -= Damage;
+	}
 
 	if (bAppliesRage && !bIsStunned)
 	{
@@ -65,7 +79,7 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 		CurrentHp = 0;
 		OnHpChanged.Broadcast(CurrentHp);
 		Death(DamageCauser);
-		return;
+		return false;
 	}
 
 	OnHpChanged.Broadcast(CurrentHp); // update UI
@@ -78,7 +92,7 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 	// play hurt sound
 
 	if (HurtSounds.Num() <= 0)
-		return;
+		return true;
 
 	USoundBase* SoundToPlay = HurtSounds[FMath::RandRange(0, HurtSounds.Num() - 1)];
 
@@ -87,56 +101,18 @@ void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDama
 	float Pitch = FMath::RandRange(HurtPitchMinMax.X, HurtPitchMinMax.Y);
 
 	PlaySound(SoundToPlay, GetOwner(), Volume, Pitch);
+	return true;
+}
+
+void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+{
+	TakeDamage(Damage, DamageCauser);
 }
 
 void UHpComponent::ApplyDamageDirectly(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser, bool bShouldFade)
 {
-	if (!bShouldFade)
-	{
-		OnDamageTaken(DamagedActor,Damage,DamageType, InstigatedBy, DamageCauser);
-		return;
-	}
-
-	if (!IsActive() || CurrentHp <= 0)
-		return;
-
-	CurrentHp -= Damage;
-
-	if (bAppliesRage && !bIsStunned)
-	{
-		UAttackComponent* AttackComponent = DamageCauser->GetComponentByClass<UAttackComponent>();
-		if (IsValid(AttackComponent))
-			AttackComponent->OnAttackHit(GetOwner());
-	}
-
-	if (CurrentHp <= 0)
-	{
-		CurrentHp = 0;
-		OnHpChanged.Broadcast(CurrentHp);
-		Death(DamageCauser);
-		return;
-	}
-
-	OnHpChanged.Broadcast(CurrentHp); // Update UI
-	OnHpDirectlyChanged.Broadcast(CurrentHp); // Tell the game to go back to the checkpoint 
-
-	if (HitMontage)
-		CharacterOwner->PlayAnimMontage(HitMontage);
-
-	OnHit.Broadcast();
-
-	// play hurt sound
-
-	if (HurtSounds.Num() <= 0)
-		return;
-
-	USoundBase* SoundToPlay = HurtSounds[FMath::RandRange(0, HurtSounds.Num() - 1)];
-
-	// change into normal sound
-	float Volume = FMath::RandRange(HurtVolumeMinMax.X, HurtVolumeMinMax.Y);
-	float Pitch = FMath::RandRange(HurtPitchMinMax.X, HurtPitchMinMax.Y);
-
-	PlaySound(SoundToPlay, GetOwner(), Volume, Pitch);
+	if (TakeDamage(Damage, DamageCauser))
+		OnHpDirectlyChanged.Broadcast(CurrentHp); // Tell the game to go back to the checkpoint 
 }
 
 void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
@@ -146,6 +122,15 @@ void UHpComponent::OnHealingTaken(float Healing, AActor* HealingCauser)
 
 	CurrentHp = FMath::Min(CurrentHp + Healing, MaxHp);
 	OnHpChanged.Broadcast(CurrentHp);
+}
+
+void UHpComponent::OnHealShieldTaken(float ShieldAmount, AActor* HealingCauser)
+{
+	if (!IsActive() || CurrentHp <= 0)
+		return;
+
+	CurrentShield = FMath::Min(CurrentShield + ShieldAmount, MaxShield);
+	OnShieldChanged.Broadcast(CurrentShield);
 }
 
 void UHpComponent::Death(AActor* TheKiller)

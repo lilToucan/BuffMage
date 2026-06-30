@@ -1,12 +1,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BuffMage/Interfaces/Interactables.h"
+#include "BuffMage/Interactables/TimedPickup/TimedPickup.h"
 #include "GameFramework/Actor.h"
 #include "HealthPack.generated.h"
 
 UCLASS()
-class BUFFMAGE_API AHealthPack : public AActor, public IInteractables
+class BUFFMAGE_API AHealthPack : public ATimedPickup
 {
 	GENERATED_BODY()
 
@@ -18,10 +18,7 @@ protected:
 
 public:
 	AHealthPack();
-	virtual void Tick(float DeltaTime) override;
-	virtual void Interact_Implementation(ABuffMageCharacter* Player) override;
-	
+	virtual void PickUp_Implementation(ABuffMageCharacter* Player) override;
 protected:
 	virtual void BeginPlay() override;
-	void DisableActor();
 };

@@ -22,6 +22,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
 	float StartingHP;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
+	float MaxShield = 100;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Config")
+	float StartingShield = 0;
+
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HpComponent|Hit")
 	UAnimMontage* HitMontage;
 
@@ -54,6 +61,10 @@ public:
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
 	FHPValueCahngeDelegate OnHpChanged;
+
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
+	FHPValueCahngeDelegate OnShieldChanged;
+
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, BlueprintReadWrite, Category = "HpComponent|Delegate")
 	FHPValueCahngeDelegate OnHpDirectlyChanged;
 
@@ -82,6 +93,11 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Hp")
 	float CurrentHp;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HpComponent|Hp")
+	float CurrentShield;
+
+	
+
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Animations")
 	ACharacter* CharacterOwner;
 	UPROPERTY(BlueprintReadWrite, Category = "HpComponent|Animations")
@@ -96,6 +112,7 @@ public:
 
 	virtual void Activate(bool bReset = false) override;
 	virtual void Deactivate() override;
+	bool TakeDamage(float Damage, AActor* DamageCauser);
 
 	UFUNCTION(BlueprintCallable, Category = "HpComponent")
 	virtual void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
@@ -105,6 +122,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "HpComponent")
 	virtual void OnHealingTaken(float Healing, AActor* HealingCauser);
+	UFUNCTION(BlueprintCallable, Category = "HpComponent")
+	virtual void OnHealShieldTaken(float ShieldAmount, AActor* HealingCauser);
 
 	UFUNCTION(BlueprintCallable, Category = "HpComponent|Death")
 	virtual void Death(AActor* TheKiller);
