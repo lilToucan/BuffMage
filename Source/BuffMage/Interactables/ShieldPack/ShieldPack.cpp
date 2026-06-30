@@ -1,34 +1,31 @@
-#include "HealthPack.h"
+#include "ShieldPack.h"
 
-#include "BuffMage/ActorComponents/HpComponent/HpComponent.h"
-
-
-AHealthPack::AHealthPack()
+AShieldPack::AShieldPack()
 {
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-void AHealthPack::BeginPlay()
+void AShieldPack::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-void AHealthPack::Tick(float DeltaTime)
+void AShieldPack::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-void AHealthPack::PickUp_Implementation(ABuffMageCharacter* Player)
+void AShieldPack::PickUp_Implementation(ABuffMageCharacter* Player)
 {
 	UHpComponent* PlayerHp = Player->FindComponentByClass<UHpComponent>();
 	if (!PlayerHp)
 		return;
 
-	PlayerHp->OnHealingTaken(HealingAmount, GetOwner());
+	PlayerHp->OnHealShieldTaken(ShieldAmount, GetOwner());
 	DisableActor();
 }
 
-void AHealthPack::NotifyActorBeginOverlap(AActor* OtherActor)
+void AShieldPack::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	if (ABuffMageCharacter* Player = Cast<ABuffMageCharacter>(OtherActor))
 	{
@@ -36,8 +33,7 @@ void AHealthPack::NotifyActorBeginOverlap(AActor* OtherActor)
 	}
 }
 
-
-void AHealthPack::DisableActor()
+void AShieldPack::DisableActor()
 {
 	SetActorHiddenInGame(true);
 	SetActorEnableCollision(false);

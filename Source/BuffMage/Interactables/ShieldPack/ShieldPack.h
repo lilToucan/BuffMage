@@ -1,23 +1,23 @@
-#pragma once
+// Fill out your copyright notice in the Description page of Project Settings.#pragma once
 
 #include "CoreMinimal.h"
 #include "BuffMage/Interfaces/Pickupable/Pickupable.h"
 #include "GameFramework/Actor.h"
-#include "HealthPack.generated.h"
+#include "ShieldPack.generated.h"
 
 UCLASS()
-class BUFFMAGE_API AHealthPack : public AActor, public IPickupable
+class BUFFMAGE_API AShieldPack : public AActor, public IPickupable
 {
 	GENERATED_BODY()
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config")
-	float HealingAmount;
+	float ShieldAmount;
 
 protected:
 
 public:
-	AHealthPack();
+	AShieldPack();
 	virtual void Tick(float DeltaTime) override;
 	virtual void PickUp_Implementation(ABuffMageCharacter* Player) override;
 protected:
