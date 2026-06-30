@@ -1,17 +1,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BuffMage/Interactables/Booster/Booster.h"
-#include "SuperSpeed.generated.h"
+#include "BuffMage/Interactables/TimedPickup/Booster/Booster.h"
+#include "GameFramework/Actor.h"
+#include "SuperJump.generated.h"
 
 UCLASS()
-class BUFFMAGE_API ASuperSpeed : public ABooster
+class BUFFMAGE_API ASuperJump : public ABooster
 {
 	GENERATED_BODY()
 
 public:
-	ASuperSpeed();
+	ASuperJump();
 	virtual void ResetBoost() override;
+	
 	virtual void PickUp_Implementation(ABuffMageCharacter* Player) override;
 
 protected:

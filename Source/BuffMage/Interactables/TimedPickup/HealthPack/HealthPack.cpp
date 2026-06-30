@@ -13,10 +13,6 @@ void AHealthPack::BeginPlay()
 	Super::BeginPlay();
 }
 
-void AHealthPack::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
 
 void AHealthPack::PickUp_Implementation(ABuffMageCharacter* Player)
 {
@@ -25,22 +21,7 @@ void AHealthPack::PickUp_Implementation(ABuffMageCharacter* Player)
 		return;
 
 	PlayerHp->OnHealingTaken(HealingAmount, GetOwner());
-	DisableActor();
+
+	Super::PickUp_Implementation(Player); // == DisableActor_Implementation();
 }
 
-void AHealthPack::NotifyActorBeginOverlap(AActor* OtherActor)
-{
-	if (ABuffMageCharacter* Player = Cast<ABuffMageCharacter>(OtherActor))
-	{
-		PickUp_Implementation(Player);
-	}
-}
-
-
-void AHealthPack::DisableActor()
-{
-	SetActorHiddenInGame(true);
-	SetActorEnableCollision(false);
-	SetActorTickEnabled(false);
-	Destroy();
-}
