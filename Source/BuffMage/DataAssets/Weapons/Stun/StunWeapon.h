@@ -13,5 +13,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
 	float StunDuration;
 	
-	virtual void Attack(FVector StartPos, FRotator Rotation, AActor* Instigator,TArray<AActor*>& ActorsHit) override;
+	virtual void Attack(float AddedDamage,FVector StartPos, FRotator Rotation, AActor* Instigator,TArray<AActor*>& ActorsHit) override;
 };

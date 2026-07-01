@@ -4,7 +4,7 @@
 #include "Engine/DamageEvents.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-void UStunWeapon::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
+void UStunWeapon::Attack(float AddedDamage,FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
 {
 	TArray<AActor*> IgnoreActors;
 	IgnoreActors.Add(Instigator);

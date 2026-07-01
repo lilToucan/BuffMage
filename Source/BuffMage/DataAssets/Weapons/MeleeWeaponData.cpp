@@ -3,7 +3,7 @@
 #include "Engine/DamageEvents.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-void UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
+void UMeleeWeaponData::Attack(float AddedDamage,FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
 {
 	TArray<TEnumAsByte<EObjectTypeQuery>> traceObjectTypes;
 	traceObjectTypes.Append(CollisionChannel);
@@ -47,7 +47,7 @@ void UMeleeWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Insti
 				continue;
 		}
 
-		Actor->TakeDamage(Damage, DamageEvent, nullptr, Instigator);
+		Actor->TakeDamage(Damage+AddedDamage, DamageEvent, nullptr, Instigator);
 		ActorsHit.Add(Actor);
 		
 	}

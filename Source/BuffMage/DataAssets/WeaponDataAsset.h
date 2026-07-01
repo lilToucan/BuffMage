@@ -55,5 +55,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 	TArray<UAnimSequenceBase*> WalkAnims;
 	
-	virtual void Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit);
+	virtual void Attack(float AddedDamage,FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit);
 };

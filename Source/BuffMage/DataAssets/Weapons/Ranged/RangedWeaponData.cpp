@@ -3,7 +3,7 @@
 #include "BuffMage/Interfaces/Poolable/ProjectilePoolable.h"
 #include "BuffMage/Subsystems/ObjectPooling/ObjectPoolingSubsystem.h"
 
-void URangedWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
+void URangedWeaponData::Attack(float AddedDamage,FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit)
 {
 	UObjectPoolingSubsystem* PoolingSubsystem = Instigator->GetWorld()->GetSubsystem<UObjectPoolingSubsystem>();
 	
@@ -12,5 +12,5 @@ void URangedWeaponData::Attack(FVector StartPos, FRotator Rotation, AActor* Inst
 	if (!ProjectileInterface.GetObject())
 		return ;
 
-	IProjectilePoolable::Execute_Activate(ProjectileInterface.GetObject(),ProjectileVelocity,Damage,0, Instigator,StartPos,Rotation);
+	IProjectilePoolable::Execute_Activate(ProjectileInterface.GetObject(),ProjectileVelocity,Damage+AddedDamage,0, Instigator,StartPos,Rotation);
 }
