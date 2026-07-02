@@ -9,17 +9,12 @@
   <component name="ChangeListManager">
     <list default="true" id="3be4fa2a-25df-468c-8e40-c3cd8c6e2ffa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BuffMage.uproject.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/BuffMage.uproject.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Character/BP_BuffMage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/Core/Controllers/BP_BuffMageController.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/EnemyWeapon/RangedSkeleton/DA_RangedSkeletonWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DataAssets/Weapons/EnemyWeapon/RangedSkeleton/DA_RangedSkeletonWeapon.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/UI/WBP_GameUI.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Arena/BP_Door.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Arena/BP_Door.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Arena/BP_EnemyArena.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Arena/BP_EnemyArena.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/HpComponent/HpComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/Booster/SuperJump/SuperJump.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/Booster/SuperJump/SuperJump.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/Booster/SuperSpeed/SuperSpeed.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/Booster/SuperSpeed/SuperSpeed.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/ShieldPack/ShieldPack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Interactables/TimedPickup/ShieldPack/ShieldPack.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Structs/Wave/FWave.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Structs/Wave/FWave.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/BuffMage/Structs/WaveData/FWaveData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/Structs/WaveData/FWaveData.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +119,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Uproject.BuffMage.executor": "Run",
-    "git-widget-placeholder": "feature/Programming/Gameplay/PowerUps",
+    "git-widget-placeholder": "feature/Programming/TestBranch",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",

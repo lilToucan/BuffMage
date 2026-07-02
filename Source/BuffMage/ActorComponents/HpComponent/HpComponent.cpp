@@ -48,10 +48,9 @@ void UHpComponent::Deactivate()
 
 bool UHpComponent::TakeDamage(float Damage, AActor* DamageCauser)
 {
-	if (!IsActive() || CurrentHp <= 0)
+	if (CurrentHp <= 0)
 		return false;
-
-
+	
 	if (CurrentShield > 0)
 	{
 		CurrentShield -= Damage;
@@ -106,6 +105,8 @@ bool UHpComponent::TakeDamage(float Damage, AActor* DamageCauser)
 
 void UHpComponent::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
+	if (!IsActive())
+		return;
 	TakeDamage(Damage, DamageCauser);
 }
 
