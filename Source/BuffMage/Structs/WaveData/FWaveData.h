@@ -18,6 +18,6 @@ struct FWaveData
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TEnumAsByte<EEnemyType> EnemyType;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(MakeEditWidget = true))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(MakeEditWidget = true, ToolTip="Every position is equal to a new enemy spawned (ex 5 positions = 5 enemies of the EnemyType chosen)"))
 	TArray<FVector> EnemyPositions;
 };

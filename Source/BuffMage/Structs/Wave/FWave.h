@@ -8,5 +8,5 @@ struct FWave
 	GENERATED_BODY()
 	public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(MakeEditWidget = true))
-	TArray<FWaveData> Waves;
+	TArray<FWaveData> Enemies;
 };
