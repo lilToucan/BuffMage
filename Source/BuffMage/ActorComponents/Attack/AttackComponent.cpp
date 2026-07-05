@@ -120,24 +120,30 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 
 	FVector AttackPosition;
-	FRotator AttackRotation = FRotator::ZeroRotator;
+	FRotator AttackRotation;
 
 	if (Target)
 	{
-		AttackRotation = UKismetMathLibrary::FindLookAtRotation(GetOwner()->GetActorLocation(), Target->GetActorLocation());
+		if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName)) 
+			AttackRotation = UKismetMathLibrary::FindLookAtRotation(GetOwner()->GetActorLocation(), Target->GetActorLocation()); // if socket doesn't exist
+		else
+			AttackRotation = UKismetMathLibrary::FindLookAtRotation(AnimInstance->GetSkelMeshComponent()->GetSocketLocation(SocketName), Target->GetActorLocation()); // if socket exists
+	}
+	else
+	{
+		if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName))
+			AttackRotation = GetOwner()->GetActorRotation();
+		else
+			AttackRotation = AnimInstance->GetSkelMeshComponent()->GetSocketRotation(SocketName);
 	}
 
 	if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName))
 	{
 		AttackPosition = GetOwner()->GetActorLocation(); // get owner position
-		if (!Target)
-			AttackRotation = GetOwner()->GetActorRotation();
 	} // if the socket given does not exist 
 	else
 	{
 		AttackPosition = AnimInstance->GetSkelMeshComponent()->GetSocketLocation(SocketName); // get the position of the socket
-		if (!Target)
-			AttackRotation = AnimInstance->GetSkelMeshComponent()->GetSocketRotation(SocketName);
 	}
 
 	AttackPosition += GetOwner()->GetActorForwardVector() * WeaponAsset->PositionOffsetX; // offset the position forward by PositionOffsetX
