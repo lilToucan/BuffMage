@@ -32,6 +32,9 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadWrite)
+	AActor* Target;
+	
+	UPROPERTY(BlueprintReadWrite)
 	float AddedAttack;
 	
 	UPROPERTY(BlueprintReadWrite, BlueprintAssignable, BlueprintCallable)
@@ -97,9 +100,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config")
 	float RageAfterHitting = 5.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config|Debug")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Config|Debug")
 	bool bRemoveRageWhenStopped;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Config|Debug")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Config|Debug")
 	bool bReloadWhenAmmoFinished = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound|Start")
@@ -151,7 +154,7 @@ public:
 
 #pragma region AttackFunctions
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void StartAttackAnim();
+	void StartAttackAnim(AActor* TargetActor = nullptr);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void HitDetection(FName SocketName);

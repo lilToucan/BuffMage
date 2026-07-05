@@ -3,6 +3,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 
 
 UAttackComponent::UAttackComponent()
@@ -50,7 +51,7 @@ void UAttackComponent::SetUpWeapon(FDynamicWeaponData& WeaponAsset)
 }
 
 // START ATTACKING: Called by the Owner of the component when inputting an attack
-void UAttackComponent::StartAttackAnim_Implementation()
+void UAttackComponent::StartAttackAnim_Implementation(AActor* TargetActor)
 {
 	if (GetWorld()->GetTimeSeconds() < CurrentWeapon.CooldownTime) //has the input been received before the fire rate was over
 		return;
@@ -71,6 +72,8 @@ void UAttackComponent::StartAttackAnim_Implementation()
 			StartReloading();
 		return;
 	}
+
+	Target = TargetActor;
 
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 	ResetHitActors();
@@ -117,25 +120,32 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 
 	FVector AttackPosition;
-	FRotator AttackRotation;
+	FRotator AttackRotation = FRotator::ZeroRotator;
+
+	if (Target)
+	{
+		AttackRotation = UKismetMathLibrary::FindLookAtRotation(GetOwner()->GetActorLocation(), Target->GetActorLocation());
+	}
 
 	if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName))
 	{
 		AttackPosition = GetOwner()->GetActorLocation(); // get owner position
-		AttackRotation = GetOwner()->GetActorRotation();
+		if (!Target)
+			AttackRotation = GetOwner()->GetActorRotation();
 	} // if the socket given does not exist 
 	else
 	{
 		AttackPosition = AnimInstance->GetSkelMeshComponent()->GetSocketLocation(SocketName); // get the position of the socket
-		AttackRotation = AnimInstance->GetSkelMeshComponent()->GetSocketRotation(SocketName);
+		if (!Target)
+			AttackRotation = AnimInstance->GetSkelMeshComponent()->GetSocketRotation(SocketName);
 	}
 
 	AttackPosition += GetOwner()->GetActorForwardVector() * WeaponAsset->PositionOffsetX; // offset the position forward by PositionOffsetX
 
 	if (Cam != nullptr) // if we have the ref to the cam
-		WeaponAsset->Attack(AddedAttack,AttackPosition, Cam->GetComponentRotation(), GetOwner(), HitActors); // rotate attack by the cam
+		WeaponAsset->Attack(AddedAttack, AttackPosition, Cam->GetComponentRotation(), GetOwner(), HitActors); // rotate attack by the cam
 	else
-		WeaponAsset->Attack(AddedAttack,AttackPosition, AttackRotation, GetOwner(), HitActors); // rotate attack by the owner's rotation
+		WeaponAsset->Attack(AddedAttack, AttackPosition, AttackRotation, GetOwner(), HitActors); // rotate attack by the owner's rotation
 }
 
 // ON ATTACK HIT: Called when your attack goes through and hits an enemy :) (not called if the attack killed it D:)
@@ -227,7 +237,7 @@ void UAttackComponent::StartReloading_Implementation()
 
 	CurrentWeapon.bIsReloading = true;
 
-	if (!AnimInstance || !WeaponAsset->ReloadAnimMontage)
+	if (!AnimInstance || !IsValid(WeaponAsset->ReloadAnimMontage))
 	{
 		ReloadWeapon();
 		return;
