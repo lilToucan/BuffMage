@@ -104,6 +104,8 @@ protected:
 	bool bRemoveRageWhenStopped;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Config|Debug")
 	bool bReloadWhenAmmoFinished = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Config|Debug")
+	bool bCheckAmmo = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AttackComponent|Weapons|Rage|Sound|Start")
 	USoundBase* StartRageSound;

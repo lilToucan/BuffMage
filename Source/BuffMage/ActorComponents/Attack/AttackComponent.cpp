@@ -66,11 +66,14 @@ void UAttackComponent::StartAttackAnim_Implementation(AActor* TargetActor)
 	if (!IsValid(AnimInstance))
 		return;
 	// Check if you have ammo
-	if (HasAmmoBeenDepleted())
+	if (bCheckAmmo)
 	{
-		if (bReloadWhenAmmoFinished)
-			StartReloading();
-		return;
+		if (HasAmmoBeenDepleted())
+		{
+			if (bReloadWhenAmmoFinished)
+				StartReloading();
+			return;
+		}
 	}
 
 	Target = TargetActor;

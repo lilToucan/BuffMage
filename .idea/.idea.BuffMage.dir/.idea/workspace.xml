@@ -11,8 +11,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuffMage.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprint/ActorComponents/BP_EnemyAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/ActorComponents/BP_EnemyAttack.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/BehaviourTrees/Bheaviours/HidingEnemy/BT_HidingEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/BehaviourTrees/Bheaviours/HidingEnemy/BT_HidingEnemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/BehaviourTrees/CustomTasks/BTT_StartAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/BehaviourTrees/CustomTasks/BTT_StartAttack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Enemies/BP_BaseEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Enemies/BP_BaseEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Enemies/BP_HidingEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/EnemyAI/Enemies/BP_HidingEnemy.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/TestLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/TestLevel.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Testing/Lvl_PlayTest.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/BuffMage/ActorComponents/Attack/AttackComponent.h" afterDir="false" />
     </list>
