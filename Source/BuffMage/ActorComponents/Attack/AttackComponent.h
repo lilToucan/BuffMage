@@ -159,7 +159,7 @@ public:
 	void StartAttackAnim(AActor* TargetActor = nullptr);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void HitDetection(FName SocketName);
+	void HitDetection(FName SocketName,FVector SocketPos , FRotator SocketRotation );
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ResetHitActors();

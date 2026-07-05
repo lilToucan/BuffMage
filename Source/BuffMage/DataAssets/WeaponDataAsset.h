@@ -14,9 +14,6 @@ public:
 	float Damage = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
-	float PositionOffsetX = 400;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
 	float CooldownBetweenCombos = 3;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
@@ -42,9 +39,12 @@ public:
 	FVector2D PitchMinMax = FVector2D(0.7f, 1.3f);
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
 	USoundAttenuation* SoundAttenuation;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 	TArray<TObjectPtr<UAnimMontage>> AttackComboAnimMontage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+	TArray<FVector> AttackOffsets;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 	TObjectPtr<UAnimMontage> ReloadAnimMontage;
@@ -54,6 +54,11 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 	TArray<UAnimSequenceBase*> WalkAnims;
+
+
+	UPROPERTY( BlueprintReadWrite, Category = "Attack")
+	float HalfHeight = 1;
+
+	virtual void Attack(float AddedDamage, FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit);
 	
-	virtual void Attack(float AddedDamage,FVector StartPos, FRotator Rotation, AActor* Instigator, TArray<AActor*>& ActorsHit);
 };

@@ -112,13 +112,16 @@ void UAttackComponent::SetCooldownTime_Implementation()
 }
 
 // HIT DETECTION: Called by the Attack notify inside the animation
-void UAttackComponent::HitDetection_Implementation(FName SocketName)
+void UAttackComponent::HitDetection_Implementation(FName SocketName, FVector SocketPos, FRotator SocketRotation)
 {
 	if (WeaponsData.Num() < 1 || // has any weapon
 		!AnimInstance || // has the animation instance
 		!CurrentWeapon.WeaponData || // the weapon is valid
 		CurrentWeapon.bIsReloading) // is reloading
 		return;
+
+	if (SocketPos == FVector::ZeroVector && AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName))
+		SocketPos = AnimInstance->GetSkelMeshComponent()->GetSocketLocation(SocketName);
 
 	UWeaponDataAsset* WeaponAsset = CurrentWeapon.WeaponData;
 
@@ -127,14 +130,16 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 
 	if (Target)
 	{
-		if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName)) 
+		if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName))
 			AttackRotation = UKismetMathLibrary::FindLookAtRotation(GetOwner()->GetActorLocation(), Target->GetActorLocation()); // if socket doesn't exist
 		else
 			AttackRotation = UKismetMathLibrary::FindLookAtRotation(AnimInstance->GetSkelMeshComponent()->GetSocketLocation(SocketName), Target->GetActorLocation()); // if socket exists
 	}
 	else
 	{
-		if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName))
+		if (SocketRotation != FRotator::ZeroRotator)
+			AttackRotation = SocketRotation;
+		else if (!AnimInstance->GetSkelMeshComponent()->DoesSocketExist(SocketName))
 			AttackRotation = GetOwner()->GetActorRotation();
 		else
 			AttackRotation = AnimInstance->GetSkelMeshComponent()->GetSocketRotation(SocketName);
@@ -146,10 +151,10 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName)
 	} // if the socket given does not exist 
 	else
 	{
-		AttackPosition = AnimInstance->GetSkelMeshComponent()->GetSocketLocation(SocketName); // get the position of the socket
+		AttackPosition = SocketPos; // get the position of the socket
 	}
-
-	AttackPosition += GetOwner()->GetActorForwardVector() * WeaponAsset->PositionOffsetX; // offset the position forward by PositionOffsetX
+	if (CurrentWeapon.AnimIndex >= WeaponAsset->AttackOffsets.Num() || WeaponAsset->AttackOffsets[CurrentWeapon.AnimIndex].IsZero())
+		AttackPosition += AttackRotation.Quaternion() * WeaponAsset->AttackOffsets[CurrentWeapon.AnimIndex]; // offset the position forward by PositionOffsetX
 
 	if (Cam != nullptr) // if we have the ref to the cam
 		WeaponAsset->Attack(AddedAttack, AttackPosition, Cam->GetComponentRotation(), GetOwner(), HitActors); // rotate attack by the cam

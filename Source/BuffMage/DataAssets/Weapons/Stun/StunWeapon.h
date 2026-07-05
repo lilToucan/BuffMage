@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BuffMage/DataAssets/Weapons/MeleeWeaponData.h"
+#include "BuffMage/DataAssets/Weapons/Melee/MeleeWeaponData.h"
 #include "StunWeapon.generated.h"
 
 UCLASS()
