@@ -153,7 +153,7 @@ void UAttackComponent::HitDetection_Implementation(FName SocketName, FVector Soc
 	{
 		AttackPosition = SocketPos; // get the position of the socket
 	}
-	if (CurrentWeapon.AnimIndex >= WeaponAsset->AttackOffsets.Num() || WeaponAsset->AttackOffsets[CurrentWeapon.AnimIndex].IsZero())
+	if (CurrentWeapon.AnimIndex < WeaponAsset->AttackOffsets.Num() && !WeaponAsset->AttackOffsets[CurrentWeapon.AnimIndex].IsZero())
 		AttackPosition += AttackRotation.Quaternion() * WeaponAsset->AttackOffsets[CurrentWeapon.AnimIndex]; // offset the position forward by PositionOffsetX
 
 	if (Cam != nullptr) // if we have the ref to the cam
