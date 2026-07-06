@@ -451,11 +451,11 @@ void UAttackComponent::StartRage_Implementation()
 	WeaponsData[WeaponIndex] = CurrentWeapon;
 	CurrentWeapon = RageWeapon;
 	OnCurrentWeaponChange(); // update Weapon UI
-
 	OnActivatingRage.Broadcast();
 
 	PlaySound(StartRageSound, GetOwner(), StartRageVolume, FMath::RandRange(StartRagePitch.X, StartRagePitch.Y));
 	SetComponentTickEnabled(true);
+	bCanChangeWeapon = false;
 }
 
 // STOP RAGE: Called by the rage when it gets depleated
@@ -466,7 +466,6 @@ void UAttackComponent::StopRage_Implementation()
 	RageWeapon.CurrentAmmo = RageWeapon.WeaponData->AmmoMax;
 	RageWeapon.bIsAttacking = false;
 	RageWeapon.bIsReloading = false;
-	bCanChangeWeapon = false;
 	CurrentWeapon = WeaponsData[WeaponIndex];
 
 	OnDeactivatingRage.Broadcast();
@@ -477,6 +476,7 @@ void UAttackComponent::StopRage_Implementation()
 
 	SetComponentTickEnabled(false);
 	OnCurrentWeaponChange();
+	bCanChangeWeapon = true;
 }
 
 void UAttackComponent::AddAttackDamageToAttacks_Implementation(float Damage)
