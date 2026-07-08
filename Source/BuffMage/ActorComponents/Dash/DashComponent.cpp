@@ -1,4 +1,5 @@
 #include "DashComponent.h"
+#include <Kismet/GameplayStatics.h>
 
 UDashComponent::UDashComponent()
 {
@@ -72,6 +73,22 @@ void UDashComponent::PerformDash()
 	DashStartPos = GetOwner()->GetActorLocation();
 
 	bIsDashing = true;
+
+	float SoundPitch = FMath::RandRange(Pitch.X, Pitch.Y);
+
+	UGameplayStatics::PlaySoundAtLocation(
+		GetOwner(),
+		OnDashSound,
+		GetOwner()->GetActorLocation(),
+		GetOwner()->GetActorRotation(),
+		Volume,
+		SoundPitch,
+		0,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr
+	);
 
 	SetComponentTickEnabled(true);
 
