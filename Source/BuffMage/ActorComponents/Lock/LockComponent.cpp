@@ -34,5 +34,9 @@ void ULockComponent::KeyUnlock()
 
 void ULockComponent::KeyLock()
 {
-	OnLocked.Broadcast();
+	NumOfKeysUsed--;
+	if (NumOfKeysUsed < NumOfKeys)
+	{
+		OnLocked.Broadcast();
+	}
 }
