@@ -32,6 +32,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="DashComponent|Config")
 	float DashCooldown = 1;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DashComponent|Config")
+	USoundBase* OnDashSound;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DashComponent|Config")
+	float Volume;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DashComponent|Config")
+	FVector2D Pitch;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category ="DashComponent|Delegate")
 	FRechargeBarDelegate OnDashChange;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintCallable, BlueprintAssignable, Category ="DashComponent|Delegate")
