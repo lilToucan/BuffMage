@@ -241,11 +241,12 @@ void UAttackComponent::StartReloading_Implementation()
 	if (CurrentWeapon.CurrentAmmo == WeaponAsset->AmmoMax)
 		return;
 
-	AttackCompleted();
 	CurrentWeapon.bIsAttacking = false;
+	CurrentWeapon.AnimIndex = 0;
 	CurrentWeapon.IdleAnimIndex = 0;
-	UpdateIdle();
 	CurrentWeapon.WalkAnimIndex = 0;
+	SetCooldownTime();
+	UpdateIdle();
 	UpdateWalk();
 	bCanChangeWeapon = false;
 
