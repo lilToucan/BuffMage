@@ -26,6 +26,10 @@ void ULockComponent::BeginPlay()
 void ULockComponent::KeyUnlock()
 {
 	NumOfKeysUsed++;
+
+	if (NumOfKeysUsed >= NumOfKeys )
+		NumOfKeysUsed = NumOfKeys;
+	
 	if (NumOfKeysUsed >= NumOfKeys)
 	{
 		OnUnLocked.Broadcast();
@@ -35,6 +39,10 @@ void ULockComponent::KeyUnlock()
 void ULockComponent::KeyLock()
 {
 	NumOfKeysUsed--;
+	
+	if (NumOfKeysUsed <= 0 )
+		NumOfKeysUsed = 0;
+	
 	if (NumOfKeysUsed < NumOfKeys)
 	{
 		OnLocked.Broadcast();
