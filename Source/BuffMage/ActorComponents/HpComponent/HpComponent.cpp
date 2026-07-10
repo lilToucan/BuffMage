@@ -34,6 +34,13 @@ void UHpComponent::Activate(bool bReset)
 			CurrentHp = MaxHp;
 		else
 			CurrentHp = StartingHP;
+
+		if (StartingShield > 0)
+			CurrentShield = StartingShield;
+
+		OnShieldChanged.Broadcast(CurrentShield);
+
+		OnHpChanged.Broadcast(CurrentHp);
 	}
 
 
@@ -50,7 +57,7 @@ bool UHpComponent::TakeDamage(float Damage, AActor* DamageCauser)
 {
 	if (CurrentHp <= 0)
 		return false;
-	
+
 	if (CurrentShield > 0)
 	{
 		CurrentShield -= Damage;
